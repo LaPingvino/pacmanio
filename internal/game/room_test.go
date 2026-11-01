@@ -110,3 +110,43 @@ func TestGhostsAndPellets(t *testing.T) {
 		t.Errorf("after 40 more: %s", g.Obj.Name)
 	}
 }
+
+// The fruit in a level: hidden at first, at its place for 200 steps from
+// step 500, eaten for 200 points; an extra life adds one.
+func TestFruitAndExtraLife(t *testing.T) {
+	a, err := LoadAssets(pacmanio.Files)
+	if err != nil {
+		t.Fatal(err)
+	}
+	w, err := LoadWorld(pacmanio.Files, a, "pu_1a_nivelo")
+	if err != nil {
+		t.Fatal(err)
+	}
+	f := w.Room.Create(a.Object("bonus"), 64, 64)
+	if f.X != -1000 {
+		t.Fatalf("not hidden at start: %v", f.X)
+	}
+	for range 500 {
+		w.Step(held{})
+	}
+	if f.X != 64 || f.Y != 64 {
+		t.Fatalf("not back at 500: %v,%v", f.X, f.Y)
+	}
+	for range 200 {
+		w.Step(held{})
+	}
+	if f.X != -1000 {
+		t.Fatalf("not hidden again at 700: %v", f.X)
+	}
+	p := w.Room.All("pacman")[0]
+	f.X, f.Y = p.X, p.Y
+	score, lives := w.Room.G.Score, w.Room.G.Lives
+	w.Room.Create(a.Object("vivo"), p.X, p.Y)
+	w.Step(held{})
+	if w.Room.G.Score-score < 200 || f.X != -1000 {
+		t.Errorf("fruit not eaten: score +%d, x %v", w.Room.G.Score-score, f.X)
+	}
+	if w.Room.G.Lives != lives+1 || len(w.Room.All("vivo")) != 0 {
+		t.Errorf("extra life: lives %d (was %d)", w.Room.G.Lives, lives)
+	}
+}

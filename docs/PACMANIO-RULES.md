@@ -66,7 +66,10 @@ header: Pacmanio grew out of Game Maker's Pac-Man example.
   sets alarm 0 = 500 steps. Alarm 0: new random picture, back to its place, alarm 1 = 200 steps. Alarm 1: hide
   again, alarm 0 = 500. So it shows for 200 steps every 700.
 - Eaten: sound `bonus`, score +200, hidden, alarm 0 = 500.
-- Outside levels (title and end rooms, no `regulilo`) fruits stay where they were placed.
+- Outside levels (title and end rooms, no `regulilo`) fruits stay where they were placed, but still change picture
+  every 700 steps: in Game Maker 5 the negated question ("no `regulilo`?") governs only the next action (the move),
+  so the alarms are set in every room. Eaten outside a level, a fruit is hidden all the same (that move has no
+  question before it).
 - `vivo`: an extra life (see §2).
 
 ## 5. Walls
