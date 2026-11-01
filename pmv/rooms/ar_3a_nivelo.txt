@@ -1,0 +1,18 @@
+ar_3a_nivelo  640x480  (20x15 cells of 32px)
+legend: a=muro  c=konstruu_muron  d=point  g=pil  i=vivo  B=bonus  j=pacman  M=monster  k=regulilo
+
+k..cdccccccccccdc...
+...c.cMdgdd.d.dMc...
+ccccdcdcdccdcdcdcccc
+cd.d.c.c.dd.c.c.dgdc
+c.ccccdccccccdcdcccc
+cdcdBd.d.dd.d.d.dcdc
+c.ccdcdccccccdcdcc.c
+dMdc.c.d.di.d.c.cdMd
+c.ccdcdccccccdcdcc.c
+cdcd.d.d.j..d.dBdcdc
+ccccdcdccccccdcccc.c
+cdgd.c.c.dd.c.c.d.dc
+ccccdcdcdccdcdcdcccc
+...cMd.d.ddgdMc.c...
+...cdccccccccccdc...

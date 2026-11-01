@@ -1,0 +1,18 @@
+ls_fina_nivelo  640x480  (20x15 cells of 32px)
+legend: a=konstruu_muron  c=vivo  B=bonus  d=pil  g=point  i=muroy  j=konstruu_murox  k=pacman  M=monster  l=regulilo
+
+l..adaaaiaadaaa.a...
+...ag.ga..agMg.ga...
+aaaaiaiaj.aaaaaiaaaa
+g.gMgaga..jM.Mag.g.d
+aaaaaa.a.jj.j.aaaaga
+akg.g.ga.dj.jM..Ma.a
+agaaaaaaj.j.jjjj.aga
+g.aM...dM..Md...Ma.g
+aga.jjjj.j.jaaaaaaga
+a.aM..cj.jd.ag.g.g.a
+agaaaa.j.jj.a.aaaaaa
+d.g.gaM.Mj..agagMg.g
+aaaaiaaaaa.jaiaiaaaa
+...ag.gMga..ag.ga...
+...a.aaadaaiaaada...

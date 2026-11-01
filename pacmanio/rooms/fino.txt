@@ -1,0 +1,18 @@
+fino  640x480  (20x15 cells of 32px)
+legend: a=muro  c=finigxu  d=konstruu_muron  B=bonus  M=monster
+
+BBBddddddddddddddBBB
+BBBd............dBBB
+dddd.M...MM...M.dddd
+d....dddddddddd....d
+dM.d.dc.......d.d.Md
+d..d.d........d.d..d
+d..d.d........d.d..d
+d..d.d........d.d..d
+d..d.d........d.d..d
+d..d.d........d.d..d
+d..dMd........dMd..d
+d....d........d....d
+dddd.dddddddddd.dddd
+BBBd....M..M....dBBB
+BBBddddddddddddddBBB

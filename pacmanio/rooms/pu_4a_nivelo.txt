@@ -1,0 +1,33 @@
+pu_4a_nivelo  640x960  (20x30 cells of 32px)
+legend: a=muro  c=konstruu_muron  B=bonus  d=point  g=pil  i=pacman  M=monster  j=regulilo
+
+j..cccccccccccccc...
+...cd.d.d..d.d.dc...
+cccc.cccccccccc.cccc
+c.d.dcg.dccd.gcd.d.c
+cdcdcc.c.cc.c.ccdcdc
+c.c.d.dcd..dcd.d.c.c
+cdcccc.cccBcc.ccccdc
+c.d.d.dcMM.Mcd.d.d.c
+cdccccccccccccccccdc
+c.d.d.d.di.d.d.d.d.c
+cdccccccccccccccccdc
+c.d.d.d.d..d.d.d.d.c
+cdcdccccccccccccdcdc
+c.c.d.d.d..d.d.d.c.c
+cdcccccc.cc.ccccccdc
+c.c.d.d.dccd.d.d.c.c
+cdcgccccccccccccgcdc
+c.c.d.d.d..d.d.d.c.c
+cdcdccccc..cccccdcdc
+c.d.d.d.d..d.d.d.d.c
+cdcccccdccccdcccccdc
+c.c.d.d.cMMc.d.d.c.c
+cdcdcdcd...cdcdcdcdc
+c.c.c.c.c....c.c.c.c
+cdcdcdcdcMMcdcdcdcdc
+c.c.c.d.cccc.d.c.c.c
+cg.d.dcd.dd.dcd.d.gc
+ccccc.c.cccc.c.ccccc
+...cBd.d.dd.d.dBc...
+...cccccccccccccc...

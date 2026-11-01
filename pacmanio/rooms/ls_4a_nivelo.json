@@ -1,0 +1,2435 @@
+{
+ "id": 23,
+ "name": "ls_4a_nivelo",
+ "caption": "Divideme...",
+ "w": 1280,
+ "h": 480,
+ "speed": 20,
+ "snap_x": 32,
+ "snap_y": 32,
+ "persistent": false,
+ "bg_color": 0,
+ "creation_code": "",
+ "views_enabled": true,
+ "order_position": 17,
+ "backgrounds": [],
+ "views": [
+  {
+   "visible": true,
+   "view": [
+    0,
+    0,
+    640,
+    480
+   ],
+   "port_xy": [
+    0,
+    0
+   ],
+   "border_hv_speed_hv": [
+    256,
+    220,
+    -1,
+    -1
+   ],
+   "follow": 0
+  }
+ ],
+ "instances": [
+  {
+   "x": 96,
+   "y": 0,
+   "object": "konstruu_muron"
+  },
+  {
+   "x": 96,
+   "y": 32,
+   "object": "konstruu_muron"
+  },
+  {
+   "x": 96,
+   "y": 64,
+   "object": "konstruu_muron"
+  },
+  {
+   "x": 64,
+   "y": 64,
+   "object": "konstruu_muron"
+  },
+  {
+   "x": 32,
+   "y": 64,
+   "object": "konstruu_muron"
+  },
+  {
+   "x": 0,
+   "y": 64,
+   "object": "konstruu_muron"
+  },
+  {
+   "x": 0,
+   "y": 96,
+   "object": "konstruu_muron"
+  },
+  {
+   "x": 0,
+   "y": 128,
+   "object": "konstruu_muron"
+  },
+  {
+   "x": 0,
+   "y": 160,
+   "object": "konstruu_muron"
+  },
+  {
+   "x": 0,
+   "y": 192,
+   "object": "konstruu_muron"
+  },
+  {
+   "x": 0,
+   "y": 256,
+   "object": "konstruu_muron"
+  },
+  {
+   "x": 0,
+   "y": 288,
+   "object": "konstruu_muron"
+  },
+  {
+   "x": 0,
+   "y": 320,
+   "object": "konstruu_muron"
+  },
+  {
+   "x": 0,
+   "y": 352,
+   "object": "konstruu_muron"
+  },
+  {
+   "x": 0,
+   "y": 384,
+   "object": "konstruu_muron"
+  },
+  {
+   "x": 32,
+   "y": 384,
+   "object": "konstruu_muron"
+  },
+  {
+   "x": 64,
+   "y": 384,
+   "object": "konstruu_muron"
+  },
+  {
+   "x": 96,
+   "y": 384,
+   "object": "konstruu_muron"
+  },
+  {
+   "x": 96,
+   "y": 416,
+   "object": "konstruu_muron"
+  },
+  {
+   "x": 96,
+   "y": 448,
+   "object": "konstruu_muron"
+  },
+  {
+   "x": 160,
+   "y": 448,
+   "object": "konstruu_muron"
+  },
+  {
+   "x": 224,
+   "y": 448,
+   "object": "konstruu_muron"
+  },
+  {
+   "x": 256,
+   "y": 448,
+   "object": "konstruu_muron"
+  },
+  {
+   "x": 288,
+   "y": 448,
+   "object": "konstruu_muron"
+  },
+  {
+   "x": 320,
+   "y": 448,
+   "object": "konstruu_muron"
+  },
+  {
+   "x": 352,
+   "y": 448,
+   "object": "konstruu_muron"
+  },
+  {
+   "x": 384,
+   "y": 448,
+   "object": "konstruu_muron"
+  },
+  {
+   "x": 416,
+   "y": 448,
+   "object": "konstruu_muron"
+  },
+  {
+   "x": 448,
+   "y": 448,
+   "object": "konstruu_muron"
+  },
+  {
+   "x": 512,
+   "y": 448,
+   "object": "konstruu_muron"
+  },
+  {
+   "x": 448,
+   "y": 0,
+   "object": "konstruu_muron"
+  },
+  {
+   "x": 416,
+   "y": 0,
+   "object": "konstruu_muron"
+  },
+  {
+   "x": 384,
+   "y": 0,
+   "object": "konstruu_muron"
+  },
+  {
+   "x": 352,
+   "y": 0,
+   "object": "konstruu_muron"
+  },
+  {
+   "x": 320,
+   "y": 0,
+   "object": "konstruu_muron"
+  },
+  {
+   "x": 288,
+   "y": 0,
+   "object": "konstruu_muron"
+  },
+  {
+   "x": 256,
+   "y": 0,
+   "object": "konstruu_muron"
+  },
+  {
+   "x": 224,
+   "y": 0,
+   "object": "konstruu_muron"
+  },
+  {
+   "x": 160,
+   "y": 0,
+   "object": "konstruu_muron"
+  },
+  {
+   "x": 192,
+   "y": 0,
+   "object": "konstruu_muron"
+  },
+  {
+   "x": 192,
+   "y": 448,
+   "object": "konstruu_muron"
+  },
+  {
+   "x": -32,
+   "y": 192,
+   "object": "konstruu_muron"
+  },
+  {
+   "x": -32,
+   "y": 256,
+   "object": "konstruu_muron"
+  },
+  {
+   "x": 512,
+   "y": 0,
+   "object": "konstruu_muron"
+  },
+  {
+   "x": 128,
+   "y": 0,
+   "object": "konstruu_muron"
+  },
+  {
+   "x": 480,
+   "y": 0,
+   "object": "konstruu_muron"
+  },
+  {
+   "x": 128,
+   "y": 448,
+   "object": "konstruu_muron"
+  },
+  {
+   "x": 480,
+   "y": 448,
+   "object": "konstruu_muron"
+  },
+  {
+   "x": 544,
+   "y": 448,
+   "object": "konstruu_muron"
+  },
+  {
+   "x": 576,
+   "y": 448,
+   "object": "konstruu_muron"
+  },
+  {
+   "x": 608,
+   "y": 448,
+   "object": "konstruu_muron"
+  },
+  {
+   "x": 640,
+   "y": 448,
+   "object": "konstruu_muron"
+  },
+  {
+   "x": 672,
+   "y": 448,
+   "object": "konstruu_muron"
+  },
+  {
+   "x": 704,
+   "y": 448,
+   "object": "konstruu_muron"
+  },
+  {
+   "x": 736,
+   "y": 448,
+   "object": "konstruu_muron"
+  },
+  {
+   "x": 768,
+   "y": 448,
+   "object": "konstruu_muron"
+  },
+  {
+   "x": 800,
+   "y": 448,
+   "object": "konstruu_muron"
+  },
+  {
+   "x": 832,
+   "y": 448,
+   "object": "konstruu_muron"
+  },
+  {
+   "x": 864,
+   "y": 448,
+   "object": "konstruu_muron"
+  },
+  {
+   "x": 896,
+   "y": 448,
+   "object": "konstruu_muron"
+  },
+  {
+   "x": 928,
+   "y": 448,
+   "object": "konstruu_muron"
+  },
+  {
+   "x": 960,
+   "y": 448,
+   "object": "konstruu_muron"
+  },
+  {
+   "x": 1024,
+   "y": 448,
+   "object": "konstruu_muron"
+  },
+  {
+   "x": 1152,
+   "y": 448,
+   "object": "konstruu_muron"
+  },
+  {
+   "x": 1120,
+   "y": 448,
+   "object": "konstruu_muron"
+  },
+  {
+   "x": 1088,
+   "y": 448,
+   "object": "konstruu_muron"
+  },
+  {
+   "x": 1056,
+   "y": 448,
+   "object": "konstruu_muron"
+  },
+  {
+   "x": 1152,
+   "y": 416,
+   "object": "konstruu_muron"
+  },
+  {
+   "x": 1152,
+   "y": 384,
+   "object": "konstruu_muron"
+  },
+  {
+   "x": 1184,
+   "y": 384,
+   "object": "konstruu_muron"
+  },
+  {
+   "x": 1216,
+   "y": 384,
+   "object": "konstruu_muron"
+  },
+  {
+   "x": 1248,
+   "y": 384,
+   "object": "konstruu_muron"
+  },
+  {
+   "x": 1248,
+   "y": 352,
+   "object": "konstruu_muron"
+  },
+  {
+   "x": 1248,
+   "y": 320,
+   "object": "konstruu_muron"
+  },
+  {
+   "x": 1248,
+   "y": 288,
+   "object": "konstruu_muron"
+  },
+  {
+   "x": 1248,
+   "y": 256,
+   "object": "konstruu_muron"
+  },
+  {
+   "x": 1248,
+   "y": 192,
+   "object": "konstruu_muron"
+  },
+  {
+   "x": 1248,
+   "y": 160,
+   "object": "konstruu_muron"
+  },
+  {
+   "x": 1248,
+   "y": 128,
+   "object": "konstruu_muron"
+  },
+  {
+   "x": 1248,
+   "y": 96,
+   "object": "konstruu_muron"
+  },
+  {
+   "x": 1248,
+   "y": 64,
+   "object": "konstruu_muron"
+  },
+  {
+   "x": 1216,
+   "y": 64,
+   "object": "konstruu_muron"
+  },
+  {
+   "x": 1184,
+   "y": 64,
+   "object": "konstruu_muron"
+  },
+  {
+   "x": 1152,
+   "y": 64,
+   "object": "konstruu_muron"
+  },
+  {
+   "x": 1152,
+   "y": 32,
+   "object": "konstruu_muron"
+  },
+  {
+   "x": 1152,
+   "y": 0,
+   "object": "konstruu_muron"
+  },
+  {
+   "x": 1120,
+   "y": 0,
+   "object": "konstruu_muron"
+  },
+  {
+   "x": 1088,
+   "y": 0,
+   "object": "konstruu_muron"
+  },
+  {
+   "x": 1056,
+   "y": 0,
+   "object": "konstruu_muron"
+  },
+  {
+   "x": 1024,
+   "y": 0,
+   "object": "konstruu_muron"
+  },
+  {
+   "x": 992,
+   "y": 0,
+   "object": "konstruu_muron"
+  },
+  {
+   "x": 960,
+   "y": 0,
+   "object": "konstruu_muron"
+  },
+  {
+   "x": 928,
+   "y": 0,
+   "object": "konstruu_muron"
+  },
+  {
+   "x": 896,
+   "y": 0,
+   "object": "konstruu_muron"
+  },
+  {
+   "x": 864,
+   "y": 0,
+   "object": "konstruu_muron"
+  },
+  {
+   "x": 832,
+   "y": 0,
+   "object": "konstruu_muron"
+  },
+  {
+   "x": 800,
+   "y": 0,
+   "object": "konstruu_muron"
+  },
+  {
+   "x": 768,
+   "y": 0,
+   "object": "konstruu_muron"
+  },
+  {
+   "x": 736,
+   "y": 0,
+   "object": "konstruu_muron"
+  },
+  {
+   "x": 704,
+   "y": 0,
+   "object": "konstruu_muron"
+  },
+  {
+   "x": 672,
+   "y": 0,
+   "object": "konstruu_muron"
+  },
+  {
+   "x": 640,
+   "y": 0,
+   "object": "konstruu_muron"
+  },
+  {
+   "x": 608,
+   "y": 0,
+   "object": "konstruu_muron"
+  },
+  {
+   "x": 576,
+   "y": 0,
+   "object": "konstruu_muron"
+  },
+  {
+   "x": 544,
+   "y": 0,
+   "object": "konstruu_muron"
+  },
+  {
+   "x": 1280,
+   "y": 192,
+   "object": "konstruu_muron"
+  },
+  {
+   "x": 1280,
+   "y": 256,
+   "object": "konstruu_muron"
+  },
+  {
+   "x": 64,
+   "y": 96,
+   "object": "muroy"
+  },
+  {
+   "x": 64,
+   "y": 352,
+   "object": "muroy"
+  },
+  {
+   "x": 64,
+   "y": 128,
+   "object": "konstruu_muron"
+  },
+  {
+   "x": 64,
+   "y": 160,
+   "object": "konstruu_muron"
+  },
+  {
+   "x": 64,
+   "y": 192,
+   "object": "konstruu_muron"
+  },
+  {
+   "x": 64,
+   "y": 224,
+   "object": "konstruu_muron"
+  },
+  {
+   "x": 64,
+   "y": 256,
+   "object": "konstruu_muron"
+  },
+  {
+   "x": 64,
+   "y": 288,
+   "object": "konstruu_muron"
+  },
+  {
+   "x": 64,
+   "y": 320,
+   "object": "konstruu_muron"
+  },
+  {
+   "x": 128,
+   "y": 320,
+   "object": "konstruu_muron"
+  },
+  {
+   "x": 160,
+   "y": 320,
+   "object": "konstruu_muron"
+  },
+  {
+   "x": 160,
+   "y": 352,
+   "object": "konstruu_muron"
+  },
+  {
+   "x": 160,
+   "y": 384,
+   "object": "konstruu_muron"
+  },
+  {
+   "x": 128,
+   "y": 128,
+   "object": "konstruu_muron"
+  },
+  {
+   "x": 160,
+   "y": 128,
+   "object": "konstruu_muron"
+  },
+  {
+   "x": 160,
+   "y": 96,
+   "object": "konstruu_muron"
+  },
+  {
+   "x": 160,
+   "y": 64,
+   "object": "konstruu_muron"
+  },
+  {
+   "x": 224,
+   "y": 32,
+   "object": "konstruu_muron"
+  },
+  {
+   "x": 224,
+   "y": 64,
+   "object": "konstruu_muron"
+  },
+  {
+   "x": 224,
+   "y": 96,
+   "object": "konstruu_muron"
+  },
+  {
+   "x": 224,
+   "y": 128,
+   "object": "konstruu_muron"
+  },
+  {
+   "x": 224,
+   "y": 160,
+   "object": "konstruu_muron"
+  },
+  {
+   "x": 224,
+   "y": 192,
+   "object": "konstruu_muron"
+  },
+  {
+   "x": 192,
+   "y": 192,
+   "object": "konstruu_muron"
+  },
+  {
+   "x": 160,
+   "y": 192,
+   "object": "konstruu_muron"
+  },
+  {
+   "x": 128,
+   "y": 192,
+   "object": "konstruu_muron"
+  },
+  {
+   "x": 128,
+   "y": 256,
+   "object": "konstruu_muron"
+  },
+  {
+   "x": 160,
+   "y": 256,
+   "object": "konstruu_muron"
+  },
+  {
+   "x": 192,
+   "y": 256,
+   "object": "konstruu_muron"
+  },
+  {
+   "x": 224,
+   "y": 256,
+   "object": "konstruu_muron"
+  },
+  {
+   "x": 224,
+   "y": 288,
+   "object": "konstruu_muron"
+  },
+  {
+   "x": 224,
+   "y": 320,
+   "object": "konstruu_muron"
+  },
+  {
+   "x": 224,
+   "y": 352,
+   "object": "konstruu_muron"
+  },
+  {
+   "x": 224,
+   "y": 384,
+   "object": "konstruu_muron"
+  },
+  {
+   "x": 224,
+   "y": 416,
+   "object": "konstruu_muron"
+  },
+  {
+   "x": 96,
+   "y": 320,
+   "object": "konstruu_murox"
+  },
+  {
+   "x": 96,
+   "y": 128,
+   "object": "konstruu_murox"
+  },
+  {
+   "x": 128,
+   "y": 224,
+   "object": "muroy"
+  },
+  {
+   "x": 32,
+   "y": 96,
+   "object": "point"
+  },
+  {
+   "x": 32,
+   "y": 352,
+   "object": "point"
+  },
+  {
+   "x": 32,
+   "y": 288,
+   "object": "point"
+  },
+  {
+   "x": 32,
+   "y": 224,
+   "object": "point"
+  },
+  {
+   "x": 32,
+   "y": 160,
+   "object": "point"
+  },
+  {
+   "x": 96,
+   "y": 96,
+   "object": "point"
+  },
+  {
+   "x": 96,
+   "y": 160,
+   "object": "point"
+  },
+  {
+   "x": 96,
+   "y": 224,
+   "object": "point"
+  },
+  {
+   "x": 96,
+   "y": 288,
+   "object": "point"
+  },
+  {
+   "x": 160,
+   "y": 288,
+   "object": "point"
+  },
+  {
+   "x": 96,
+   "y": 352,
+   "object": "point"
+  },
+  {
+   "x": 128,
+   "y": 384,
+   "object": "point"
+  },
+  {
+   "x": 160,
+   "y": 416,
+   "object": "point"
+  },
+  {
+   "x": 192,
+   "y": 384,
+   "object": "point"
+  },
+  {
+   "x": 192,
+   "y": 320,
+   "object": "point"
+  },
+  {
+   "x": 160,
+   "y": 160,
+   "object": "point"
+  },
+  {
+   "x": 192,
+   "y": 128,
+   "object": "point"
+  },
+  {
+   "x": 192,
+   "y": 64,
+   "object": "point"
+  },
+  {
+   "x": 160,
+   "y": 32,
+   "object": "point"
+  },
+  {
+   "x": 128,
+   "y": 64,
+   "object": "point"
+  },
+  {
+   "x": 1184,
+   "y": 352,
+   "object": "muroy"
+  },
+  {
+   "x": 1184,
+   "y": 96,
+   "object": "muroy"
+  },
+  {
+   "x": 1184,
+   "y": 320,
+   "object": "konstruu_muron"
+  },
+  {
+   "x": 1184,
+   "y": 288,
+   "object": "konstruu_muron"
+  },
+  {
+   "x": 1184,
+   "y": 256,
+   "object": "konstruu_muron"
+  },
+  {
+   "x": 1184,
+   "y": 224,
+   "object": "konstruu_muron"
+  },
+  {
+   "x": 1184,
+   "y": 192,
+   "object": "konstruu_muron"
+  },
+  {
+   "x": 1184,
+   "y": 160,
+   "object": "konstruu_muron"
+  },
+  {
+   "x": 1184,
+   "y": 128,
+   "object": "konstruu_muron"
+  },
+  {
+   "x": 1120,
+   "y": 128,
+   "object": "konstruu_muron"
+  },
+  {
+   "x": 1088,
+   "y": 128,
+   "object": "konstruu_muron"
+  },
+  {
+   "x": 1088,
+   "y": 96,
+   "object": "konstruu_muron"
+  },
+  {
+   "x": 1088,
+   "y": 64,
+   "object": "konstruu_muron"
+  },
+  {
+   "x": 1024,
+   "y": 32,
+   "object": "konstruu_muron"
+  },
+  {
+   "x": 1024,
+   "y": 64,
+   "object": "konstruu_muron"
+  },
+  {
+   "x": 1024,
+   "y": 96,
+   "object": "konstruu_muron"
+  },
+  {
+   "x": 1024,
+   "y": 128,
+   "object": "konstruu_muron"
+  },
+  {
+   "x": 1024,
+   "y": 160,
+   "object": "konstruu_muron"
+  },
+  {
+   "x": 1024,
+   "y": 192,
+   "object": "konstruu_muron"
+  },
+  {
+   "x": 1056,
+   "y": 192,
+   "object": "konstruu_muron"
+  },
+  {
+   "x": 1088,
+   "y": 192,
+   "object": "konstruu_muron"
+  },
+  {
+   "x": 1120,
+   "y": 192,
+   "object": "konstruu_muron"
+  },
+  {
+   "x": 1120,
+   "y": 320,
+   "object": "konstruu_muron"
+  },
+  {
+   "x": 1088,
+   "y": 320,
+   "object": "konstruu_muron"
+  },
+  {
+   "x": 1088,
+   "y": 352,
+   "object": "konstruu_muron"
+  },
+  {
+   "x": 1088,
+   "y": 384,
+   "object": "konstruu_muron"
+  },
+  {
+   "x": 1024,
+   "y": 416,
+   "object": "konstruu_muron"
+  },
+  {
+   "x": 1024,
+   "y": 384,
+   "object": "konstruu_muron"
+  },
+  {
+   "x": 1024,
+   "y": 352,
+   "object": "konstruu_muron"
+  },
+  {
+   "x": 1024,
+   "y": 320,
+   "object": "konstruu_muron"
+  },
+  {
+   "x": 1024,
+   "y": 288,
+   "object": "konstruu_muron"
+  },
+  {
+   "x": 1024,
+   "y": 256,
+   "object": "konstruu_muron"
+  },
+  {
+   "x": 1056,
+   "y": 256,
+   "object": "konstruu_muron"
+  },
+  {
+   "x": 1088,
+   "y": 256,
+   "object": "konstruu_muron"
+  },
+  {
+   "x": 1120,
+   "y": 256,
+   "object": "konstruu_muron"
+  },
+  {
+   "x": 1120,
+   "y": 224,
+   "object": "muroy"
+  },
+  {
+   "x": 1216,
+   "y": 352,
+   "object": "point"
+  },
+  {
+   "x": 1216,
+   "y": 288,
+   "object": "point"
+  },
+  {
+   "x": 1216,
+   "y": 224,
+   "object": "point"
+  },
+  {
+   "x": 1216,
+   "y": 160,
+   "object": "point"
+  },
+  {
+   "x": 1216,
+   "y": 96,
+   "object": "point"
+  },
+  {
+   "x": 1152,
+   "y": 96,
+   "object": "point"
+  },
+  {
+   "x": 1152,
+   "y": 224,
+   "object": "point"
+  },
+  {
+   "x": 1152,
+   "y": 288,
+   "object": "point"
+  },
+  {
+   "x": 1152,
+   "y": 352,
+   "object": "point"
+  },
+  {
+   "x": 1120,
+   "y": 384,
+   "object": "point"
+  },
+  {
+   "x": 1088,
+   "y": 416,
+   "object": "point"
+  },
+  {
+   "x": 1056,
+   "y": 384,
+   "object": "point"
+  },
+  {
+   "x": 1056,
+   "y": 320,
+   "object": "point"
+  },
+  {
+   "x": 1088,
+   "y": 288,
+   "object": "point"
+  },
+  {
+   "x": 1088,
+   "y": 160,
+   "object": "point"
+  },
+  {
+   "x": 1056,
+   "y": 128,
+   "object": "point"
+  },
+  {
+   "x": 1056,
+   "y": 64,
+   "object": "point"
+  },
+  {
+   "x": 1088,
+   "y": 32,
+   "object": "point"
+  },
+  {
+   "x": 1120,
+   "y": 64,
+   "object": "point"
+  },
+  {
+   "x": 1088,
+   "y": 224,
+   "object": "pil"
+  },
+  {
+   "x": 160,
+   "y": 224,
+   "object": "pil"
+  },
+  {
+   "x": 224,
+   "y": 224,
+   "object": "point"
+  },
+  {
+   "x": 1024,
+   "y": 224,
+   "object": "point"
+  },
+  {
+   "x": 288,
+   "y": 64,
+   "object": "konstruu_murox"
+  },
+  {
+   "x": 288,
+   "y": 96,
+   "object": "konstruu_murox"
+  },
+  {
+   "x": 288,
+   "y": 128,
+   "object": "konstruu_murox"
+  },
+  {
+   "x": 288,
+   "y": 160,
+   "object": "konstruu_murox"
+  },
+  {
+   "x": 288,
+   "y": 192,
+   "object": "konstruu_murox"
+  },
+  {
+   "x": 288,
+   "y": 256,
+   "object": "konstruu_murox"
+  },
+  {
+   "x": 288,
+   "y": 288,
+   "object": "konstruu_murox"
+  },
+  {
+   "x": 288,
+   "y": 320,
+   "object": "konstruu_murox"
+  },
+  {
+   "x": 288,
+   "y": 352,
+   "object": "konstruu_murox"
+  },
+  {
+   "x": 288,
+   "y": 384,
+   "object": "konstruu_murox"
+  },
+  {
+   "x": 320,
+   "y": 384,
+   "object": "konstruu_murox"
+  },
+  {
+   "x": 352,
+   "y": 384,
+   "object": "konstruu_murox"
+  },
+  {
+   "x": 384,
+   "y": 384,
+   "object": "konstruu_murox"
+  },
+  {
+   "x": 416,
+   "y": 384,
+   "object": "konstruu_murox"
+  },
+  {
+   "x": 448,
+   "y": 384,
+   "object": "konstruu_murox"
+  },
+  {
+   "x": 480,
+   "y": 384,
+   "object": "konstruu_murox"
+  },
+  {
+   "x": 512,
+   "y": 384,
+   "object": "konstruu_murox"
+  },
+  {
+   "x": 544,
+   "y": 384,
+   "object": "konstruu_murox"
+  },
+  {
+   "x": 576,
+   "y": 384,
+   "object": "konstruu_murox"
+  },
+  {
+   "x": 640,
+   "y": 384,
+   "object": "konstruu_murox"
+  },
+  {
+   "x": 672,
+   "y": 384,
+   "object": "konstruu_murox"
+  },
+  {
+   "x": 704,
+   "y": 384,
+   "object": "konstruu_murox"
+  },
+  {
+   "x": 736,
+   "y": 384,
+   "object": "konstruu_murox"
+  },
+  {
+   "x": 768,
+   "y": 384,
+   "object": "konstruu_murox"
+  },
+  {
+   "x": 800,
+   "y": 384,
+   "object": "konstruu_murox"
+  },
+  {
+   "x": 832,
+   "y": 384,
+   "object": "konstruu_murox"
+  },
+  {
+   "x": 864,
+   "y": 384,
+   "object": "konstruu_murox"
+  },
+  {
+   "x": 896,
+   "y": 384,
+   "object": "konstruu_murox"
+  },
+  {
+   "x": 928,
+   "y": 384,
+   "object": "konstruu_murox"
+  },
+  {
+   "x": 960,
+   "y": 384,
+   "object": "konstruu_murox"
+  },
+  {
+   "x": 960,
+   "y": 352,
+   "object": "konstruu_murox"
+  },
+  {
+   "x": 960,
+   "y": 320,
+   "object": "konstruu_murox"
+  },
+  {
+   "x": 960,
+   "y": 288,
+   "object": "konstruu_murox"
+  },
+  {
+   "x": 960,
+   "y": 256,
+   "object": "konstruu_murox"
+  },
+  {
+   "x": 960,
+   "y": 192,
+   "object": "konstruu_murox"
+  },
+  {
+   "x": 960,
+   "y": 160,
+   "object": "konstruu_murox"
+  },
+  {
+   "x": 960,
+   "y": 128,
+   "object": "konstruu_murox"
+  },
+  {
+   "x": 960,
+   "y": 96,
+   "object": "konstruu_murox"
+  },
+  {
+   "x": 960,
+   "y": 64,
+   "object": "konstruu_murox"
+  },
+  {
+   "x": 928,
+   "y": 64,
+   "object": "konstruu_murox"
+  },
+  {
+   "x": 896,
+   "y": 64,
+   "object": "konstruu_murox"
+  },
+  {
+   "x": 864,
+   "y": 64,
+   "object": "konstruu_murox"
+  },
+  {
+   "x": 832,
+   "y": 64,
+   "object": "konstruu_murox"
+  },
+  {
+   "x": 800,
+   "y": 64,
+   "object": "konstruu_murox"
+  },
+  {
+   "x": 768,
+   "y": 64,
+   "object": "konstruu_murox"
+  },
+  {
+   "x": 736,
+   "y": 64,
+   "object": "konstruu_murox"
+  },
+  {
+   "x": 704,
+   "y": 64,
+   "object": "konstruu_murox"
+  },
+  {
+   "x": 672,
+   "y": 64,
+   "object": "konstruu_murox"
+  },
+  {
+   "x": 640,
+   "y": 64,
+   "object": "konstruu_murox"
+  },
+  {
+   "x": 608,
+   "y": 64,
+   "object": "konstruu_murox"
+  },
+  {
+   "x": 576,
+   "y": 64,
+   "object": "konstruu_murox"
+  },
+  {
+   "x": 544,
+   "y": 64,
+   "object": "konstruu_murox"
+  },
+  {
+   "x": 512,
+   "y": 64,
+   "object": "konstruu_murox"
+  },
+  {
+   "x": 480,
+   "y": 64,
+   "object": "konstruu_murox"
+  },
+  {
+   "x": 448,
+   "y": 64,
+   "object": "konstruu_murox"
+  },
+  {
+   "x": 416,
+   "y": 64,
+   "object": "konstruu_murox"
+  },
+  {
+   "x": 384,
+   "y": 64,
+   "object": "konstruu_murox"
+  },
+  {
+   "x": 352,
+   "y": 64,
+   "object": "konstruu_murox"
+  },
+  {
+   "x": 320,
+   "y": 64,
+   "object": "konstruu_murox"
+  },
+  {
+   "x": 352,
+   "y": 128,
+   "object": "konstruu_muron"
+  },
+  {
+   "x": 352,
+   "y": 160,
+   "object": "konstruu_muron"
+  },
+  {
+   "x": 352,
+   "y": 192,
+   "object": "konstruu_muron"
+  },
+  {
+   "x": 352,
+   "y": 224,
+   "object": "konstruu_muron"
+  },
+  {
+   "x": 352,
+   "y": 256,
+   "object": "konstruu_muron"
+  },
+  {
+   "x": 352,
+   "y": 288,
+   "object": "konstruu_muron"
+  },
+  {
+   "x": 352,
+   "y": 320,
+   "object": "konstruu_muron"
+  },
+  {
+   "x": 416,
+   "y": 320,
+   "object": "konstruu_muron"
+  },
+  {
+   "x": 448,
+   "y": 320,
+   "object": "konstruu_muron"
+  },
+  {
+   "x": 480,
+   "y": 320,
+   "object": "konstruu_muron"
+  },
+  {
+   "x": 512,
+   "y": 320,
+   "object": "konstruu_muron"
+  },
+  {
+   "x": 416,
+   "y": 128,
+   "object": "konstruu_muron"
+  },
+  {
+   "x": 448,
+   "y": 128,
+   "object": "konstruu_muron"
+  },
+  {
+   "x": 480,
+   "y": 128,
+   "object": "konstruu_muron"
+  },
+  {
+   "x": 512,
+   "y": 128,
+   "object": "konstruu_muron"
+  },
+  {
+   "x": 544,
+   "y": 128,
+   "object": "konstruu_muron"
+  },
+  {
+   "x": 576,
+   "y": 128,
+   "object": "konstruu_muron"
+  },
+  {
+   "x": 544,
+   "y": 320,
+   "object": "konstruu_muron"
+  },
+  {
+   "x": 576,
+   "y": 320,
+   "object": "konstruu_muron"
+  },
+  {
+   "x": 608,
+   "y": 320,
+   "object": "konstruu_muron"
+  },
+  {
+   "x": 672,
+   "y": 320,
+   "object": "konstruu_muron"
+  },
+  {
+   "x": 704,
+   "y": 320,
+   "object": "konstruu_muron"
+  },
+  {
+   "x": 736,
+   "y": 320,
+   "object": "konstruu_muron"
+  },
+  {
+   "x": 768,
+   "y": 320,
+   "object": "konstruu_muron"
+  },
+  {
+   "x": 896,
+   "y": 320,
+   "object": "konstruu_muron"
+  },
+  {
+   "x": 896,
+   "y": 288,
+   "object": "konstruu_muron"
+  },
+  {
+   "x": 896,
+   "y": 256,
+   "object": "konstruu_muron"
+  },
+  {
+   "x": 896,
+   "y": 224,
+   "object": "konstruu_muron"
+  },
+  {
+   "x": 896,
+   "y": 192,
+   "object": "konstruu_muron"
+  },
+  {
+   "x": 896,
+   "y": 160,
+   "object": "konstruu_muron"
+  },
+  {
+   "x": 896,
+   "y": 128,
+   "object": "konstruu_muron"
+  },
+  {
+   "x": 800,
+   "y": 320,
+   "object": "konstruu_muron"
+  },
+  {
+   "x": 832,
+   "y": 320,
+   "object": "konstruu_muron"
+  },
+  {
+   "x": 832,
+   "y": 128,
+   "object": "konstruu_muron"
+  },
+  {
+   "x": 800,
+   "y": 128,
+   "object": "konstruu_muron"
+  },
+  {
+   "x": 768,
+   "y": 128,
+   "object": "konstruu_muron"
+  },
+  {
+   "x": 736,
+   "y": 128,
+   "object": "konstruu_muron"
+  },
+  {
+   "x": 704,
+   "y": 128,
+   "object": "konstruu_muron"
+  },
+  {
+   "x": 672,
+   "y": 128,
+   "object": "konstruu_muron"
+  },
+  {
+   "x": 640,
+   "y": 128,
+   "object": "konstruu_muron"
+  },
+  {
+   "x": 416,
+   "y": 192,
+   "object": "konstruu_murox"
+  },
+  {
+   "x": 416,
+   "y": 224,
+   "object": "konstruu_murox"
+  },
+  {
+   "x": 416,
+   "y": 256,
+   "object": "konstruu_murox"
+  },
+  {
+   "x": 480,
+   "y": 192,
+   "object": "konstruu_murox"
+  },
+  {
+   "x": 512,
+   "y": 192,
+   "object": "konstruu_murox"
+  },
+  {
+   "x": 544,
+   "y": 192,
+   "object": "konstruu_murox"
+  },
+  {
+   "x": 576,
+   "y": 192,
+   "object": "konstruu_murox"
+  },
+  {
+   "x": 608,
+   "y": 192,
+   "object": "konstruu_murox"
+  },
+  {
+   "x": 640,
+   "y": 192,
+   "object": "konstruu_murox"
+  },
+  {
+   "x": 672,
+   "y": 192,
+   "object": "konstruu_murox"
+  },
+  {
+   "x": 704,
+   "y": 192,
+   "object": "konstruu_murox"
+  },
+  {
+   "x": 736,
+   "y": 192,
+   "object": "konstruu_murox"
+  },
+  {
+   "x": 768,
+   "y": 192,
+   "object": "konstruu_murox"
+  },
+  {
+   "x": 832,
+   "y": 192,
+   "object": "konstruu_murox"
+  },
+  {
+   "x": 832,
+   "y": 224,
+   "object": "konstruu_murox"
+  },
+  {
+   "x": 832,
+   "y": 256,
+   "object": "konstruu_murox"
+  },
+  {
+   "x": 736,
+   "y": 256,
+   "object": "konstruu_murox"
+  },
+  {
+   "x": 768,
+   "y": 256,
+   "object": "konstruu_murox"
+  },
+  {
+   "x": 704,
+   "y": 256,
+   "object": "konstruu_murox"
+  },
+  {
+   "x": 672,
+   "y": 256,
+   "object": "konstruu_murox"
+  },
+  {
+   "x": 640,
+   "y": 256,
+   "object": "konstruu_murox"
+  },
+  {
+   "x": 608,
+   "y": 256,
+   "object": "konstruu_murox"
+  },
+  {
+   "x": 576,
+   "y": 256,
+   "object": "konstruu_murox"
+  },
+  {
+   "x": 544,
+   "y": 256,
+   "object": "konstruu_murox"
+  },
+  {
+   "x": 512,
+   "y": 256,
+   "object": "konstruu_murox"
+  },
+  {
+   "x": 480,
+   "y": 256,
+   "object": "konstruu_murox"
+  },
+  {
+   "x": 384,
+   "y": 320,
+   "object": "muroy"
+  },
+  {
+   "x": 384,
+   "y": 128,
+   "object": "muroy"
+  },
+  {
+   "x": 864,
+   "y": 128,
+   "object": "muroy"
+  },
+  {
+   "x": 864,
+   "y": 320,
+   "object": "muroy"
+  },
+  {
+   "x": 288,
+   "y": 224,
+   "object": "point"
+  },
+  {
+   "x": 256,
+   "y": 192,
+   "object": "point"
+  },
+  {
+   "x": 256,
+   "y": 256,
+   "object": "point"
+  },
+  {
+   "x": 256,
+   "y": 128,
+   "object": "point"
+  },
+  {
+   "x": 256,
+   "y": 64,
+   "object": "point"
+  },
+  {
+   "x": 256,
+   "y": 320,
+   "object": "point"
+  },
+  {
+   "x": 256,
+   "y": 384,
+   "object": "point"
+  },
+  {
+   "x": 288,
+   "y": 416,
+   "object": "point"
+  },
+  {
+   "x": 288,
+   "y": 32,
+   "object": "point"
+  },
+  {
+   "x": 352,
+   "y": 32,
+   "object": "point"
+  },
+  {
+   "x": 352,
+   "y": 96,
+   "object": "point"
+  },
+  {
+   "x": 320,
+   "y": 128,
+   "object": "point"
+  },
+  {
+   "x": 320,
+   "y": 192,
+   "object": "point"
+  },
+  {
+   "x": 320,
+   "y": 256,
+   "object": "point"
+  },
+  {
+   "x": 320,
+   "y": 320,
+   "object": "point"
+  },
+  {
+   "x": 352,
+   "y": 352,
+   "object": "point"
+  },
+  {
+   "x": 352,
+   "y": 416,
+   "object": "point"
+  },
+  {
+   "x": 416,
+   "y": 352,
+   "object": "point"
+  },
+  {
+   "x": 416,
+   "y": 416,
+   "object": "point"
+  },
+  {
+   "x": 480,
+   "y": 352,
+   "object": "point"
+  },
+  {
+   "x": 480,
+   "y": 416,
+   "object": "point"
+  },
+  {
+   "x": 544,
+   "y": 352,
+   "object": "point"
+  },
+  {
+   "x": 544,
+   "y": 416,
+   "object": "point"
+  },
+  {
+   "x": 608,
+   "y": 352,
+   "object": "point"
+  },
+  {
+   "x": 608,
+   "y": 416,
+   "object": "point"
+  },
+  {
+   "x": 608,
+   "y": 384,
+   "object": "konstruu_murox"
+  },
+  {
+   "x": 640,
+   "y": 352,
+   "object": "point"
+  },
+  {
+   "x": 640,
+   "y": 416,
+   "object": "point"
+  },
+  {
+   "x": 608,
+   "y": 96,
+   "object": "point"
+  },
+  {
+   "x": 608,
+   "y": 32,
+   "object": "point"
+  },
+  {
+   "x": 544,
+   "y": 32,
+   "object": "point"
+  },
+  {
+   "x": 544,
+   "y": 96,
+   "object": "point"
+  },
+  {
+   "x": 480,
+   "y": 32,
+   "object": "point"
+  },
+  {
+   "x": 480,
+   "y": 96,
+   "object": "point"
+  },
+  {
+   "x": 416,
+   "y": 32,
+   "object": "point"
+  },
+  {
+   "x": 416,
+   "y": 96,
+   "object": "point"
+  },
+  {
+   "x": 384,
+   "y": 192,
+   "object": "point"
+  },
+  {
+   "x": 416,
+   "y": 160,
+   "object": "point"
+  },
+  {
+   "x": 384,
+   "y": 256,
+   "object": "point"
+  },
+  {
+   "x": 416,
+   "y": 288,
+   "object": "point"
+  },
+  {
+   "x": 448,
+   "y": 256,
+   "object": "point"
+  },
+  {
+   "x": 448,
+   "y": 192,
+   "object": "point"
+  },
+  {
+   "x": 480,
+   "y": 160,
+   "object": "point"
+  },
+  {
+   "x": 480,
+   "y": 224,
+   "object": "point"
+  },
+  {
+   "x": 480,
+   "y": 288,
+   "object": "point"
+  },
+  {
+   "x": 544,
+   "y": 288,
+   "object": "point"
+  },
+  {
+   "x": 544,
+   "y": 224,
+   "object": "point"
+  },
+  {
+   "x": 544,
+   "y": 160,
+   "object": "point"
+  },
+  {
+   "x": 640,
+   "y": 224,
+   "object": "point"
+  },
+  {
+   "x": 640,
+   "y": 288,
+   "object": "point"
+  },
+  {
+   "x": 704,
+   "y": 160,
+   "object": "point"
+  },
+  {
+   "x": 704,
+   "y": 224,
+   "object": "point"
+  },
+  {
+   "x": 704,
+   "y": 288,
+   "object": "point"
+  },
+  {
+   "x": 768,
+   "y": 288,
+   "object": "point"
+  },
+  {
+   "x": 768,
+   "y": 224,
+   "object": "point"
+  },
+  {
+   "x": 768,
+   "y": 160,
+   "object": "point"
+  },
+  {
+   "x": 800,
+   "y": 192,
+   "object": "point"
+  },
+  {
+   "x": 800,
+   "y": 256,
+   "object": "point"
+  },
+  {
+   "x": 832,
+   "y": 288,
+   "object": "point"
+  },
+  {
+   "x": 864,
+   "y": 256,
+   "object": "point"
+  },
+  {
+   "x": 864,
+   "y": 192,
+   "object": "point"
+  },
+  {
+   "x": 832,
+   "y": 160,
+   "object": "point"
+  },
+  {
+   "x": 704,
+   "y": 96,
+   "object": "point"
+  },
+  {
+   "x": 704,
+   "y": 352,
+   "object": "point"
+  },
+  {
+   "x": 704,
+   "y": 416,
+   "object": "point"
+  },
+  {
+   "x": 704,
+   "y": 32,
+   "object": "point"
+  },
+  {
+   "x": 768,
+   "y": 32,
+   "object": "point"
+  },
+  {
+   "x": 768,
+   "y": 96,
+   "object": "point"
+  },
+  {
+   "x": 768,
+   "y": 352,
+   "object": "point"
+  },
+  {
+   "x": 768,
+   "y": 416,
+   "object": "point"
+  },
+  {
+   "x": 832,
+   "y": 416,
+   "object": "point"
+  },
+  {
+   "x": 832,
+   "y": 352,
+   "object": "point"
+  },
+  {
+   "x": 832,
+   "y": 96,
+   "object": "point"
+  },
+  {
+   "x": 832,
+   "y": 32,
+   "object": "point"
+  },
+  {
+   "x": 896,
+   "y": 416,
+   "object": "point"
+  },
+  {
+   "x": 896,
+   "y": 352,
+   "object": "point"
+  },
+  {
+   "x": 928,
+   "y": 320,
+   "object": "point"
+  },
+  {
+   "x": 928,
+   "y": 256,
+   "object": "point"
+  },
+  {
+   "x": 928,
+   "y": 192,
+   "object": "point"
+  },
+  {
+   "x": 928,
+   "y": 128,
+   "object": "point"
+  },
+  {
+   "x": 896,
+   "y": 96,
+   "object": "point"
+  },
+  {
+   "x": 896,
+   "y": 32,
+   "object": "point"
+  },
+  {
+   "x": 960,
+   "y": 32,
+   "object": "point"
+  },
+  {
+   "x": 992,
+   "y": 64,
+   "object": "point"
+  },
+  {
+   "x": 992,
+   "y": 128,
+   "object": "point"
+  },
+  {
+   "x": 992,
+   "y": 192,
+   "object": "point"
+  },
+  {
+   "x": 960,
+   "y": 224,
+   "object": "point"
+  },
+  {
+   "x": 992,
+   "y": 256,
+   "object": "point"
+  },
+  {
+   "x": 992,
+   "y": 320,
+   "object": "point"
+  },
+  {
+   "x": 992,
+   "y": 384,
+   "object": "point"
+  },
+  {
+   "x": 960,
+   "y": 416,
+   "object": "point"
+  },
+  {
+   "x": 384,
+   "y": 224,
+   "object": "pil"
+  },
+  {
+   "x": 864,
+   "y": 224,
+   "object": "pil"
+  },
+  {
+   "x": 384,
+   "y": 416,
+   "object": "pil"
+  },
+  {
+   "x": 384,
+   "y": 32,
+   "object": "pil"
+  },
+  {
+   "x": 864,
+   "y": 416,
+   "object": "pil"
+  },
+  {
+   "x": 864,
+   "y": 32,
+   "object": "pil"
+  },
+  {
+   "x": 256,
+   "y": 416,
+   "object": "bonus"
+  },
+  {
+   "x": 256,
+   "y": 32,
+   "object": "bonus"
+  },
+  {
+   "x": 992,
+   "y": 416,
+   "object": "bonus"
+  },
+  {
+   "x": 992,
+   "y": 32,
+   "object": "bonus"
+  },
+  {
+   "x": 992,
+   "y": 448,
+   "object": "konstruu_muron"
+  },
+  {
+   "x": 576,
+   "y": 224,
+   "object": "konstruu_murox"
+  },
+  {
+   "x": 576,
+   "y": 288,
+   "object": "konstruu_murox"
+  },
+  {
+   "x": 576,
+   "y": 352,
+   "object": "konstruu_murox"
+  },
+  {
+   "x": 576,
+   "y": 416,
+   "object": "konstruu_murox"
+  },
+  {
+   "x": 640,
+   "y": 160,
+   "object": "konstruu_murox"
+  },
+  {
+   "x": 640,
+   "y": 96,
+   "object": "konstruu_murox"
+  },
+  {
+   "x": 640,
+   "y": 32,
+   "object": "konstruu_murox"
+  },
+  {
+   "x": 1152,
+   "y": 320,
+   "object": "konstruu_murox"
+  },
+  {
+   "x": 1152,
+   "y": 128,
+   "object": "konstruu_murox"
+  },
+  {
+   "x": 1152,
+   "y": 160,
+   "object": "point"
+  },
+  {
+   "x": 640,
+   "y": 320,
+   "object": "konstruu_muron"
+  },
+  {
+   "x": 608,
+   "y": 128,
+   "object": "konstruu_muron"
+  },
+  {
+   "x": 608,
+   "y": 288,
+   "object": "bonus"
+  },
+  {
+   "x": 608,
+   "y": 160,
+   "object": "bonus"
+  },
+  {
+   "x": 608,
+   "y": 224,
+   "object": "pacman"
+  },
+  {
+   "x": 192,
+   "y": 416,
+   "object": "monster"
+  },
+  {
+   "x": 192,
+   "y": 32,
+   "object": "monster"
+  },
+  {
+   "x": 1056,
+   "y": 416,
+   "object": "monster"
+  },
+  {
+   "x": 1056,
+   "y": 32,
+   "object": "monster"
+  },
+  {
+   "x": 320,
+   "y": 96,
+   "object": "monster"
+  },
+  {
+   "x": 320,
+   "y": 352,
+   "object": "monster"
+  },
+  {
+   "x": 928,
+   "y": 96,
+   "object": "monster"
+  },
+  {
+   "x": 928,
+   "y": 352,
+   "object": "monster"
+  },
+  {
+   "x": 0,
+   "y": 0,
+   "object": "regulilo"
+  }
+ ]
+}

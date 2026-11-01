@@ -1,0 +1,18 @@
+pu_fina_nivelo  640x480  (20x15 cells of 32px)
+legend: a=konstruu_muron  c=point  d=pil  g=vivo  i=pacman  j=regulilo  M=monster
+
+j..aaaaaaaaaaaaaa...
+...a...........Ma...
+aaaa.aaaaaaaaaaMaaaa
+a....accccccdcaMMMMa
+a.aaaacaaaacacaaaaaa
+a.accccaccccaccccg.a
+a.accccacaaaacccca.a
+a.aciccaccccaccMca.a
+a.accccaaaacacccca.a
+a.accccaccccacccca.a
+a.aaaacacaaaacaaaa.a
+a....acaccccdca....a
+aaaa.aaaaaaaaaa.aaaa
+...a............a...
+...aaaaaaaaaaaaaa...

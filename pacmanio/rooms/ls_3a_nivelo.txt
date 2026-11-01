@@ -1,0 +1,18 @@
+ls_3a_nivelo  640x480  (20x15 cells of 32px)
+legend: a=muro  c=konstruu_muron  d=point  g=pil  i=vivo  j=muroy  B=bonus  k=konstruu_murox  l=pacman  M=monster  n=regulilo
+
+n..cdccccccccccdc...
+...c.k.jgdd.j.d.c...
+ccccdcdcdkkdcdcdcccc
+cd.dBc.c.ddMc.cBdgdc
+c.ccccdcdkkdcdcdcckc
+cdcdld.c.dd.c.d.dcdc
+c.ccdcccccjccccdcc.c
+dMdc.cM..kik..c.cdMd
+c.ccdccccccccccdcc.c
+cdcd.d.c.dd.c.d.dcdc
+ckccdcdcdkkdcdcccc.c
+cdgdBc.cMdd.c.cBd.dc
+ccccdcdcdkkdcdcdcccc
+...c.d.j.ddgj.k.c...
+...cdccccccccccdc...

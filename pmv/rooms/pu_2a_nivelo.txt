@@ -1,0 +1,18 @@
+pu_2a_nivelo  640x480  (20x15 cells of 32px)
+legend: a=muro  c=konstruu_muron  B=bonus  d=point  g=pil  i=pacman  M=monster  j=regulilo
+
+j..cccccccccccccc...
+...c.d.dgdd.d.d.c...
+ccccdcdcdccdcdcdcccc
+cd.d.c.c.dd.c.c.d.dc
+c.ccdcdccccccdcdcc.c
+cdcd.d.d.dd.d.d.dcdc
+c.ccdcdcccBccdcdcc.c
+cgdc.c.cMM.Mc.c.cdgc
+c.ccdcdccccccdcdcc.c
+cdcd.d.d.i..d.d.dcdc
+c.ccdcdccccccdcdcc.c
+cd.d.c.c.dd.c.c.d.dc
+ccccdcdcdccdcdcdcccc
+...c.d.d.ddgd.d.c...
+...cccccccccccccc...

@@ -1,0 +1,18 @@
+ls_4a_nivelo  1280x480  (40x15 cells of 32px)
+legend: a=konstruu_muron  c=muroy  d=konstruu_murox  g=point  i=pil  B=bonus  j=pacman  M=monster  k=regulilo
+
+k..aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa...
+...a.gMaBg.gig.g.g.gd.g.g.gig.gBaMg.a...
+aaaagagagddddddddddddddddddddddgagagaaaa
+agcg.a.a.dMg.g.g.g.gd.g.g.g.gMd.a.a.gcga
+a.adaagagdgacaaaaaaaaaaaaaacagdgagaada.a
+agag.g.a.d.a.g.g.g.Bd.g.g.g.a.d.a.g.gaga
+a.a.aaaagdgagdgddddddddddgdgagdgaaaa.a.a
+.gagci.g.g.aid.g.gdjg.g.g.dia.g.g.icgag.
+a.a.aaaagdgagdgddddddddddgdgagdgaaaa.a.a
+agag.g.a.d.a.g.g.gdBg.g.g.g.a.d.a.g.gaga
+a.adaagagdgacaaaaaaaaaaaaaacagdgagaada.a
+agcg.a.a.dMg.g.g.gdgg.g.g.g.gMd.a.a.gcga
+aaaagagagddddddddddddddddddddddgagagaaaa
+...a.gMaBg.gig.g.gdgg.g.g.gig.gBaMg.a...
+...aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa...

@@ -1,0 +1,18 @@
+ar_fina_nivelo  640x480  (20x15 cells of 32px)
+legend: a=konstruu_muron  c=vivo  B=bonus  d=pil  g=point  i=pacman  M=monster  j=regulilo
+
+j..adaaa.aadaaa.a...
+...ag.ga..ag.g.ga...
+aaaa.a.aa.aaaaa.aaaa
+g.g.gaga..aM.Mag.g.d
+aaaaaa.a.aa.a.aaaaga
+aig.g.ga.da.aM..Ma.a
+agaaaaaaa.a.aaaa.aga
+g.aM...dM..Md...Ma.g
+aga.aaaa.a.aaaaaaaga
+a.aM..ca.ad.ag.g.g.a
+agaaaa.a.aa.a.aaaaaa
+d.g.gaM.Ma..agag.g.g
+aaaa.aaaaa.aa.a.aaaa
+...ag.g.ga..ag.ga...
+...a.aaadaa.aaada...

@@ -1,0 +1,18 @@
+ls_2a_nivelo  640x480  (20x15 cells of 32px)
+legend: a=konstruu_muron  c=muroy  d=point  B=bonus  g=pil  i=pacman  M=monster  j=regulilo
+
+j..aaaaaaaaaaaaaa...
+...a.d.cBdM.c.d.a...
+aaaadadadaadadadaaaa
+ad.d.a.a.da.a.a.d.da
+a.aaaadaa.adadaaaaca
+adgd.dMa.dagaMd.dgda
+acaaaaaacaacaaaaaa.a
+adBdcd.d.i..d.dcdBda
+a.aaaaaacaacaaaaaaca
+adgd.dMagad.aMd.dgda
+acaaaadada.aadaaaa.a
+ad.d.a.a.ad.a.a.d.da
+aaaadadadaadadadaaaa
+...a.d.c.MdBc.d.a...
+...aaaaaaaaaaaaaa...

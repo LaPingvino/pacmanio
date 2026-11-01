@@ -1,0 +1,33 @@
+ar_4a_nivelo  1280x960  (40x30 cells of 32px)
+legend: a=konstruu_muron  B=bonus  c=point  d=pil  g=pacman  M=monster  i=regulilo
+
+i..aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa...
+...a.c.c.c.c.c.c.c.cc.c.c.c.c.c.c.c.a...
+aaaacaaaadaaaacaaaaaaaaaacaaaadaaaacaaaa
+ac.cBa.c.c.c.aBc.c.cc.c.cBa.c.c.c.aBc.ca
+a.aaaacaa.aacaaaa.aaaa.aaaacaaaaacaaaa.a
+acac.c.a.c.a.c.cac...acac.c.a.c.a.a.caca
+a.a.aaaacacaaaa.a.aMMa.a.aacacaaacaa.a.a
+acdc.c.c.a.c.c.cdcaMMacdcac.c.a.c.cacdca
+a.a.aaaacacaaaa.a.aMMa.a.aacaaacacaa.a.a
+acac.c.a.c.a.c.caca...cac.a.a.c.a.c.caca
+a.aaaacaa.aacaaaa.aaaa.aaaacaaaaacaaaa.a
+ac.cBa.c.c.c.aBc.c.cc.c.cBa.c.c.c.aBc.ca
+a.aa.aaaadaaaacaaaaaaa.aacaaaadaaaacaa.a
+acac.c.c.c.c.c.c.cgccacac.c.c.c.c.c.caca
+a.a.aaaaaaaaaaa.aacaac.a.aaaaaaaaaaa.a.a
+a.a.aaaaaaaaaaa.a.caacaa.aaaaaaaaaaa.a.a
+acac.c.c.c.c.c.cacacc.c.c.c.c.c.c.c.caca
+a.aacaaaadaaaacaa.aaaaaaacaaaadaaaacaa.a
+ac.cBa.c.c.c.aBc.c.cc.c.cBa.c.c.c.aBc.ca
+a.aaaacaa.aacaaaa.aaaa.aaaacaaaaacaaaa.a
+acac.c.cacac.c.cac...acac.c.c.c.c.c.caca
+a.a.aaa.aaa.aaa.a.aMMa.a.a.a.a.a.a.a.a.a
+acdc.c.c.c.c.c.cdcaMMacdcacacacacacacdca
+a.a.aaa.aaa.aaa.a.aMMa.a.a.a.a.a.a.a.a.a
+acac.c.cacac.c.caca...cac.c.c.c.c.c.caca
+a.aaaacaa.aacaaaa.aaaa.aaaacaaaaacaaaa.a
+ac.cBa.c.c.c.aBc.c.cc.c.cBa.c.c.c.aBc.ca
+aaaacaaaadaaaacaaaaaaaaaacaaaadaaaacaaaa
+...a.c.c.c.c.c.c.c.cc.c.c.c.c.c.c.c.a...
+...aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa...
