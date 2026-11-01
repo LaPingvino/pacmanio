@@ -13,7 +13,7 @@ beautiful from the start and includes some of my own pixel art of the time. It s
 
 ## Queue
 
-1. [ ] docs/PACMANIO-RULES.md from pacmanio/objects/*.gml and scripts: every object and event in step order
+1. [x] docs/PACMANIO-RULES.md from pacmanio/objects/*.gml and scripts: every object and event in step order
    (movement, ghosts/"afraid" mode, coins, bonus items, lives, scoring, level sets ar_/ls_/pu_, bildo rooms, fino).
 2. [ ] Asset inventory: which sprites/sounds/backgrounds are Joop's own pixel art and which look like stock
    (GM 5 bundled resources) — a table for Joop to confirm; nothing removed.
@@ -23,6 +23,9 @@ beautiful from the start and includes some of my own pixel art of the time. It s
 
 ## Questions for Joop
 
+- (none yet; the open engine points are in docs/PACMANIO-RULES.md §9)
+
 ## Blocked
 
 ## Tick log
+- 2026-11-01 tick 1 (item 1) — docs/PACMANIO-RULES.md from all 17 objects + 3 scripts + rooms: Pacman, ghosts (adapt_direction; murox = Pacman-only wall, muroy = ghost-only), pellets (160+40 steps), fruit cycle (200 of every 700 steps), wall autotiling table, HUD corners, regions (pu/ar/ls), title-as-level, highscores, CD-or-muziko music. FOUND for item 2: the help text says 'surbaze de kodo de Mark Overmars; kelkaj bildoj estas de Billy McQuown' — GM's Pac-Man example is the stock base. DEBUG=true in the release: PageDown skips a level for −10000. Open: scared-ghost parent collision [engine].
