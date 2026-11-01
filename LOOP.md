@@ -7,7 +7,7 @@ beautiful from the start and includes some of my own pixel art of the time. It s
 ## Non-negotiables
 
 - The recovered code and rooms are the truth; nothing is guessed. Where the code is unclear, note it as a
-  question or check it in the original under Wine (on Crostini).
+  question for Joop (no Crostini needed).
 - No game code for a remake until Joop has approved a design (item 4). Commit locally each tick; no remote.
 - Keep the recovered files as extracted (they are Joop's lost source); write new files beside them.
 
