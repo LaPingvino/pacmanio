@@ -15,7 +15,7 @@ beautiful from the start and includes some of my own pixel art of the time. It s
 
 1. [x] docs/PACMANIO-RULES.md from pacmanio/objects/*.gml and scripts: every object and event in step order
    (movement, ghosts/"afraid" mode, coins, bonus items, lives, scoring, level sets ar_/ls_/pu_, bildo rooms, fino).
-2. [ ] Asset inventory: which sprites/sounds/backgrounds are Joop's own pixel art and which look like stock
+2. [x] Asset inventory: which sprites/sounds/backgrounds are Joop's own pixel art and which look like stock
    (GM 5 bundled resources) — a table for Joop to confirm; nothing removed.
 3. [ ] Compare pmv/ (preview) with pacmanio/: what changed between them.
 4. [ ] docs/DESIGN.md: a remake proposal on the Stelo model (Go + Ebitengine, original levels 1:1, rules and
@@ -34,7 +34,8 @@ beautiful from the start and includes some of my own pixel art of the time. It s
 
 ## Questions for Joop
 
-- (none yet; the open engine points are in docs/PACMANIO-RULES.md §9)
+- docs/ASSETS.md §Questions: which 'unsure' assets are his (pac_stand, star pellet, diamond, muro_1, the two MIDIs).
+- (engine open points: docs/PACMANIO-RULES.md §9)
 
 ## Blocked
 
@@ -42,3 +43,4 @@ beautiful from the start and includes some of my own pixel art of the time. It s
 - 2026-11-01 tick 1 (item 1) — docs/PACMANIO-RULES.md from all 17 objects + 3 scripts + rooms: Pacman, ghosts (adapt_direction; murox = Pacman-only wall, muroy = ghost-only), pellets (160+40 steps), fruit cycle (200 of every 700 steps), wall autotiling table, HUD corners, regions (pu/ar/ls), title-as-level, highscores, CD-or-muziko music. FOUND for item 2: the help text says 'surbaze de kodo de Mark Overmars; kelkaj bildoj estas de Billy McQuown' — GM's Pac-Man example is the stock base. DEBUG=true in the release: PageDown skips a level for −10000. Open: scared-ghost parent collision [engine].
 - 2026-11-01 (between ticks) — scripts/caddy-pacmanio.sh written (reuses the goloco block's basic_auth line at runtime; nothing secret in the repo), placeholder ~/Projects/pacmanio-web/index.html; Joop to run the sudo step.
 - 2026-11-01 (between ticks) — Joop's asset decision recorded under Decisions.
+- 2026-11-01 tick 2 (item 2) — docs/ASSETS.md: every sprite/background/sound with a guess (own/stock/unsure) and why; Joop's: muro_2 houses (named by him), probably muro_3/muro_x3, title and highscore backgrounds, editor placeholders; stock: Pacman, ghosts, fruit, dot, the six WAVs; unsure listed as questions. Sprites identical in pmv; pmv was saved ~14 h AFTER pacmanio (same day, 2006-04-15) and lacks muziko → item 3.
