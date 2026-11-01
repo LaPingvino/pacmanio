@@ -18,10 +18,14 @@ import (
 type app struct {
 	game  *game.Game
 	frame *image.RGBA
+	touch touchState
 }
 
-// keys is the keyboard (and mouse) as the game's input.
-type keys struct{}
+// keys is the keyboard, the mouse and the touch screen as the game's input.
+type keys struct {
+	t     *touchState
+	phone phoneKeys // this frame's characters and Enter from the phone keyboard
+}
 
 func ebitenKey(k gm.Key) ebiten.Key {
 	switch k {
@@ -43,21 +47,27 @@ func ebitenKey(k gm.Key) ebiten.Key {
 	return -1
 }
 
-func (keys) Held(k gm.Key) bool    { return ebiten.IsKeyPressed(ebitenKey(k)) }
-func (keys) Pressed(k gm.Key) bool { return inpututil.IsKeyJustPressed(ebitenKey(k)) }
-func (keys) Typed() []rune {
+func (k keys) Held(key gm.Key) bool {
+	return ebiten.IsKeyPressed(ebitenKey(key)) || (k.t != nil && k.t.held[key])
+}
+func (k keys) Pressed(key gm.Key) bool {
+	return inpututil.IsKeyJustPressed(ebitenKey(key)) || (key == gm.KeyEnter && k.phone.enter)
+}
+func (k keys) Typed() []rune {
 	t := ebiten.AppendInputChars(nil)
 	if inpututil.IsKeyJustPressed(ebiten.KeyBackspace) {
 		t = append(t, '\b')
 	}
-	return t
+	return append(t, k.phone.chars...)
 }
-func (keys) AnyPressed() bool {
-	return len(inpututil.AppendJustPressedKeys(nil)) > 0 || inpututil.IsMouseButtonJustPressed(ebiten.MouseButtonLeft)
+func (k keys) AnyPressed() bool {
+	return len(inpututil.AppendJustPressedKeys(nil)) > 0 || inpututil.IsMouseButtonJustPressed(ebiten.MouseButtonLeft) ||
+		(k.t != nil && k.t.tapped) || len(k.phone.chars) > 0 || k.phone.enter
 }
 
 func (a *app) Update() error {
-	if err := a.game.Step(keys{}); err != nil {
+	a.touch.update()
+	if err := a.game.Step(keys{&a.touch, pollPhoneKeys()}); err != nil {
 		log.Print(err)
 	}
 	// Each room has its own speed (levels 20, region titles 15, komenco and
@@ -71,6 +81,7 @@ func (a *app) Update() error {
 func (a *app) Draw(screen *ebiten.Image) {
 	a.game.Draw(a.frame)
 	screen.WritePixels(a.frame.Pix)
+	a.touch.draw(screen)
 }
 
 func (a *app) Layout(int, int) (int, int) { return game.ScreenW, game.ScreenH }
@@ -91,6 +102,7 @@ func main() {
 	g.G.Sound = sound.NewPlayer(pacmanio.Files).Play
 	// PARTIAL: the highscore table isn't kept between games yet (store, as Stelo).
 	a := &app{game: g, frame: image.NewRGBA(image.Rect(0, 0, game.ScreenW, game.ScreenH))}
+	a.touch.seen = showPadsFromURL()
 	ebiten.SetWindowTitle("Pacmanio")
 	ebiten.SetTPS(g.World.Speed)
 	ebiten.SetWindowSize(game.ScreenW, game.ScreenH)
