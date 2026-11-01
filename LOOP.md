@@ -17,7 +17,7 @@ beautiful from the start and includes some of my own pixel art of the time. It s
    (movement, ghosts/"afraid" mode, coins, bonus items, lives, scoring, level sets ar_/ls_/pu_, bildo rooms, fino).
 2. [x] Asset inventory: which sprites/sounds/backgrounds are Joop's own pixel art and which look like stock
    (GM 5 bundled resources) — a table for Joop to confirm; nothing removed.
-3. [ ] Compare pmv/ (preview) with pacmanio/: what changed between them. Joop (2026-11-01): "I think the
+3. [x] Compare pmv/ (preview) with pacmanio/: what changed between them. Joop (2026-11-01): "I think the
    Pacmanio builds both lack some. One lacks sound, the other lacks levels." First look: pmv lacks the whole
    Libera Spaco region (ls_*: 6 rooms) and the `muziko` MIDI; the 14 rooms they share are identical, and both
    have the same six WAVs. So far pacmanio.exe looks like the superset — check objects/scripts/settings too,
@@ -48,3 +48,4 @@ beautiful from the start and includes some of my own pixel art of the time. It s
 - 2026-11-01 (between ticks) — scripts/caddy-pacmanio.sh written (reuses the goloco block's basic_auth line at runtime; nothing secret in the repo), placeholder ~/Projects/pacmanio-web/index.html; Joop to run the sudo step.
 - 2026-11-01 (between ticks) — Joop's asset decision recorded under Decisions.
 - 2026-11-01 tick 2 (item 2) — docs/ASSETS.md: every sprite/background/sound with a guess (own/stock/unsure) and why; Joop's: muro_2 houses (named by him), probably muro_3/muro_x3, title and highscore backgrounds, editor placeholders; stock: Pacman, ghosts, fruit, dot, the six WAVs; unsure listed as questions. Sprites identical in pmv; pmv was saved ~14 h AFTER pacmanio (same day, 2006-04-15) and lacks muziko → item 3.
+- 2026-11-01 tick 3 (item 3) — docs/BUILDS.md: pmv is the cut-down windowed 'work' edition made the same evening (its own texts say so: 'por ludado ekz. en laborejo', 'nur la unuajn 10 nivelojn'): no Libera Spaco, no music (no muziko, no CD code), no murox/muroy, windowed, DEBUG false. pacmanio.exe is the superset → the remake's source. NEXT: item 4 (design for Joop).
