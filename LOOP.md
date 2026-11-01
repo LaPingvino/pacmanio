@@ -22,7 +22,7 @@ beautiful from the start and includes some of my own pixel art of the time. It s
    Libera Spaco region (ls_*: 6 rooms) and the `muziko` MIDI; the 14 rooms they share are identical, and both
    have the same six WAVs. So far pacmanio.exe looks like the superset — check objects/scripts/settings too,
    and whether pacmanio's sound fails at run time (CD-audio path in `preparu`, MIDI) rather than being absent.
-4. [ ] docs/DESIGN.md: a remake proposal on the Stelo model (Go + Ebitengine, original levels 1:1, rules and
+4. [x] docs/DESIGN.md: a remake proposal on the Stelo model (Go + Ebitengine, original levels 1:1, rules and
    level-format docs, editor, packs), with what stock assets would need replacing → Joop. STOP there until yes.
 5. [ ] (after the yes) The wasm build goes to ~/Projects/pacmanio-web, served PRIVATELY at
    https://kiefte.eu/pacmanio/ behind the goloco login (Joop 2026-11-01: 'add wasm pacmanio alongside goloco').
@@ -38,6 +38,8 @@ beautiful from the start and includes some of my own pixel art of the time. It s
 
 ## Questions for Joop
 
+- docs/DESIGN.md: yes to the design? And its §3: keep DEBUG (PageDown skip)? views for the big rooms? (WAITING — no game code until the yes.)
+
 - docs/ASSETS.md §Questions: which 'unsure' assets are his (pac_stand, star pellet, diamond, muro_1, the two MIDIs).
 - (engine open points: docs/PACMANIO-RULES.md §9)
 
@@ -49,3 +51,4 @@ beautiful from the start and includes some of my own pixel art of the time. It s
 - 2026-11-01 (between ticks) — Joop's asset decision recorded under Decisions.
 - 2026-11-01 tick 2 (item 2) — docs/ASSETS.md: every sprite/background/sound with a guess (own/stock/unsure) and why; Joop's: muro_2 houses (named by him), probably muro_3/muro_x3, title and highscore backgrounds, editor placeholders; stock: Pacman, ghosts, fruit, dot, the six WAVs; unsure listed as questions. Sprites identical in pmv; pmv was saved ~14 h AFTER pacmanio (same day, 2006-04-15) and lacks muziko → item 3.
 - 2026-11-01 tick 3 (item 3) — docs/BUILDS.md: pmv is the cut-down windowed 'work' edition made the same evening (its own texts say so: 'por ludado ekz. en laborejo', 'nur la unuajn 10 nivelojn'): no Libera Spaco, no music (no muziko, no CD code), no murox/muroy, windowed, DEBUG false. pacmanio.exe is the superset → the remake's source. NEXT: item 4 (design for Joop).
+- 2026-11-01 tick 4 (item 4) — docs/DESIGN.md written (Stelo model, shared GM engine core, private web build, assets per Joop's decision, three questions on deviations). Now WAITING on Joop's yes; next workable items only after it.
