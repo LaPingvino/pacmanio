@@ -8,7 +8,7 @@ beautiful from the start and includes some of my own pixel art of the time. It s
 
 - The recovered code and rooms are the truth; nothing is guessed. Where the code is unclear, note it as a
   question for Joop (no Crostini needed).
-- No game code for a remake until Joop has approved a design (item 4). Commit locally each tick; no remote.
+- Design approved 2026-11-01 (docs/DESIGN.md). Commit locally each tick; no remote; the web build only at the private kiefte.eu/pacmanio/.
 - Keep the recovered files as extracted (they are Joop's lost source); write new files beside them.
 
 ## Queue
@@ -24,12 +24,23 @@ beautiful from the start and includes some of my own pixel art of the time. It s
    and whether pacmanio's sound fails at run time (CD-audio path in `preparu`, MIDI) rather than being absent.
 4. [x] docs/DESIGN.md: a remake proposal on the Stelo model (Go + Ebitengine, original levels 1:1, rules and
    level-format docs, editor, packs), with what stock assets would need replacing → Joop. STOP there until yes.
-5. [ ] (after the yes) The wasm build goes to ~/Projects/pacmanio-web, served PRIVATELY at
+5. [ ] Level converter for the 20 rooms (round-trip test), reusing the Stelo format.
+6. [ ] Rooms drawn with the original sprites, wall autotiling (test against the room renders).
+7. [ ] Pacman and the dots; ghosts; pellets; fruit; lives and HUD; regions, title and end rooms.
+8. [ ] Music and sounds.
+9. [ ] Mobile (as Stelo item 12).
+10. [ ] The wasm build goes to ~/Projects/pacmanio-web, served PRIVATELY at
    https://kiefte.eu/pacmanio/ behind the goloco login (Joop 2026-11-01: 'add wasm pacmanio alongside goloco').
    Joop runs `sudo bash ~/Projects/pacmanio-recovered/scripts/caddy-pacmanio.sh` once (a placeholder page is
    there now); later deploys just replace the folder (atomic swap, chmod -R o+rX).
 
 ## Decisions (Joop)
+
+- 2026-11-01: DESIGN APPROVED ("I think there is nothing I can disagree with among what you propose"). On the
+  three open points the original's behaviour is kept: DEBUG as released (PageDown skip), the big rooms without
+  views as in the original, and the highscore name in an in-game text field (no Windows dialog exists).
+- 2026-11-01: true Esperanto letters on screen instead of the x-system (as for Stelo).
+- 2026-11-01: mobile support approved, as for Stelo.
 
 - 2026-11-01 assets: "For now you can keep the same assets. If you can find a replacement for stock stuff, you
   can of course keep my own pixel art (houses used as walls etc...)" → the remake starts with the original
@@ -38,7 +49,6 @@ beautiful from the start and includes some of my own pixel art of the time. It s
 
 ## Questions for Joop
 
-- docs/DESIGN.md: yes to the design? And its §3: keep DEBUG (PageDown skip)? views for the big rooms? (WAITING — no game code until the yes.)
 
 - docs/ASSETS.md §Questions: which 'unsure' assets are his (pac_stand, star pellet, diamond, muro_1, the two MIDIs).
 - (engine open points: docs/PACMANIO-RULES.md §9)
@@ -52,3 +62,4 @@ beautiful from the start and includes some of my own pixel art of the time. It s
 - 2026-11-01 tick 2 (item 2) — docs/ASSETS.md: every sprite/background/sound with a guess (own/stock/unsure) and why; Joop's: muro_2 houses (named by him), probably muro_3/muro_x3, title and highscore backgrounds, editor placeholders; stock: Pacman, ghosts, fruit, dot, the six WAVs; unsure listed as questions. Sprites identical in pmv; pmv was saved ~14 h AFTER pacmanio (same day, 2006-04-15) and lacks muziko → item 3.
 - 2026-11-01 tick 3 (item 3) — docs/BUILDS.md: pmv is the cut-down windowed 'work' edition made the same evening (its own texts say so: 'por ludado ekz. en laborejo', 'nur la unuajn 10 nivelojn'): no Libera Spaco, no music (no muziko, no CD code), no murox/muroy, windowed, DEBUG false. pacmanio.exe is the superset → the remake's source. NEXT: item 4 (design for Joop).
 - 2026-11-01 tick 4 (item 4) — docs/DESIGN.md written (Stelo model, shared GM engine core, private web build, assets per Joop's decision, three questions on deviations). Now WAITING on Joop's yes; next workable items only after it.
+- 2026-11-01 — Joop approved the design; queue items 5-10 added.
