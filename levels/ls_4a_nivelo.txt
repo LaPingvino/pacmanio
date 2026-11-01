@@ -1,0 +1,29 @@
+pacmanio-level 1
+name ls_4a_nivelo
+size 1280 480
+speed 20
+colour #000000
+caption "Divideme..."
+view 0 0 640 480 follow pacman border 256 220 speed -1 -1
+grid
+...##################################...
+...#.oM#Bo.oOo.o.o.ox.o.o.oOo.oB#Mo.#...
+####o#o#oxxxxxxxxxxxxxxxxxxxxxxo#o#o####
+#oyo.#.#.xMo.o.o.o.ox.o.o.o.oMx.#.#.oyo#
+#.#x##o#oxo#y##############y#oxo#o##x#.#
+#o#o.o.#.x.#.o.o.o.Bx.o.o.o.#.x.#.o.o#o#
+#.#.####oxo#oxoxxxxxxxxxxoxo#oxo####.#.#
+.o#oyO.o.o.#Ox.o.ox@o.o.o.xO#.o.o.Oyo#o.
+#.#.####oxo#oxoxxxxxxxxxxoxo#oxo####.#.#
+#o#o.o.#.x.#.o.o.oxBo.o.o.o.#.x.#.o.o#o#
+#.#x##o#oxo#y##############y#oxo#o##x#.#
+#oyo.#.#.xMo.o.o.oxoo.o.o.o.oMx.#.#.oyo#
+####o#o#oxxxxxxxxxxxxxxxxxxxxxxo#o#o####
+...#.oM#Bo.oOo.o.oxoo.o.o.oOo.oB#Mo.#...
+...##################################...
+instance konstruu_muron -32 192
+instance konstruu_muron -32 256
+instance konstruu_muron 1280 192
+instance konstruu_muron 1280 256
+instance regulilo 0 0
+end

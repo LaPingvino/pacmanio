@@ -1,0 +1,25 @@
+pacmanio-level 1
+name ar_1a_nivelo
+size 640 480
+speed 20
+colour #000000
+caption "For, for!"
+grid
+...##############...
+...#o.o.o..o.o.o#...
+####.####o#####.####
+#.o.o#O#o..o#O#o.o.#
+#o####.#.##.#.####o#
+#.#M#.o.o..o.o.#M#.#
+#o#o.o#o#W##o#o.o#o#
+#O#####.oB@o.#####O#
+#o#o.o#o####o#o.o#o#
+#.#M#.o.o..o.o.#M#.#
+#o####.#.##.#.####o#
+#.o.o#O#o..o#O#o.o.#
+####.#####o####.####
+...#o.o.o..o.o.o#...
+...##############...
+instance konstruu_muron 288 192
+instance regulilo 0 0
+end

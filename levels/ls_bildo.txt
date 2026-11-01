@@ -1,0 +1,25 @@
+pacmanio-level 1
+name ls_bildo
+size 640 480
+speed 15
+colour #C0C0C0
+background regiona
+code "global.regiono=\"Libera Spaco\";\r\nglobal.murigxu=3;\r\nglobal.kontrauxkoloro=c_ltgray;"
+grid
+....................
+....................
+....................
+....................
+....................
+....................
+####################
+#M.....M....M.....M#
+#.xxx..........xxx.#
+#.x.x..######..x.x.#
+#.x.xM.#o..@#.Mx.x.#
+#.x.x..######..x.x.#
+#.xxx..........xxx.#
+#M.....M....M.....M#
+####################
+instance regionilo 160 64
+end

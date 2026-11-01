@@ -1,0 +1,25 @@
+pacmanio-level 1
+name pu_bildo
+size 640 480
+speed 15
+colour #C0C0C0
+background regiona
+code "global.regiono=\"Urba Regiono\";\r\nglobal.murigxu=2;\r\nglobal.kontrauxkoloro=c_black;"
+grid
+....................
+....................
+....................
+....................
+....................
+....................
+####################
+#M.....M....M.....M#
+#.#.#..######..#.#.#
+#...####....####...#
+#.###M.#o..@#.M###.#
+#...####....####...#
+#.#.#..######..#.#.#
+#M.....M....M.....M#
+####################
+instance regionilo 160 64
+end

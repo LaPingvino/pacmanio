@@ -1,0 +1,54 @@
+pacmanio-level 1
+name ar_fina_nivelo
+size 640 480
+speed 20
+colour #000000
+caption "Se vi#kuragxas..."
+grid
+...#O###.##O###.#...
+...#o.o#..#o.o.o#...
+####.#.##.#####.####
+o.o.o#o#..#M.M#B.o.O
+######.#.##.#.####o#
+#@o.o.o#.O#.#M..M#.#
+#o#######.#.####.#o#
+o.#M...OM..MO...M#.o
+#o#.####.#.#######o#
+#.#M..V#.#O.#o.o.o.#
+#o####.#.##.#.######
+O.o.B#M.M#..#o#o.o.o
+####.#####.##.#.####
+...#o.o.o#..#o.o#...
+...#.###O##.###O#...
+instance konstruu_muron -32 64
+instance konstruu_muron -32 128
+instance konstruu_muron 96 -32
+instance konstruu_muron 160 -32
+instance konstruu_muron 96 480
+instance konstruu_muron 160 480
+instance konstruu_muron -32 384
+instance konstruu_muron -32 320
+instance konstruu_muron 448 480
+instance konstruu_muron 512 480
+instance konstruu_muron 640 320
+instance konstruu_muron 640 384
+instance konstruu_muron 640 128
+instance konstruu_muron 640 64
+instance konstruu_muron 512 -32
+instance konstruu_muron 448 -32
+instance konstruu_muron 224 -32
+instance konstruu_muron 288 -32
+instance konstruu_muron 320 480
+instance konstruu_muron 384 480
+instance konstruu_muron 320 -32
+instance konstruu_muron 384 -32
+instance konstruu_muron 224 480
+instance konstruu_muron 288 480
+instance konstruu_muron -32 192
+instance konstruu_muron -32 256
+instance konstruu_muron 640 192
+instance konstruu_muron 640 256
+instance point 128 352
+instance point 480 96
+instance regulilo 0 0
+end

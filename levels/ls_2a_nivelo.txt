@@ -1,0 +1,24 @@
+pacmanio-level 1
+name ls_2a_nivelo
+size 640 480
+speed 20
+colour #000000
+caption "Lauxregione"
+grid
+...##############...
+...#.o.yBoM.y.o.#...
+####o#o#o##o#o#o####
+#o.o.#.#.o#.#.#.o.o#
+#.####o##.#o#o####y#
+#oOo.oM#.o#O#Mo.oOo#
+#y######y##y######.#
+#oBoyo.o.@..o.oyoBo#
+#.######y##y######y#
+#oOo.oM#O#o.#Mo.oOo#
+#y####o#o#.##o####.#
+#o.o.#.#.#o.#.#.o.o#
+####o#o#o##o#o#o####
+...#.o.y.MoBy.o.#...
+...##############...
+instance regulilo 0 0
+end

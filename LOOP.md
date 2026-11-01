@@ -24,7 +24,7 @@ beautiful from the start and includes some of my own pixel art of the time. It s
    and whether pacmanio's sound fails at run time (CD-audio path in `preparu`, MIDI) rather than being absent.
 4. [x] docs/DESIGN.md: a remake proposal on the Stelo model (Go + Ebitengine, original levels 1:1, rules and
    level-format docs, editor, packs), with what stock assets would need replacing → Joop. STOP there until yes.
-5. [ ] Level converter for the 20 rooms (round-trip test), reusing the Stelo format.
+5. [x] Level converter for the 20 rooms (round-trip test), reusing the Stelo format.
 6. [ ] Rooms drawn with the original sprites, wall autotiling (test against the room renders).
 7. [ ] Pacman and the dots; ghosts; pellets; fruit; lives and HUD; regions, title and end rooms.
 8. [ ] Music and sounds.
@@ -63,3 +63,4 @@ beautiful from the start and includes some of my own pixel art of the time. It s
 - 2026-11-01 tick 3 (item 3) — docs/BUILDS.md: pmv is the cut-down windowed 'work' edition made the same evening (its own texts say so: 'por ludado ekz. en laborejo', 'nur la unuajn 10 nivelojn'): no Libera Spaco, no music (no muziko, no CD code), no murox/muroy, windowed, DEBUG false. pacmanio.exe is the superset → the remake's source. NEXT: item 4 (design for Joop).
 - 2026-11-01 tick 4 (item 4) — docs/DESIGN.md written (Stelo model, shared GM engine core, private web build, assets per Joop's decision, three questions on deviations). Now WAITING on Joop's yes; next workable items only after it.
 - 2026-11-01 — Joop approved the design; queue items 5-10 added.
+- 2026-11-01 tick 5 (item 5) — Go module 'pacmanio'; internal/level adapted from Stelo's (pacmanio-level 1, no ladder layer, Pacmanio grid chars), cmd/convert → levels/*.txt (20 rooms), docs/LEVEL-FORMAT.md; test: all 20 round-trip, levels/ current. NEXT: item 6 (draw rooms, wall autotiling).

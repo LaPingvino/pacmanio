@@ -1,0 +1,40 @@
+pacmanio-level 1
+name ar_4a_nivelo
+size 1280 960
+speed 20
+colour #000000
+caption "Sxovigxejo"
+view 0 0 640 480 follow pacman border 256 220 speed -1 -1
+grid
+...##################################...
+...#.o.o.o.o.o.o.o.oo.o.o.o.o.o.o.o.#...
+####o####O####o##########o####O####o####
+#o.oB#.o.o.o.#Bo.o.oo.o.oB#.o.o.o.#Bo.o#
+#.####o##.##o####.####.####o#####o####.#
+#o#o.o.#.o.#.o.o#o...#o#o.o.#.o.#.#.o#o#
+#.#.####o#o####.#.#MM#.#.##o#o###o##.#.#
+#oOo.o.o.#.o.o.oOo#MM#oOo#o.o.#.o.o#oOo#
+#.#.####o#o####.#.#MM#.#.##o###o#o##.#.#
+#o#o.o.#.o.#.o.o#o#...o#o.#.#.o.#.o.o#o#
+#.####o##.##o####.####.####o#####o####.#
+#o.oB#.o.o.o.#Bo.o.oo.o.oB#.o.o.o.#Bo.o#
+#.##.####O####o#######.##o####O####o##.#
+#o#o.o.o.o.o.o.o.o@oo#o#o.o.o.o.o.o.o#o#
+#.#.###########.##o##o.#.###########.#.#
+#.#.###########.#.o##o##.###########.#.#
+#o#o.o.o.o.o.o.o#o#oo.o.o.o.o.o.o.o.o#o#
+#.##o####O####o##.#######o####O####o##.#
+#o.oB#.o.o.o.#Bo.o.oo.o.oB#.o.o.o.#Bo.o#
+#.####o##.##o####.####.####o#####o####.#
+#o#o.o.o#o#o.o.o#o...#o#o.o.o.o.o.o.o#o#
+#.#.###.###.###.#.#MM#.#.#.#.#.#.#.#.#.#
+#oOo.o.o.o.o.o.oOo#MM#oOo#o#o#o#o#o#oOo#
+#.#.###.###.###.#.#MM#.#.#.#.#.#.#.#.#.#
+#o#o.o.o#o#o.o.o#o#...o#o.o.o.o.o.o.o#o#
+#.####o##.##o####.####.####o#####o####.#
+#o.oB#.o.o.o.#Bo.o.oo.o.oB#.o.o.o.#Bo.o#
+####o####O####o##########o####O####o####
+...#.o.o.o.o.o.o.o.oo.o.o.o.o.o.o.o.#...
+...##################################...
+instance regulilo 0 0
+end

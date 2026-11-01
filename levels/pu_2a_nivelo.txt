@@ -1,0 +1,25 @@
+pacmanio-level 1
+name pu_2a_nivelo
+size 640 480
+speed 20
+colour #000000
+caption "Idealisto"
+grid
+...##############...
+...#.o.oOoo.o.o.#...
+####o#o#o##o#o#o####
+#o.o.#.#.oo.#.#.o.o#
+#.##o#o######o#o##.#
+#o#o.o.o.oo.o.o.o#o#
+#.##o#o##WB##o#o##.#
+#Oo#.#.#MM.M#.#.#oO#
+#.##o#o######o#o##.#
+#o#o.o.o.@..o.o.o#o#
+#.##o#o######o#o##.#
+#o.o.#.#.oo.#.#.o.o#
+####o#o#o##o#o#o####
+...#.o.o.ooOo.o.#...
+...##############...
+instance konstruu_muron 288 192
+instance regulilo 0 0
+end

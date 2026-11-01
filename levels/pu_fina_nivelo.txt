@@ -1,0 +1,24 @@
+pacmanio-level 1
+name pu_fina_nivelo
+size 640 480
+speed 20
+colour #000000
+caption "Temp' está..."
+grid
+...##############...
+...#...........M#...
+####.##########M####
+#....#ooooooOo#MMMM#
+#.####o####o#o######
+#.#oooo#oooo#ooooV.#
+#.#oooo#o####oooo#.#
+#.#o@oo#oooo#ooMo#.#
+#.#oooo####o#oooo#.#
+#.#oooo#oooo#oooo#.#
+#.####o#o####o####.#
+#....#o#ooooOo#....#
+####.##########.####
+...#............#...
+...##############...
+instance regulilo 0 0
+end

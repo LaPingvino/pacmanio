@@ -1,0 +1,25 @@
+pacmanio-level 1
+name pu_1a_nivelo
+size 640 480
+speed 20
+colour #000000
+caption "Jen fantomoj!"
+grid
+...##############...
+...#o.o.o.o.o.o.#...
+####.#.#B##o#o#o####
+#.#.o.O#o.o.#Oo.o#o#
+#o.o##.#.##o#o##.o.#
+#.#.#.o.o.o.o.o#o#o#
+#o.o.o###W.###.o.o.#
+#O##o###M..M###.##O#
+#o.o.o########.o.o.#
+#.#.#.o.o.@.o.o#o#o#
+#o.o##.#.##o#o##.o.#
+#.#.o.O#o.o.#Oo.o#o#
+####.#.#.##B#o#o####
+...#o.o.o.o.o.o.#...
+...##############...
+instance konstruu_muron 288 192
+instance regulilo 0 0
+end

@@ -1,0 +1,24 @@
+pacmanio-level 1
+name ls_1a_nivelo
+size 640 480
+speed 20
+colour #000000
+caption "Jen kiaj muroj!"
+grid
+...##############...
+...#o.o.o.o.o.o.#...
+####.xxxBxxoxxxo####
+#.x.o.Oxo.o.xOo.oxo#
+#oxoxxxx.xxoxxxx.x.#
+#.x.x.o.o.o.o.oxoxo#
+#o.o.o###xx###.o.x.#
+#Oxxo###MMMM###.xxO#
+#oxo.o########.o.o.#
+#.x.x.o.o.@.o.oxoxo#
+#oxoxxxx.xxoxxxx.x.#
+#.x.o.Oxo.o.xOo.oxo#
+####.xxx.xxBxxxo####
+...#o.o.o.o.o.o.#...
+...##############...
+instance regulilo 0 0
+end
