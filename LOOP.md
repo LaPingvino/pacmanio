@@ -17,7 +17,11 @@ beautiful from the start and includes some of my own pixel art of the time. It s
    (movement, ghosts/"afraid" mode, coins, bonus items, lives, scoring, level sets ar_/ls_/pu_, bildo rooms, fino).
 2. [x] Asset inventory: which sprites/sounds/backgrounds are Joop's own pixel art and which look like stock
    (GM 5 bundled resources) — a table for Joop to confirm; nothing removed.
-3. [ ] Compare pmv/ (preview) with pacmanio/: what changed between them.
+3. [ ] Compare pmv/ (preview) with pacmanio/: what changed between them. Joop (2026-11-01): "I think the
+   Pacmanio builds both lack some. One lacks sound, the other lacks levels." First look: pmv lacks the whole
+   Libera Spaco region (ls_*: 6 rooms) and the `muziko` MIDI; the 14 rooms they share are identical, and both
+   have the same six WAVs. So far pacmanio.exe looks like the superset — check objects/scripts/settings too,
+   and whether pacmanio's sound fails at run time (CD-audio path in `preparu`, MIDI) rather than being absent.
 4. [ ] docs/DESIGN.md: a remake proposal on the Stelo model (Go + Ebitengine, original levels 1:1, rules and
    level-format docs, editor, packs), with what stock assets would need replacing → Joop. STOP there until yes.
 5. [ ] (after the yes) The wasm build goes to ~/Projects/pacmanio-web, served PRIVATELY at
