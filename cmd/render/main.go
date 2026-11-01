@@ -20,12 +20,12 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
-	r, err := game.LoadRoom(pacmanio.Files, a, *name)
+	r, err := game.LoadWorld(pacmanio.Files, a, *name)
 	if err != nil {
 		log.Fatal(err)
 	}
 	img := image.NewRGBA(image.Rect(0, 0, game.ScreenW, game.ScreenH))
-	r.Draw(img, a)
+	r.Draw(img)
 	f, err := os.Create(*out)
 	if err != nil {
 		log.Fatal(err)

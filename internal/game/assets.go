@@ -7,6 +7,7 @@ import (
 	"image/draw"
 	"image/png"
 	"io/fs"
+	"pacmanio/internal/gm"
 	"path"
 )
 
@@ -26,6 +27,7 @@ type ObjectDef struct {
 	Visible bool
 	Depth   int
 	Solid   bool
+	Parent  string // the parent object's name ("" none)
 }
 
 // Assets are the loaded sprites, backgrounds and object definitions.
@@ -33,6 +35,7 @@ type Assets struct {
 	Sprites     map[string]*Sprite
 	Backgrounds map[string]*image.RGBA
 	Objects     map[string]*ObjectDef
+	gmObjects   map[string]*gm.Object
 }
 
 type project struct {
@@ -53,6 +56,7 @@ type project struct {
 		Visible bool
 		Depth   int
 		Solid   bool
+		Parent  int
 	}
 }
 
@@ -97,6 +101,9 @@ func LoadAssets(fsys fs.FS) (*Assets, error) {
 			continue
 		}
 		d := &ObjectDef{Name: o.Name, Visible: o.Visible, Depth: o.Depth, Solid: o.Solid}
+		if o.Parent >= 0 && o.Parent < len(p.Objects) && p.Objects[o.Parent] != nil {
+			d.Parent = p.Objects[o.Parent].Name // parent is an object id (ids have gaps)
+		}
 		if o.Sprite >= 0 && o.Sprite < len(p.Sprites) && p.Sprites[o.Sprite] != nil {
 			d.Sprite = p.Sprites[o.Sprite].Name
 		}

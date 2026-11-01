@@ -1,5 +1,5 @@
-// Package game is the Pacmanio remake: rooms drawn and run as the recovered
-// 2006 game (docs/PACMANIO-RULES.md).
+// Package game is the Pacmanio remake: rooms run on the Game Maker core
+// (internal/gm) as the recovered 2006 game (docs/PACMANIO-RULES.md).
 package game
 
 import (
@@ -10,25 +10,20 @@ import (
 	"sort"
 	"strings"
 
+	"pacmanio/internal/gm"
 	"pacmanio/internal/level"
 )
 
 // ScreenW, ScreenH is the window (the original's 640×480).
 const ScreenW, ScreenH = 640, 480
 
-// Thing is one instance in a room (drawing state only, for now).
-type Thing struct {
-	Object string
-	X, Y   int
-	Sprite string
-	Frame  int
-}
-
-// Room is a loaded room.
-type Room struct {
+// World is a running room.
+type World struct {
+	Assets *Assets
 	Level  *level.Level
+	Room   *gm.Room
 	Region int // global.murigxu: 1 Akva (muro_1, blue), 2 Urba (muro_2, light grey), 3 Libera Spaco (muro_3, dark grey)
-	Things []*Thing
+	Speed  int // room speed (steps per second)
 }
 
 // RegionOf is the region a room is played in: the *_bildo room before it sets
@@ -44,14 +39,40 @@ func RegionOf(room string) int {
 	return 1
 }
 
-// regionColour is preparu's background_color: c_blue, c_ltgray, c_dkgray
-// (Game Maker's colour constants).
+// regionColour is preparu's background_color: c_blue, c_ltgray, c_dkgray.
 var regionColour = map[int]color.RGBA{1: {0, 0, 255, 255}, 2: {192, 192, 192, 255}, 3: {128, 128, 128, 255}}
 
-// LoadRoom reads levels/<name>.txt, turns the wall placeholders into walls
-// (konstruu_muron → muro, konstruu_murox → murox: action_change_object at
-// create) and picks every wall's sprite and frame as muro's room start does.
-func LoadRoom(fsys fs.FS, a *Assets, name string) (*Room, error) {
+// Object returns the engine object for an original object (sprite box,
+// solidity, drawing defaults, parent, events), shared by its instances.
+func (a *Assets) Object(name string) *gm.Object {
+	if o := a.gmObjects[name]; o != nil {
+		return o
+	}
+	if a.gmObjects == nil {
+		a.gmObjects = map[string]*gm.Object{}
+	}
+	o := &gm.Object{Name: name}
+	a.gmObjects[name] = o
+	if d := a.Objects[name]; d != nil {
+		o.Solid, o.Sprite, o.Visible, o.Depth = d.Solid, d.Sprite, d.Visible, d.Depth
+		if sp := a.Sprites[d.Sprite]; sp != nil {
+			o.Mask = true
+			o.BBox = gm.Box{L: sp.BBox[0], R: sp.BBox[1], T: sp.BBox[2], B: sp.BBox[3]}
+		}
+		if d.Parent != "" {
+			o.Parent = a.Object(d.Parent)
+		}
+	}
+	if ev := objectEvents[name]; ev != nil {
+		ev(a, o)
+	}
+	return o
+}
+
+// LoadWorld reads levels/<name>.txt and runs the room's start: instances are
+// created in order (their create events run), then muro's room start picks
+// every wall's tile set and frame.
+func LoadWorld(fsys fs.FS, a *Assets, name string) (*World, error) {
 	data, err := fs.ReadFile(fsys, "levels/"+name+".txt")
 	if err != nil {
 		return nil, err
@@ -60,74 +81,56 @@ func LoadRoom(fsys fs.FS, a *Assets, name string) (*Room, error) {
 	if err != nil {
 		return nil, err
 	}
-	r := &Room{Level: l, Region: RegionOf(name)}
+	w := &World{Assets: a, Level: l, Region: RegionOf(name), Speed: l.Speed,
+		Room: &gm.Room{Name: l.Name, W: l.W, H: l.H, G: &gm.Globals{Lives: 3, Vars: map[string]float64{}}}}
+	w.Room.G.Vars["room_speed"] = float64(l.Speed)
 	for _, in := range l.Instances {
-		obj := in.Object
-		switch obj {
-		case "konstruu_muron":
-			obj = "muro"
-		case "konstruu_murox":
-			obj = "murox"
-		}
-		t := &Thing{Object: obj, X: in.X, Y: in.Y}
-		if d := a.Objects[obj]; d != nil {
-			t.Sprite = d.Sprite
-		}
-		r.Things = append(r.Things, t)
+		w.Room.Create(a.Object(in.Object), float64(in.X), float64(in.Y))
 	}
-	r.autotile()
-	return r, nil
+	w.autotile()
+	return w, nil
 }
 
 // wallFrame is muro/murox's room-start table: the frame for which of the
-// neighbours (left, up, right, down) hold a solid (muro or murox).
+// neighbours (left, up, right, down) hold a solid (place_free false).
 var wallFrame = [16]int{0, 2, 4, 13, 1, 14, 10, 9, 3, 12, 15, 8, 11, 7, 6, 5}
 
-func (r *Room) autotile() {
-	solid := map[[2]int]bool{}
-	for _, t := range r.Things {
-		if t.Object == "muro" || t.Object == "murox" {
-			solid[[2]int{t.X, t.Y}] = true
-		}
-	}
-	bit := func(x, y int) int {
-		if solid[[2]int{x, y}] {
-			return 1
-		}
-		return 0
-	}
-	for _, t := range r.Things {
-		if t.Object != "muro" && t.Object != "murox" {
+func (w *World) autotile() {
+	r := w.Room
+	for _, t := range r.Instances {
+		name := t.Obj.Name
+		if name != "muro" && name != "murox" {
 			continue
 		}
-		if t.Object == "muro" { // global.murigxu picks the region's tile set
-			t.Sprite = []string{"", "muro_1", "muro_2", "muro_3"}[r.Region]
+		if name == "muro" { // global.murigxu picks the region's tile set
+			t.Sprite = []string{"", "muro_1", "muro_2", "muro_3"}[w.Region]
 		}
-		idx := bit(t.X-32, t.Y)<<3 | bit(t.X, t.Y-32)<<2 | bit(t.X+32, t.Y)<<1 | bit(t.X, t.Y+32)
-		t.Frame = wallFrame[idx]
+		bit := func(dx, dy float64) int {
+			if r.PlaceFree(t, t.X+dx, t.Y+dy) {
+				return 0
+			}
+			return 1
+		}
+		idx := bit(-32, 0)<<3 | bit(0, -32)<<2 | bit(32, 0)<<1 | bit(0, 32)
+		t.ImageIndex, t.ImageSpeed = float64(wallFrame[idx]), 0 // image_single
 	}
 }
 
+// Step runs one step.
+func (w *World) Step(in gm.Input) { w.Room.Step(in) }
+
 // Draw renders the room's top-left 640×480 (no views, as the original).
-func (r *Room) Draw(dst *image.RGBA, a *Assets) {
-	bg := regionColour[r.Region]
-	draw.Draw(dst, dst.Bounds(), image.NewUniform(bg), image.Point{}, draw.Src)
-	things := append([]*Thing(nil), r.Things...)
-	depth := func(t *Thing) int {
-		if d := a.Objects[t.Object]; d != nil {
-			return d.Depth
-		}
-		return 0
-	}
-	sort.SliceStable(things, func(i, j int) bool { return depth(things[i]) > depth(things[j]) })
-	for _, t := range things {
-		d := a.Objects[t.Object]
-		sp := a.Sprites[t.Sprite]
-		if d == nil || !d.Visible || sp == nil || len(sp.Frames) == 0 {
+func (w *World) Draw(dst *image.RGBA) {
+	draw.Draw(dst, dst.Bounds(), image.NewUniform(regionColour[w.Region]), image.Point{}, draw.Src)
+	insts := append([]*gm.Instance(nil), w.Room.Instances...)
+	sort.SliceStable(insts, func(i, j int) bool { return insts[i].Obj.Depth > insts[j].Obj.Depth })
+	for _, t := range insts {
+		sp := w.Assets.Sprites[t.Sprite]
+		if !t.Obj.Visible || t.Destroyed || sp == nil || len(sp.Frames) == 0 {
 			continue
 		}
-		img := sp.Frames[t.Frame%len(sp.Frames)]
-		rr := img.Bounds().Add(image.Pt(t.X, t.Y))
+		img := sp.Frames[int(t.ImageIndex)%len(sp.Frames)]
+		rr := img.Bounds().Add(image.Pt(int(t.X), int(t.Y)))
 		if rr.Overlaps(dst.Bounds()) {
 			draw.Draw(dst, rr, img, image.Point{}, draw.Over)
 		}

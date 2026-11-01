@@ -26,7 +26,7 @@ beautiful from the start and includes some of my own pixel art of the time. It s
    level-format docs, editor, packs), with what stock assets would need replacing → Joop. STOP there until yes.
 5. [x] Level converter for the 20 rooms (round-trip test), reusing the Stelo format.
 6. [x] Rooms drawn with the original sprites, wall autotiling (test against the room renders).
-7. [ ] Pacman and the dots; ghosts; pellets; fruit; lives and HUD; regions, title and end rooms.
+7. [~] Pacman and the dots (done); ghosts; pellets; fruit; lives and HUD; regions, title and end rooms.
 8. [ ] Music and sounds.
 9. [ ] Mobile (as Stelo item 12).
 10. [ ] The wasm build goes to ~/Projects/pacmanio-web, served PRIVATELY at
@@ -65,3 +65,4 @@ beautiful from the start and includes some of my own pixel art of the time. It s
 - 2026-11-01 — Joop approved the design; queue items 5-10 added.
 - 2026-11-01 tick 5 (item 5) — Go module 'pacmanio'; internal/level adapted from Stelo's (pacmanio-level 1, no ladder layer, Pacmanio grid chars), cmd/convert → levels/*.txt (20 rooms), docs/LEVEL-FORMAT.md; test: all 20 round-trip, levels/ current. NEXT: item 6 (draw rooms, wall autotiling).
 - 2026-11-01 tick 6 (item 6) — internal/game: assets (from Stelo's loader), rooms from levels/, placeholders → muro/murox, muro's 16-case autotile table (unit test, every case), region tile set and preparu's background colour (pu → muro_2/light grey, ar → muro_1/blue, ls → muro_3/dark grey; ASSUMPTION: fino keeps the last region), drawing by depth, top-left 640×480 (no views). cmd/render; pu/ar/ls level 1 rendered and checked. The room renders can't be compared pixel-wise: gm53_export drew the placeholders' own sprites. Fruit visible until the create events run (item 7).
+- 2026-11-01 tick 7 (item 7) — rooms now run on a copy of Stelo's Game Maker core (internal/gm; Stelo's is internal to its module): objects with sprite box, solidity, depth, parents (resolved from object ids, which have gaps); placeholders change to muro/murox on create; muro's room start autotiles via place_free; pacman: held keys move at 4 when free (sprite kept frame), muro (solid put-back) / murox (back to previous) stop him, dots +10, outside_wrap, all dots eaten → 'won', 2 s, next room. Tests: 16 wall cases on the engine, Pacman eats dots going left and stops at the wall. NEXT: ghosts (adapt_direction), pellets, fruit, lives.
