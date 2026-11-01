@@ -58,3 +58,38 @@ func TestGameRooms(t *testing.T) {
 		t.Errorf("no more lives: %s, region %d", RoomOrder[g.Room], g.Region)
 	}
 }
+
+// A region title room: the background scrolls right first, then turns
+// down, left, up, each after 32, 64 or 96 steps.
+func TestRegionTitleScroll(t *testing.T) {
+	a, err := LoadAssets(pacmanio.Files)
+	if err != nil {
+		t.Fatal(err)
+	}
+	w, err := LoadWorld(pacmanio.Files, a, "pu_bildo")
+	if err != nil {
+		t.Fatal(err)
+	}
+	var dirs [][2]float64
+	last := [2]float64{9, 9}
+	for range 500 {
+		w.Step(held{})
+		d := [2]float64{w.Room.G.Vars["background_hspeed"], w.Room.G.Vars["background_vspeed"]}
+		if d != last {
+			dirs = append(dirs, d)
+			last = d
+		}
+	}
+	want := [][2]float64{{1, 0}, {0, 1}, {-1, 0}, {0, -1}, {1, 0}}
+	if len(dirs) < len(want) {
+		t.Fatalf("directions %v", dirs)
+	}
+	for i, d := range want {
+		if dirs[i] != d {
+			t.Fatalf("directions %v, want %v…", dirs, want)
+		}
+	}
+	if w.BgX == 0 && w.BgY == 0 {
+		t.Error("the background didn't move")
+	}
+}

@@ -25,6 +25,9 @@ type World struct {
 	Region int    // global.murigxu: 1 Akva (muro_1, blue), 2 Urba (muro_2, light grey), 3 Libera Spaco (muro_3, dark grey)
 	Speed  int    // room speed (steps per second)
 	Fonts  *Fonts // the text's fonts; nil = no text
+	// BgX, BgY is the background's offset: it moves by background_hspeed/
+	// vspeed each step.
+	BgX, BgY float64
 }
 
 // RegionOf is the region a room is played in: the *_bildo room before it sets
@@ -39,6 +42,9 @@ func RegionOf(room string) int {
 	}
 	return 1
 }
+
+// regionName is global.regiono, set by the *_bildo rooms' creation code.
+var regionName = map[int]string{1: "Akva Regiono", 2: "Urba Regiono", 3: "Libera Spaco"}
 
 // regionColour is preparu's background_color: c_blue, c_ltgray, c_dkgray.
 var regionColour = map[int]color.RGBA{1: {0, 0, 255, 255}, 2: {192, 192, 192, 255}, 3: {128, 128, 128, 255}}
@@ -91,6 +97,8 @@ func LoadWorldWith(fsys fs.FS, a *Assets, name string, g *gm.Globals, region int
 	w := &World{Assets: a, Level: l, Region: region, Speed: l.Speed,
 		Room: &gm.Room{Name: l.Name, W: l.W, H: l.H, G: g}}
 	w.Room.G.Vars["room_speed"] = float64(l.Speed)
+	// background_hspeed/vspeed belong to the room: they start at 0.
+	w.Room.G.Vars["background_hspeed"], w.Room.G.Vars["background_vspeed"] = 0, 0
 	for _, in := range l.Instances {
 		w.Room.Create(a.Object(in.Object), float64(in.X), float64(in.Y))
 	}
@@ -124,16 +132,37 @@ func (w *World) autotile() {
 }
 
 // Step runs one step.
-func (w *World) Step(in gm.Input) { w.Room.Step(in) }
+func (w *World) Step(in gm.Input) {
+	w.Room.Step(in)
+	w.BgX += w.Room.G.Vars["background_hspeed"]
+	w.BgY += w.Room.G.Vars["background_vspeed"]
+}
 
 // Draw renders the room's top-left 640×480 (no views, as the original).
 func (w *World) Draw(dst *image.RGBA) {
 	draw.Draw(dst, dst.Bounds(), image.NewUniform(regionColour[w.Region]), image.Point{}, draw.Src)
+	if bg := w.Assets.Backgrounds[w.Level.Background]; bg != nil { // tiled both ways
+		bw, bh := bg.Bounds().Dx(), bg.Bounds().Dy()
+		ox := ((int(w.BgX) % bw) + bw) % bw
+		oy := ((int(w.BgY) % bh) + bh) % bh
+		for y := oy - bh; y < dst.Bounds().Dy(); y += bh {
+			for x := ox - bw; x < dst.Bounds().Dx(); x += bw {
+				draw.Draw(dst, bg.Bounds().Add(image.Pt(x, y)), bg, bg.Bounds().Min, draw.Src)
+			}
+		}
+	}
 	insts := append([]*gm.Instance(nil), w.Room.Instances...)
 	sort.SliceStable(insts, func(i, j int) bool { return insts[i].Obj.Depth > insts[j].Obj.Depth })
 	for _, t := range insts {
 		if t.Obj.Name == "regulilo" && !t.Destroyed { // its draw event (depth −10)
 			w.drawHUD(dst)
+			continue
+		}
+		if t.Obj.Name == "regionilo" && !t.Destroyed && w.Fonts != nil {
+			// The region's name in white, then in black 1 px down-right.
+			name := regionName[w.Region]
+			drawGMText(dst, w.Fonts.Region, int(t.X), int(t.Y), name, color.White)
+			drawGMText(dst, w.Fonts.Region, int(t.X)+1, int(t.Y)+1, name, color.Black)
 			continue
 		}
 		sp := w.Assets.Sprites[t.Sprite]

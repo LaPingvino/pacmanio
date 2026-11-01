@@ -90,6 +90,30 @@ func init() {
 			r.Goto = "@next"
 		}}
 	}
+	// regionilo (the *_bildo rooms): room start sets alarm 0 = 1; alarm 0
+	// turns the background's scroll (right → down → left → up → right…) and
+	// comes back after 32, 64 or 96 steps.
+	objectEvents["regionilo"] = func(a *Assets, o *gm.Object) {
+		o.Events.Create = func(r *gm.Room, self *gm.Instance) { self.Alarm[0] = 1 }
+		o.Events.Alarm[0] = func(r *gm.Room, self *gm.Instance) {
+			v := r.G.Vars
+			h, vs := v["background_hspeed"], v["background_vspeed"]
+			switch h {
+			case 0:
+				if vs == 1 {
+					h, vs = -1, 0
+				} else {
+					h, vs = 1, 0
+				}
+			case 1:
+				h, vs = 0, 1
+			case -1:
+				h, vs = 0, -1
+			}
+			v["background_hspeed"], v["background_vspeed"] = h, vs
+			self.Alarm[0] = int(r.Random(3)+1) * 32
+		}
+	}
 	// komencu (the title room): music off, score 0, lives 3, finsono, and
 	// after 450 steps the highscores (fino, transition 14).
 	// PARTIAL: a mouse click quits the game (game_end); the transition.
