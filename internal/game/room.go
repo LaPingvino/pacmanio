@@ -74,6 +74,12 @@ func (a *Assets) Object(name string) *gm.Object {
 // created in order (their create events run), then muro's room start picks
 // every wall's tile set and frame.
 func LoadWorld(fsys fs.FS, a *Assets, name string) (*World, error) {
+	return LoadWorldWith(fsys, a, name, &gm.Globals{Lives: 3, Vars: map[string]float64{}}, RegionOf(name))
+}
+
+// LoadWorldWith loads a room with the game's globals (score, lives across
+// rooms) in the given region.
+func LoadWorldWith(fsys fs.FS, a *Assets, name string, g *gm.Globals, region int) (*World, error) {
 	data, err := fs.ReadFile(fsys, "levels/"+name+".txt")
 	if err != nil {
 		return nil, err
@@ -82,8 +88,8 @@ func LoadWorld(fsys fs.FS, a *Assets, name string) (*World, error) {
 	if err != nil {
 		return nil, err
 	}
-	w := &World{Assets: a, Level: l, Region: RegionOf(name), Speed: l.Speed,
-		Room: &gm.Room{Name: l.Name, W: l.W, H: l.H, G: &gm.Globals{Lives: 3, Vars: map[string]float64{}}}}
+	w := &World{Assets: a, Level: l, Region: region, Speed: l.Speed,
+		Room: &gm.Room{Name: l.Name, W: l.W, H: l.H, G: g}}
 	w.Room.G.Vars["room_speed"] = float64(l.Speed)
 	for _, in := range l.Instances {
 		w.Room.Create(a.Object(in.Object), float64(in.X), float64(in.Y))

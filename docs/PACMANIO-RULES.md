@@ -100,7 +100,8 @@ header: Pacmanio grew out of Game Maker's Pac-Man example.
   top-left "P A C M A N I O" and the room caption; top-right "Poentoj:" and the score; bottom-left "Programisto:"
   and "Joop KIEFTE"; bottom-right "Restaj vivoj:" and the lives: up to 3 as `pac_stand` icons from
   (view right − 96, view bottom − 32); more than 3 as one icon and the number (Courier New 18, bold, yellow).
-- **Page Down** (key 34), because `DEBUG` is true: score −10000 and the next room.
+- **Page Down** (key 34), because `DEBUG` is true: the score **becomes** −10000 (`score=-10000`, not minus) and the
+  next room; it is a keyboard (held) event, so holding it skips a room every step.
 
 ## 7. Rooms
 
