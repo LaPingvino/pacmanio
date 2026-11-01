@@ -174,7 +174,7 @@ func (r *Room) Step(in Input) {
 				if !i.BoxAt(i.X, i.Y).Overlaps(o.BoxAt(o.X, o.Y)) {
 					continue
 				}
-				if o.Obj.Solid {
+				if o.Solid {
 					i.X, i.Y = i.XPrevious, i.YPrevious
 					h(r, i, o)
 					if nx, ny := i.X+i.HSpeed, i.Y+i.VSpeed; (i.HSpeed != 0 || i.VSpeed != 0) && r.PlaceFree(i, nx, ny) {

@@ -24,8 +24,8 @@ func stop(self *gm.Instance) {
 	self.Sprite = "pac_stand"
 }
 
-// pacmanEvents is pacman.gml (dots, walls, keys, wrap). PARTIAL: pellets,
-// ghosts, fruit, lives (the rest of item 7).
+// pacmanEvents is pacman.gml (dots, pellets, walls, keys, wrap). PARTIAL:
+// touching ghosts (open engine point), fruit, extra life, lives (item 7).
 func pacmanEvents(a *Assets, o *gm.Object) {
 	o.Events.Create = func(r *gm.Room, self *gm.Instance) { self.ImageSpeed = 0.5 }
 	// Step: no dots left → sound won, 2 s, next room.
@@ -57,6 +57,7 @@ func pacmanEvents(a *Assets, o *gm.Object) {
 			self.X, self.Y = self.XPrevious, self.YPrevious
 			stop(self)
 		},
+		"pil": pellet(a),
 		"point": func(r *gm.Room, self, other *gm.Instance) {
 			other.Destroyed = true
 			r.G.Play("click")

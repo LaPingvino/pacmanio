@@ -7,7 +7,10 @@
 // at the instance's position rounded to the nearest pixel.
 package gm
 
-import "math"
+import (
+	"math"
+	"math/rand"
+)
 
 // Box is a bounding box in pixels, all edges inclusive (Game Maker's
 // bbox_left, bbox_right, bbox_top, bbox_bottom).
@@ -68,6 +71,8 @@ type Instance struct {
 	GravityDirection     float64 // degrees, 270 = down
 	Alarm                [12]int // -1 = off
 	Destroyed            bool
+	// Solid is the instance's solid variable (starts as the object's).
+	Solid bool
 	// Sprite is sprite_index (starts as the object's); ImageIndex the frame.
 	Sprite     string
 	ImageIndex float64
@@ -92,7 +97,7 @@ type Timeline struct {
 // is placed.
 func NewInstance(obj *Object, x, y float64) *Instance {
 	in := &Instance{Obj: obj, X: x, Y: y, XPrevious: x, YPrevious: y, XStart: x, YStart: y, GravityDirection: 270,
-		Sprite: obj.Sprite, ImageSpeed: 1, Vars: map[string]float64{}, VarsStr: map[string]string{}}
+		Solid: obj.Solid, Sprite: obj.Sprite, ImageSpeed: 1, Vars: map[string]float64{}, VarsStr: map[string]string{}}
 	for i := range in.Alarm {
 		in.Alarm[i] = -1
 	}
@@ -118,6 +123,17 @@ type Room struct {
 	Sleep int
 	// G holds what lives across rooms: score, lives, global variables.
 	G *Globals
+	// Rand is random(): Game Maker's own generator isn't reproduced; nil
+	// uses a fixed seed.
+	Rand *rand.Rand
+}
+
+// Random is random(n): a real number in [0, n).
+func (r *Room) Random(n float64) float64 {
+	if r.Rand == nil {
+		r.Rand = rand.New(rand.NewSource(1))
+	}
+	return r.Rand.Float64() * n
 }
 
 // Globals are Game Maker's game-wide state.
@@ -162,7 +178,7 @@ func (g *Globals) Play(name string) {
 // create event (and the old object's destroy event, which no Stelo object
 // has).
 func (r *Room) Change(in *Instance, obj *Object, perform bool) {
-	in.Obj, in.Sprite, in.ImageIndex = obj, obj.Sprite, 0
+	in.Obj, in.Sprite, in.ImageIndex, in.Solid = obj, obj.Sprite, 0, obj.Solid
 	if perform {
 		if h := obj.handler(func(e *Events) Handler { return e.Create }); h != nil {
 			h(r, in)
@@ -190,7 +206,7 @@ func (r *Room) PlaceFree(in *Instance, x, y float64) bool {
 	}
 	b := in.BoxAt(x, y)
 	for _, o := range r.live() {
-		if o != in && o.Obj.Solid && o.Obj.Mask && b.Overlaps(o.BoxAt(o.X, o.Y)) {
+		if o != in && o.Solid && o.Obj.Mask && b.Overlaps(o.BoxAt(o.X, o.Y)) {
 			return false
 		}
 	}

@@ -49,6 +49,8 @@ beautiful from the start and includes some of my own pixel art of the time. It s
 
 ## Questions for Joop
 
+- Do you remember: could Pacman eat the blue (scared) ghosts in Pacmanio, or did touching one still cost a life? (Settles the open engine point in PACMANIO-RULES §3: a scared ghost is also a 'monster', so both of Pacman's collision events see it.)
+
 
 - docs/ASSETS.md §Questions: which 'unsure' assets are his (pac_stand, star pellet, diamond, muro_1, the two MIDIs).
 - (engine open points: docs/PACMANIO-RULES.md §9)
@@ -66,3 +68,4 @@ beautiful from the start and includes some of my own pixel art of the time. It s
 - 2026-11-01 tick 5 (item 5) — Go module 'pacmanio'; internal/level adapted from Stelo's (pacmanio-level 1, no ladder layer, Pacmanio grid chars), cmd/convert → levels/*.txt (20 rooms), docs/LEVEL-FORMAT.md; test: all 20 round-trip, levels/ current. NEXT: item 6 (draw rooms, wall autotiling).
 - 2026-11-01 tick 6 (item 6) — internal/game: assets (from Stelo's loader), rooms from levels/, placeholders → muro/murox, muro's 16-case autotile table (unit test, every case), region tile set and preparu's background colour (pu → muro_2/light grey, ar → muro_1/blue, ls → muro_3/dark grey; ASSUMPTION: fino keeps the last region), drawing by depth, top-left 640×480 (no views). cmd/render; pu/ar/ls level 1 rendered and checked. The room renders can't be compared pixel-wise: gm53_export drew the placeholders' own sprites. Fruit visible until the create events run (item 7).
 - 2026-11-01 tick 7 (item 7) — rooms now run on a copy of Stelo's Game Maker core (internal/gm; Stelo's is internal to its module): objects with sprite box, solidity, depth, parents (resolved from object ids, which have gaps); placeholders change to muro/murox on create; muro's room start autotiles via place_free; pacman: held keys move at 4 when free (sprite kept frame), muro (solid put-back) / murox (back to previous) stop him, dots +10, outside_wrap, all dots eaten → 'won', 2 s, next room. Tests: 16 wall cases on the engine, Pacman eats dots going left and stops at the wall. NEXT: ghosts (adapt_direction), pellets, fruit, lives.
+- 2026-11-01 tick 8 (item 7) — ghosts: random start among down/left/right/up at 4, adapt_direction on the 32 px grid (murox not solid, muroy solid during the check: gm instances now have their own solid variable), reverse + adapt on muro/muroy, wrap; pellets: scared (alarm 160) → intermonster (40) → monster; gm.Room.Random (fixed seed; GM's generator not reproduced). Test: a ghost roams 200 steps never inside a wall; the pellet cycle 160/40. NOT PORTED: Pacman touching ghosts (open engine point; asked Joop).

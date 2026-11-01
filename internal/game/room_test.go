@@ -64,3 +64,49 @@ func TestPacmanEatsDotsAndStopsAtWalls(t *testing.T) {
 		t.Errorf("not stopped at the wall: hspeed %v sprite %s at %v,%v", p.HSpeed, p.Sprite, p.X, p.Y)
 	}
 }
+
+// Ghosts keep moving through the maze at 4 px a step (never inside a wall),
+// and a pellet turns them scared, then flashing at 160 steps, then back.
+func TestGhostsAndPellets(t *testing.T) {
+	a, err := LoadAssets(pacmanio.Files)
+	if err != nil {
+		t.Fatal(err)
+	}
+	w, err := LoadWorld(pacmanio.Files, a, "ar_1a_nivelo")
+	if err != nil {
+		t.Fatal(err)
+	}
+	ghosts := w.Room.All("monster")
+	if len(ghosts) == 0 {
+		t.Fatal("no ghosts")
+	}
+	g := ghosts[0]
+	x0, y0 := g.X, g.Y
+	for range 200 {
+		w.Step(held{})
+		if !w.Room.PlaceFree(g, g.X, g.Y) {
+			t.Fatalf("ghost inside a wall at %v,%v", g.X, g.Y)
+		}
+	}
+	if g.X == x0 && g.Y == y0 {
+		t.Error("ghost didn't move")
+	}
+	p := w.Room.All("pacman")[0]
+	pil := w.Room.Create(a.Object("pil"), p.X, p.Y)
+	w.Step(held{})
+	if !pil.Destroyed || g.Obj.Name != "scared" || g.Alarm[0] <= 0 {
+		t.Fatalf("pellet: destroyed %v, ghost %s alarm %d", pil.Destroyed, g.Obj.Name, g.Alarm[0])
+	}
+	for range 160 {
+		w.Step(held{})
+	}
+	if g.Obj.Name != "intermonster" {
+		t.Fatalf("after 160 steps: %s", g.Obj.Name)
+	}
+	for range 40 {
+		w.Step(held{})
+	}
+	if g.Obj.Name != "monster" {
+		t.Errorf("after 40 more: %s", g.Obj.Name)
+	}
+}
