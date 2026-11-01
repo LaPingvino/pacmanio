@@ -153,8 +153,10 @@ func TestFruitAndExtraLife(t *testing.T) {
 
 // In every level the regulilo comes after the fruits in the room, so a
 // fruit's create event sees none: the level's fruits show from the start
-// until step 700 (alarm 0 at 500, alarm 1 200 later hides them).
-func TestLevelFruitShowsFirst700Steps(t *testing.T) {
+// until step 699: alarm 0 fires at 500 and sets alarm 1 = 200, which the
+// same step's alarm pass already counts down (alarms run 0…11 in order;
+// ASSUMPTION [engine] that Game Maker 5 does so too).
+func TestLevelFruitShowsFirst699Steps(t *testing.T) {
 	a, err := LoadAssets(pacmanio.Files)
 	if err != nil {
 		t.Fatal(err)
@@ -168,14 +170,14 @@ func TestLevelFruitShowsFirst700Steps(t *testing.T) {
 	if x < 0 {
 		t.Fatal("hidden at the start")
 	}
-	for range 699 {
+	for range 698 {
 		w.Step(held{})
 	}
 	if f.X != x {
-		t.Fatalf("moved before 700: %v", f.X)
+		t.Fatalf("moved before 699: %v", f.X)
 	}
 	w.Step(held{})
 	if f.X != -1000 {
-		t.Errorf("not hidden at 700: %v", f.X)
+		t.Errorf("not hidden at 699: %v", f.X)
 	}
 }

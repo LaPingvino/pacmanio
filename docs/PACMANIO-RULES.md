@@ -64,7 +64,8 @@ header: Pacmanio grew out of Game Maker's Pac-Man example.
 
 - A fruit picks a random picture (frame 0–3). If a `regulilo` already exists it hides at (−1000, 0); alarm 0 = 500
   steps. In every original level the `regulilo` is the room's last instance, created after the fruits, so a level's
-  own fruits are **not** hidden at first: they show until step 700, then follow the cycle below. Alarm 0: new random picture, back to its place, alarm 1 = 200 steps. Alarm 1: hide
+  own fruits are **not** hidden at first: they show until step 699 (alarm 1, set inside alarm 0's event, is counted
+  down in that same step's alarm pass [engine; assumed]), then follow the cycle below. Alarm 0: new random picture, back to its place, alarm 1 = 200 steps. Alarm 1: hide
   again, alarm 0 = 500. So it shows for 200 steps every 700.
 - Eaten: sound `bonus`, score +200, hidden, alarm 0 = 500.
 - Outside levels (title and end rooms, no `regulilo`) fruits stay where they were placed, but still change picture
