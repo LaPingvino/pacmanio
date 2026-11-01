@@ -1,6 +1,7 @@
 package game
 
 import (
+	"image"
 	"io/fs"
 	"strings"
 
@@ -23,11 +24,22 @@ type Game struct {
 	World  *World
 	Room   int // index in RoomOrder
 	Region int // global.murigxu, kept across rooms (fino keeps the last one)
+	// Highscores is the table; SaveHighscores (if set) keeps it.
+	Highscores     Highscores
+	SaveHighscores func(Highscores)
+	asking         bool // fino: the name is being typed (get_string)
 }
+
+// AnyKey is keyboard_key != 0 or a mouse button this step.
+type AnyKey interface{ AnyPressed() bool }
+
+// Typer gives the characters typed since the last step.
+type Typer interface{ Typed() []rune }
 
 // NewGame starts at the first room.
 func NewGame(fsys fs.FS, a *Assets, f *Fonts) (*Game, error) {
-	g := &Game{FS: fsys, Assets: a, Fonts: f, G: &gm.Globals{Lives: 3, Vars: map[string]float64{}}, Region: 1}
+	g := &Game{FS: fsys, Assets: a, Fonts: f, G: &gm.Globals{Lives: 3, Vars: map[string]float64{}}, Region: 1,
+		Highscores: ClearedHighscores()}
 	return g, g.enter(0)
 }
 
@@ -47,12 +59,20 @@ func (g *Game) enter(i int) error {
 	}
 	w.Fonts = g.Fonts
 	g.World, g.Room = w, i
+	if name == "fino" { // finigxu's create: a new highscore asks the name
+		g.asking = g.Highscores[9].Score < g.G.Score
+		g.G.KeyboardString = "Pacman"
+		g.G.Play("@music:finsono")
+	}
 	return nil
 }
 
 // Step runs a step and then any room change it asked for (room_goto_next,
 // a named room, or "no more lives" → fino).
 func (g *Game) Step(in gm.Input) error {
+	if RoomOrder[g.Room] == "fino" {
+		return g.stepEnd(in)
+	}
 	r := g.World.Room
 	r.Step(in)
 	if r.Sleep > 0 {
@@ -124,5 +144,38 @@ func init() {
 			self.Alarm[0] = 450
 		}
 		o.Events.Alarm[0] = func(r *gm.Room, self *gm.Instance) { r.Goto = "fino" }
+	}
+}
+
+// stepEnd is the end room: typing the name until Enter (the dialog stops
+// the game), then any key or click → komenco.
+func (g *Game) stepEnd(in gm.Input) error {
+	if g.asking {
+		if t, ok := in.(Typer); ok {
+			g.G.Type(t.Typed())
+		}
+		if in.Pressed(gm.KeyEnter) {
+			g.Highscores.Add(g.G.KeyboardString, g.G.Score)
+			if g.SaveHighscores != nil {
+				g.SaveHighscores(g.Highscores)
+			}
+			g.asking = false
+		}
+		return nil
+	}
+	g.World.Room.Step(in)
+	if a, ok := in.(AnyKey); ok && a.AnyPressed() {
+		return g.enter(0)
+	}
+	return nil
+}
+
+// Draw renders the room, and the end room's table.
+func (g *Game) Draw(dst *image.RGBA) {
+	g.World.Draw(dst)
+	if RoomOrder[g.Room] == "fino" {
+		for _, f := range g.World.Room.All("finigxu") {
+			g.World.drawEnd(dst, int(f.X), int(f.Y), g.Highscores, g.asking, g.G.KeyboardString)
+		}
 	}
 }

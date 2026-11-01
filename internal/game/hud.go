@@ -16,7 +16,7 @@ import (
 // Fonts stand in for the 2006 Windows fonts: Liberation Sans Bold for
 // "MS Sans Serif" 9 bold, Liberation Mono Bold for "Courier New" 18 bold
 // (both OFL, fonts/LICENSE-Liberation).
-type Fonts struct{ Small, Lives, Region font.Face }
+type Fonts struct{ Small, Lives, Region, Table font.Face }
 
 // LoadFonts reads the fonts at Game Maker's sizes (points at 96 DPI).
 func LoadFonts(fsys fs.FS) (*Fonts, error) {
@@ -43,7 +43,11 @@ func LoadFonts(fsys fs.FS) (*Fonts, error) {
 	if err != nil {
 		return nil, err
 	}
-	return &Fonts{Small: s, Lives: l, Region: rg}, nil
+	tb, err := face("LiberationMono-Bold.ttf", 14) // Courier New 14 bold
+	if err != nil {
+		return nil, err
+	}
+	return &Fonts{Small: s, Lives: l, Region: rg, Table: tb}, nil
 }
 
 // textColour is global.kontrauxkoloro, set by the region's *_bildo room:

@@ -152,7 +152,15 @@ type Globals struct {
 
 // Type appends typed characters to keyboard_string.
 func (g *Globals) Type(chars []rune) {
-	g.KeyboardString += string(chars)
+	for _, c := range chars { // '\b' (Backspace) deletes the last one [engine]
+		if c == '\b' {
+			if r := []rune(g.KeyboardString); len(r) > 0 {
+				g.KeyboardString = string(r[:len(r)-1])
+			}
+			continue
+		}
+		g.KeyboardString += string(c)
+	}
 	if r := []rune(g.KeyboardString); len(r) > 1024 {
 		g.KeyboardString = string(r[len(r)-1024:])
 	}

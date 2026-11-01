@@ -93,3 +93,51 @@ func TestRegionTitleScroll(t *testing.T) {
 		t.Error("the background didn't move")
 	}
 }
+
+type endKeys struct {
+	held
+	enter bool
+	chars []rune
+	any   bool
+}
+
+func (e endKeys) Pressed(k gm.Key) bool { return k == gm.KeyEnter && e.enter }
+func (e endKeys) Typed() []rune         { return e.chars }
+func (e endKeys) AnyPressed() bool      { return e.any }
+
+// The end room: a new highscore asks the name ("Pacman" filled in, Backspace
+// edits), Enter puts it in the table; then any key goes back to komenco.
+func TestEndRoomHighscore(t *testing.T) {
+	a, err := LoadAssets(pacmanio.Files)
+	if err != nil {
+		t.Fatal(err)
+	}
+	g, err := NewGame(pacmanio.Files, a, nil)
+	if err != nil {
+		t.Fatal(err)
+	}
+	g.G.Score = 1230
+	for i, n := range RoomOrder {
+		if n == "fino" {
+			if err := g.enter(i); err != nil {
+				t.Fatal(err)
+			}
+		}
+	}
+	if !g.asking {
+		t.Fatal("a 1230 score should be asked for a name")
+	}
+	steps := []endKeys{{chars: []rune("\b\b\b\b\b\bJoop")}, {}, {enter: true}}
+	for _, k := range steps {
+		if err := g.Step(k); err != nil {
+			t.Fatal(err)
+		}
+	}
+	if g.asking || g.Highscores[0] != (Highscore{"Joop", 1230}) {
+		t.Fatalf("table %v, asking %v", g.Highscores[0], g.asking)
+	}
+	g.Step(endKeys{any: true})
+	if RoomOrder[g.Room] != "komenco" {
+		t.Errorf("any key: %s", RoomOrder[g.Room])
+	}
+}
