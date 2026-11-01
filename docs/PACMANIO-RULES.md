@@ -62,8 +62,9 @@ header: Pacmanio grew out of Game Maker's Pac-Man example.
 
 ## 4. Fruit (`bonus`) and extra lives
 
-- A fruit picks a random picture (frame 0–3). In a level (when a `regulilo` is present) it hides at (−1000, 0) and
-  sets alarm 0 = 500 steps. Alarm 0: new random picture, back to its place, alarm 1 = 200 steps. Alarm 1: hide
+- A fruit picks a random picture (frame 0–3). If a `regulilo` already exists it hides at (−1000, 0); alarm 0 = 500
+  steps. In every original level the `regulilo` is the room's last instance, created after the fruits, so a level's
+  own fruits are **not** hidden at first: they show until step 700, then follow the cycle below. Alarm 0: new random picture, back to its place, alarm 1 = 200 steps. Alarm 1: hide
   again, alarm 0 = 500. So it shows for 200 steps every 700.
 - Eaten: sound `bonus`, score +200, hidden, alarm 0 = 500.
 - Outside levels (title and end rooms, no `regulilo`) fruits stay where they were placed, but still change picture
@@ -93,7 +94,7 @@ header: Pacmanio grew out of Game Maker's Pac-Man example.
 ## 6. The level screen (`regulilo`)
 
 - Room start: `preparu` (music and background colour, §8).
-- Draws four 96×64 boxes in the corners of the view, filled with the background colour, with text (MS Sans Serif
+- Draws four 96×64 boxes (drawn as 97×65: Game Maker's rectangle corners taken as inclusive, an assumption) in the corners of the view, filled with the background colour, with text (MS Sans Serif
   9, bold) in the region's text colour (`global.kontrauxkoloro`):
   top-left "P A C M A N I O" and the room caption; top-right "Poentoj:" and the score; bottom-left "Programisto:"
   and "Joop KIEFTE"; bottom-right "Restaj vivoj:" and the lives: up to 3 as `pac_stand` icons from

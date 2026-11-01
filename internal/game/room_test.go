@@ -150,3 +150,32 @@ func TestFruitAndExtraLife(t *testing.T) {
 		t.Errorf("extra life: lives %d (was %d)", w.Room.G.Lives, lives)
 	}
 }
+
+// In every level the regulilo comes after the fruits in the room, so a
+// fruit's create event sees none: the level's fruits show from the start
+// until step 700 (alarm 0 at 500, alarm 1 200 later hides them).
+func TestLevelFruitShowsFirst700Steps(t *testing.T) {
+	a, err := LoadAssets(pacmanio.Files)
+	if err != nil {
+		t.Fatal(err)
+	}
+	w, err := LoadWorld(pacmanio.Files, a, "pu_1a_nivelo")
+	if err != nil {
+		t.Fatal(err)
+	}
+	f := w.Room.All("bonus")[0]
+	x := f.X
+	if x < 0 {
+		t.Fatal("hidden at the start")
+	}
+	for range 699 {
+		w.Step(held{})
+	}
+	if f.X != x {
+		t.Fatalf("moved before 700: %v", f.X)
+	}
+	w.Step(held{})
+	if f.X != -1000 {
+		t.Errorf("not hidden at 700: %v", f.X)
+	}
+}

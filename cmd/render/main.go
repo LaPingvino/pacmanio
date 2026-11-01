@@ -24,6 +24,9 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
+	if f, err := game.LoadFonts(pacmanio.Files); err == nil {
+		r.Fonts = f
+	}
 	img := image.NewRGBA(image.Rect(0, 0, game.ScreenW, game.ScreenH))
 	r.Draw(img)
 	f, err := os.Create(*out)

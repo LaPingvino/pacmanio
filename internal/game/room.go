@@ -22,8 +22,9 @@ type World struct {
 	Assets *Assets
 	Level  *level.Level
 	Room   *gm.Room
-	Region int // global.murigxu: 1 Akva (muro_1, blue), 2 Urba (muro_2, light grey), 3 Libera Spaco (muro_3, dark grey)
-	Speed  int // room speed (steps per second)
+	Region int    // global.murigxu: 1 Akva (muro_1, blue), 2 Urba (muro_2, light grey), 3 Libera Spaco (muro_3, dark grey)
+	Speed  int    // room speed (steps per second)
+	Fonts  *Fonts // the text's fonts; nil = no text
 }
 
 // RegionOf is the region a room is played in: the *_bildo room before it sets
@@ -125,6 +126,10 @@ func (w *World) Draw(dst *image.RGBA) {
 	insts := append([]*gm.Instance(nil), w.Room.Instances...)
 	sort.SliceStable(insts, func(i, j int) bool { return insts[i].Obj.Depth > insts[j].Obj.Depth })
 	for _, t := range insts {
+		if t.Obj.Name == "regulilo" && !t.Destroyed { // its draw event (depth −10)
+			w.drawHUD(dst)
+			continue
+		}
 		sp := w.Assets.Sprites[t.Sprite]
 		if !t.Obj.Visible || t.Destroyed || sp == nil || len(sp.Frames) == 0 {
 			continue
