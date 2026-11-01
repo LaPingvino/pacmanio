@@ -13,6 +13,7 @@ import (
 	"pacmanio/internal/game"
 	"pacmanio/internal/gm"
 	"pacmanio/internal/sound"
+	"pacmanio/internal/store"
 )
 
 type app struct {
@@ -100,7 +101,8 @@ func main() {
 		log.Fatal(err)
 	}
 	g.G.Sound = sound.NewPlayer(pacmanio.Files).Play
-	// PARTIAL: the highscore table isn't kept between games yet (store, as Stelo).
+	g.Highscores = store.LoadHighscores() // kept between games (localStorage / config file)
+	g.SaveHighscores = store.SaveHighscores
 	a := &app{game: g, frame: image.NewRGBA(image.Rect(0, 0, game.ScreenW, game.ScreenH))}
 	a.touch.seen = showPadsFromURL()
 	ebiten.SetWindowTitle("Pacmanio")
