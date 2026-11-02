@@ -38,6 +38,12 @@ beautiful from the start and includes some of my own pixel art of the time. It s
    room reached, a pause key, a mute toggle, a short "ready" beat when a level starts. The pause fix (no
    freeze) is done.
 
+U. [ ] **Modern UI** (Joop 2026-11-02, docs/UI.md — APPROVED): sharp scaling + text at real resolution, Noto Sans,
+   Pits-like menus (title, pause, settings, level pick of reached levels, resume), new "Kiel ludi" and "Pri"
+   texts (drafts to Joop first), slim HUD, proper highscores. Steps: U1 shared UI package (scaler, text, menu
+   widget); U2 title + menus; U3 Kiel ludi / Pri (drafts → Joop); U4 HUD + level start / end; U5 highscores;
+   U6 settings (language, sound, music). After Stelo (reuses its UI package).
+
 ## Decisions (Joop)
 
 - 2026-11-01: DESIGN APPROVED ("I think there is nothing I can disagree with among what you propose"). On the
@@ -90,3 +96,4 @@ beautiful from the start and includes some of my own pixel art of the time. It s
 - 2026-11-02 (Joop: 'I don't think there are strong reasons not to put the Pacmanio on Github either, the assets were meant for creating your own games anyway. We can of course put a clear disclaimer in the repo') — README rewritten for the public (the disclaimer: code MIT, the 2006 assets outside it — the GM Pac-Man example by Mark Overmars with images by Billy McQuown, Joop's own pixel art, two MIDI tunes of unrecorded origin; issues for takedown / credit), LICENSE (MIT, code only), docs/RECOVERY.md (the old README's extraction notes), .github/workflows/pages.yml (as Stelo's). Checked first: no .exe / .gmd in the tree or history; fonts are Liberation (OFL, licence included).
 - 2026-11-02 — GitHub Pages switched on (Joop's go-ahead; the first push's deploy had failed for lack of it): https://lapingvino.github.io/pacmanio/ — the Pages workflow run succeeded, the page and pacmanio.wasm are served.
 - 2026-11-02 — sound and music as Ogg Opus via gopus v0.1.0 (github.com/LaPingvino/gopus, published with Joop's go-ahead); scripts/convert-audio.sh makes audio/ from the 2006 files. Music plays for the first time.
+- 2026-11-02 — Joop approved docs/UI.md (new title, fonts as fits, resume like Pits); queued as item U.
