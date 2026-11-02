@@ -63,6 +63,35 @@ func pacmanEvents(a *Assets, o *gm.Object) {
 			r.G.Play("click")
 			r.G.Score += 10
 		},
+		// scared (and intermonster, its child): catch, the ghost back to its
+		// start as a monster, +100.
+		"scared": func(r *gm.Room, self, other *gm.Instance) {
+			r.G.Play("catch")
+			other.X, other.Y = other.XStart, other.YStart
+			r.Change(other, a.Object("monster"), false)
+			r.G.Score += 100
+		},
+		// monster: dead, 1.5 s, every ghost back to its start, Pacman stopped
+		// and back to his, a life less. Joop (2026-11-02): "Pacman can eat the
+		// blues" — a scared ghost (a child of monster, so this event sees it
+		// too) is only eaten, so this event leaves it to the scared one.
+		"monster": func(r *gm.Room, self, other *gm.Instance) {
+			if other.Obj.IsA("scared") {
+				return
+			}
+			r.G.Play("dead")
+			r.SleepMS(1500, roomSpeed(r))
+			for _, g := range r.All("monster") { // with (monster) — children included
+				g.X, g.Y = g.XStart, g.YStart
+			}
+			for _, g := range r.All("scared") {
+				g.X, g.Y = g.XStart, g.YStart
+			}
+			stop(self)
+			self.Sprite = "pac_stand"
+			self.X, self.Y = self.XStart, self.YStart
+			r.G.AddLives(-1)
+		},
 	}
 	o.Events.OutsideRoom = outsideWrap
 }

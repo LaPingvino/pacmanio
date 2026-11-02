@@ -141,3 +141,52 @@ func TestEndRoomHighscore(t *testing.T) {
 		t.Errorf("any key: %s", RoomOrder[g.Room])
 	}
 }
+
+// Pacman meeting a ghost: a monster costs a life (Pacman and every ghost back
+// to their starts); a scared ghost is eaten — +100, back to its start as a
+// monster, no life lost (Joop 2026-11-02: "Pacman can eat the blues"), and so
+// is a flashing (intermonster) one.
+func TestPacmanMeetsGhosts(t *testing.T) {
+	a, err := LoadAssets(pacmanio.Files)
+	if err != nil {
+		t.Fatal(err)
+	}
+	for _, kind := range []string{"monster", "scared", "intermonster"} {
+		w, err := LoadWorld(pacmanio.Files, a, "pu_1a_nivelo")
+		if err != nil {
+			t.Fatal(err)
+		}
+		pac := w.Room.All("pacman")[0]
+		ghosts := w.Room.All("monster")
+		if len(ghosts) == 0 {
+			t.Fatal("no ghosts")
+		}
+		g := ghosts[0]
+		if kind != "monster" {
+			w.Room.Change(g, a.Object(kind), false)
+		}
+		pac.X, pac.Y, pac.HSpeed, pac.VSpeed = pac.X+32, pac.Y, 0, 0 // away from his start
+		other := ghosts[len(ghosts)-1]
+		other.X += 64
+		g.X, g.Y, g.HSpeed, g.VSpeed = pac.X, pac.Y, 0, 0
+		lives, score := w.Room.G.Lives, w.Room.G.Score
+		w.Step(held{})
+		switch kind {
+		case "monster":
+			if w.Room.G.Lives != lives-1 || pac.X != pac.XStart || pac.Y != pac.YStart || other.X != other.XStart {
+				t.Errorf("monster: lives %d → %d, pacman (%v,%v) start (%v,%v), other ghost x %v start %v", lives, w.Room.G.Lives, pac.X, pac.Y, pac.XStart, pac.YStart, other.X, other.XStart)
+			}
+		default:
+			eaten := w.Room.All("monster")
+			found := false
+			for _, e := range eaten {
+				if e.X == e.XStart && e.Y == e.YStart && !e.Obj.IsA("scared") && e.Obj.Name == "monster" {
+					found = true
+				}
+			}
+			if w.Room.G.Lives != lives || w.Room.G.Score != score+100 || !found {
+				t.Errorf("%s: lives %d → %d, score %d → %d, eaten ghost back as a monster %v", kind, lives, w.Room.G.Lives, score, w.Room.G.Score, found)
+			}
+		}
+	}
+}

@@ -4,9 +4,9 @@ import "pacmanio/internal/gm"
 
 // The ghosts (pacmanio/objects/monster.gml, scared.gml, intermonster.gml,
 // scripts/adapt_direction.gml) and the power pellet's effect.
-// OPEN [engine]: what happens when Pacman touches a scared ghost (both his
-// monster and his scared collision events see it, scared being a child of
-// monster) — docs/PACMANIO-RULES.md §3; not ported until settled.
+// Pacman touching a ghost is pacman's collision events (objects.go): a
+// scared one is eaten, a monster costs a life (Joop 2026-11-02, settling
+// docs/PACMANIO-RULES.md §3's engine point).
 
 func init() {
 	objectEvents["monster"] = monsterEvents
