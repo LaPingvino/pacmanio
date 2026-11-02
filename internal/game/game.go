@@ -28,6 +28,12 @@ type Game struct {
 	Highscores     Highscores
 	SaveHighscores func(Highscores)
 	asking         bool // fino: the name is being typed (get_string)
+	// OnRoom, when set, is told each room entered (its index in RoomOrder):
+	// the program keeps the furthest one for Continue.
+	OnRoom func(i int)
+	// OnTitle, when set, replaces going back to komenco after the highscores:
+	// the program's own title screen (docs/UI.md).
+	OnTitle func()
 }
 
 // AnyKey is keyboard_key != 0 or a mouse button this step.
@@ -45,6 +51,31 @@ func NewGame(fsys fs.FS, a *Assets, f *Fonts) (*Game, error) {
 
 // enter goes to room i: the *_bildo room's creation code sets the region
 // (pu 2, ar 1, ls 3), komenco sets 1, other rooms keep it.
+// RoomTitle names a room for the player: a region's name, or the region and
+// the level number ("Urba Regiono 2"), or the final level's.
+func RoomTitle(i int) string {
+	name := RoomOrder[i]
+	region := map[string]string{"pu": "Urba Regiono", "ar": "Akva Regiono", "ls": "Libera Spaco"}[name[:2]]
+	switch {
+	case region == "":
+		return name
+	case len(name) > 3 && name[3:] == "bildo":
+		return region
+	case len(name) > 5 && name[3:] == "fina_nivelo":
+		return region + " — fina nivelo"
+	case len(name) > 4 && name[4] == 'a':
+		return region + " " + name[3:4]
+	}
+	return region
+}
+
+// StartAt starts a new game in room name: score 0 and 3 lives, as komencu sets
+// them (the title's Play and Continue).
+func (g *Game) StartAt(name string) error {
+	g.G.Score, g.G.Lives = 0, 3
+	return g.EnterRoom(name)
+}
+
 // EnterRoom starts in a room by name (a testing aid: ?room= / PACMANIO_ROOM);
 // unknown names are ignored.
 func (g *Game) EnterRoom(name string) error {
@@ -57,6 +88,9 @@ func (g *Game) EnterRoom(name string) error {
 }
 
 func (g *Game) enter(i int) error {
+	if g.OnRoom != nil {
+		g.OnRoom(i)
+	}
 	name := RoomOrder[i]
 	switch {
 	case name == "komenco":
@@ -180,6 +214,10 @@ func (g *Game) stepEnd(in gm.Input) error {
 	}
 	g.World.Room.Step(in)
 	if a, ok := in.(AnyKey); ok && a.AnyPressed() {
+		if g.OnTitle != nil {
+			g.OnTitle()
+			return nil
+		}
 		return g.enter(0)
 	}
 	return nil

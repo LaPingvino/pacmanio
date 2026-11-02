@@ -9,7 +9,12 @@ func storage() js.Value {
 	return js.Global().Get("localStorage")
 }
 
-func read() ([]byte, bool) {
+func read() ([]byte, bool) { return readKey(key) }
+
+func write(data []byte) { writeKey(key, data) }
+
+// readKey / writeKey store a value by name (the highscores, the progress).
+func readKey(key string) ([]byte, bool) {
 	s := storage()
 	if s.IsUndefined() || s.IsNull() {
 		return nil, false
@@ -21,7 +26,7 @@ func read() ([]byte, bool) {
 	return []byte(v.String()), true
 }
 
-func write(data []byte) {
+func writeKey(key string, data []byte) {
 	if s := storage(); !s.IsUndefined() && !s.IsNull() {
 		func() {
 			defer func() { recover() }()

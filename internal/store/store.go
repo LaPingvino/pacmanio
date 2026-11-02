@@ -5,6 +5,8 @@ package store
 
 import (
 	"encoding/json"
+	"strconv"
+	"strings"
 
 	"pacmanio/internal/game"
 )
@@ -27,5 +29,23 @@ func LoadHighscores() game.Highscores {
 func SaveHighscores(h game.Highscores) {
 	if data, err := json.Marshal(h); err == nil {
 		write(data)
+	}
+}
+
+// Progress is the furthest room reached (its index in game.RoomOrder; 0 none):
+// the title's Continue ("resume wherever you got, like with Pits").
+func Progress() int {
+	data, ok := readKey("pacmanio-progress")
+	if !ok {
+		return 0
+	}
+	n, _ := strconv.Atoi(strings.TrimSpace(string(data)))
+	return n
+}
+
+// Reached records room index n if it is further than before.
+func Reached(n int) {
+	if n > Progress() {
+		writeKey("pacmanio-progress", []byte(strconv.Itoa(n)))
 	}
 }

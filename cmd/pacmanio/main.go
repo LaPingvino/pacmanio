@@ -22,6 +22,7 @@ type app struct {
 	canvas  *ebiten.Image // the frame as an image, scaled onto the screen
 	overlay game.Overlay  // texts drawn sharp over it (text.go)
 	touch   touchState
+	title   titleScreen
 }
 
 // keys is the keyboard, the mouse and the touch screen as the game's input.
@@ -69,6 +70,10 @@ func (k keys) AnyPressed() bool {
 }
 
 func (a *app) Update() error {
+	if a.title.on {
+		a.updateTitle()
+		return nil
+	}
 	a.touch.update()
 	if err := a.game.Step(keys{&a.touch, pollPhoneKeys()}); err != nil {
 		log.Print(err)
@@ -82,6 +87,14 @@ func (a *app) Update() error {
 }
 
 func (a *app) Draw(screen *ebiten.Image) {
+	if a.title.on {
+		a.overlay.Reset()
+		a.drawTitle()
+		a.canvas.WritePixels(a.frame.Pix)
+		present(screen, a.canvas)
+		drawOverlay(screen, &a.overlay)
+		return
+	}
 	a.overlay.Reset()
 	if a.game.World != nil {
 		a.game.World.Overlay = &a.overlay // the HUD's text, drawn sharp after the frame (text.go)
@@ -121,6 +134,11 @@ func main() {
 		}
 	}
 	a.touch.seen = showPadsFromURL()
+	g.OnRoom = func(i int) { store.Reached(i) } // the furthest room, for Continue
+	g.OnTitle = func() { a.openTitle() }        // after the highscores: the new title
+	if roomFromURL() == "" {
+		a.openTitle() // the new title (docs/UI.md); the 2006 title room no longer shows
+	}
 	ebiten.SetWindowTitle("Pacmanio")
 	ebiten.SetTPS(g.World.Speed)
 	ebiten.SetWindowSize(game.ScreenW, game.ScreenH)
