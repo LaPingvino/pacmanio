@@ -100,7 +100,8 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
-	g.G.Sound = sound.NewPlayer(pacmanio.Files).Play
+	player := sound.NewPlayer(pacmanio.Files)
+	g.G.Sound, g.G.SoundPlaying = player.Play, player.Playing
 	g.Highscores = store.LoadHighscores() // kept between games (localStorage / config file)
 	g.SaveHighscores = store.SaveHighscores
 	a := &app{game: g, frame: image.NewRGBA(image.Rect(0, 0, game.ScreenW, game.ScreenH))}

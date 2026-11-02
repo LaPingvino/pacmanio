@@ -7,5 +7,5 @@ import "embed"
 // Files holds pacmanio/project.json, pacmanio/sprites/*.png,
 // pacmanio/backgrounds/*.png and levels/*.txt.
 //
-//go:embed pacmanio/project.json pacmanio/sprites/*.png pacmanio/backgrounds/*.png pacmanio/sounds/*.wav levels/*.txt fonts/*.ttf
+//go:embed pacmanio/project.json pacmanio/sprites/*.png pacmanio/backgrounds/*.png audio/effects/*.opus audio/music/*.opus levels/*.txt fonts/*.ttf
 var Files embed.FS

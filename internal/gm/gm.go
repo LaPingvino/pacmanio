@@ -149,6 +149,8 @@ type Globals struct {
 	Vars        map[string]float64
 	// Sound plays a sound by name (action_sound); nil = silent.
 	Sound func(name string)
+	// SoundPlaying is sound_isplaying for a tune; nil = nothing plays.
+	SoundPlaying func(name string) bool
 	// KeyboardString is keyboard_string: the characters typed (Game Maker
 	// keeps the last 1024).
 	KeyboardString string
@@ -179,6 +181,11 @@ func (g *Globals) AddLives(n int) {
 }
 
 // Play is action_sound(name).
+// Playing is sound_isplaying(name).
+func (g *Globals) Playing(name string) bool {
+	return g != nil && g.SoundPlaying != nil && g.SoundPlaying(name)
+}
+
 func (g *Globals) Play(name string) {
 	if g != nil && g.Sound != nil {
 		g.Sound(name)

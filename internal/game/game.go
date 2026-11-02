@@ -105,6 +105,7 @@ func init() {
 	// regulilo: Page Down (keyboard event 34, every step it is held) — with
 	// DEBUG true as released: score = −10000 and the next room.
 	objectEvents["regulilo"] = func(a *Assets, o *gm.Object) {
+		o.Events.Create = func(r *gm.Room, self *gm.Instance) { preparu(r) } // room start
 		o.Events.Key = map[gm.Key]gm.Handler{gm.KeyPgDn: func(r *gm.Room, self *gm.Instance) {
 			r.G.Score = -10000
 			r.Goto = "@next"
@@ -114,7 +115,10 @@ func init() {
 	// turns the background's scroll (right → down → left → up → right…) and
 	// comes back after 32, 64 or 96 steps.
 	objectEvents["regionilo"] = func(a *Assets, o *gm.Object) {
-		o.Events.Create = func(r *gm.Room, self *gm.Instance) { self.Alarm[0] = 1 }
+		o.Events.Create = func(r *gm.Room, self *gm.Instance) { // room start
+			self.Alarm[0] = 1
+			preparu(r)
+		}
 		o.Events.Alarm[0] = func(r *gm.Room, self *gm.Instance) {
 			v := r.G.Vars
 			h, vs := v["background_hspeed"], v["background_vspeed"]
@@ -177,5 +181,15 @@ func (g *Game) Draw(dst *image.RGBA) {
 		for _, f := range g.World.Room.All("finigxu") {
 			g.World.drawEnd(dst, int(f.X), int(f.Y), g.Highscores, g.asking, g.G.KeyboardString)
 		}
+	}
+}
+
+// preparu's music (regulilo's and regionilo's room start): unless muziko
+// already plays (or MUTE, false as released), the CD's tracks when an audio CD
+// is in, else muziko looped. A remake has no CD, so: muziko, looped, carrying
+// on from room to room. (The background colour part is regionColour.)
+func preparu(r *gm.Room) {
+	if !r.G.Playing("muziko") {
+		r.G.Play("@music:muziko")
 	}
 }
