@@ -63,4 +63,3 @@ English alongside. Every line is from docs/PACMANIO-RULES.md (what the game real
 1. The region names in English — "City Region", "Water Region", "Free Space" — or keep them in Esperanto?
 2. The 2006 music and sounds: their source, to credit them properly (also asked for Stelo).
 3. Mention Claude in Pri, or leave it to the repo? (also asked for Stelo)
-4. The repo URL — github.com/LaPingvino/pacmanio right?
