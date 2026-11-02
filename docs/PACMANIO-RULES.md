@@ -130,6 +130,14 @@ Order: `komenco` → (`pu_bildo`, pu_1a … pu_4a, `pu_fina_nivelo`) → (`ar_bi
 `preparu` (each level and region room start): if an audio CD is present, plays its tracks in turn
 (`global.chambro`, next track each room); otherwise loops `muziko`. Room end remembers the CD track.
 
+## 8b. The pauses (quality of life)
+
+The original freezes the whole game, drawing included, in `action_sleep` (dying: 1.5 s; a level done: 2 s). The
+remake keeps their length and the logic waits exactly as before, but the screen stays alive (Joop 2026-11-02:
+"keep the beat, no freeze"): the moment the pause began is shown with its animations and the scrolling
+background running, the HUD holding its score and lives; the rest of the event (ghosts and Pacman back to their
+starts, a life less) shows when the pause ends.
+
 ## 9. Open points
 
 - (settled) Scared-ghost collision and parent events (§3): Pacman eats them.

@@ -77,7 +77,7 @@ func (w *World) drawHUD(dst *image.RGBA) {
 	box := func(x1, y1, x2, y2 int) {
 		draw.Draw(dst, image.Rect(x1, y1, x2+1, y2+1), image.NewUniform(bg), image.Point{}, draw.Src)
 	}
-	g := w.Room.G
+	g := w.Room.ShownG() // during a pause, the score and lives of the moment it began
 	box(0, 0, 96, 64)
 	drawGMText(dst, f.Small, 3, 3, "P A C M A N I O#"+w.Level.Caption, fg)
 	box(640-96, 0, 640, 64)

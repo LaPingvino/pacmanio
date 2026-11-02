@@ -151,7 +151,7 @@ func (w *World) Draw(dst *image.RGBA) {
 			}
 		}
 	}
-	insts := append([]*gm.Instance(nil), w.Room.Instances...)
+	insts := append([]*gm.Instance(nil), w.Room.Drawn()...) // during a pause, the moment it began
 	sort.SliceStable(insts, func(i, j int) bool { return insts[i].Obj.Depth > insts[j].Obj.Depth })
 	for _, t := range insts {
 		if t.Obj.Name == "regulilo" && !t.Destroyed { // its draw event (depth −10)
