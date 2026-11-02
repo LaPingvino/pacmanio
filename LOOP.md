@@ -33,6 +33,10 @@ beautiful from the start and includes some of my own pixel art of the time. It s
    https://kiefte.eu/pacmanio/ behind the goloco login (Joop 2026-11-01: 'add wasm pacmanio alongside goloco').
    Joop runs `sudo bash ~/Projects/pacmanio-recovered/scripts/caddy-pacmanio.sh` once (a placeholder page is
    there now); later deploys just replace the folder (atomic swap, chmod -R o+rX).
+11. [ ] Quality of life (Joop 2026-11-02: "both could have some quality of life improvements in the next runs").
+   First a short list for Joop to pick from, each small and switch-free unless he asks: resume from the last
+   room reached, a pause key, a mute toggle, a short "ready" beat when a level starts. The pause fix (no
+   freeze) is done.
 
 ## Decisions (Joop)
 
