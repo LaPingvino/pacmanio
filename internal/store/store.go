@@ -49,3 +49,18 @@ func Reached(n int) {
 		writeKey("pacmanio-progress", []byte(strconv.Itoa(n)))
 	}
 }
+
+// Muted is the sound button's setting (off: false).
+func Muted() bool {
+	data, ok := readKey("pacmanio-muted")
+	return ok && strings.TrimSpace(string(data)) == "1"
+}
+
+// SetMuted keeps the sound button's setting.
+func SetMuted(m bool) {
+	v := "0"
+	if m {
+		v = "1"
+	}
+	writeKey("pacmanio-muted", []byte(v))
+}

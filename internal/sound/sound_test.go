@@ -74,3 +74,17 @@ func TestEveryOriginalSoundConverted(t *testing.T) {
 		}
 	}
 }
+
+// Muting: effects are skipped, the setting reads back.
+func TestMute(t *testing.T) {
+	p := &Player{fsys: pacmanio.Files}
+	p.SetMuted(true)
+	if !p.Muted() || p.volume() != 0 {
+		t.Fatal("not muted")
+	}
+	p.Play("click") // no audio context: would panic if it tried to play
+	p.SetMuted(false)
+	if p.Muted() || p.volume() != 1 {
+		t.Fatal("still muted")
+	}
+}

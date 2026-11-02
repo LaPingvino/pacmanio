@@ -69,6 +69,9 @@ func RoomTitle(i int) string {
 	return region
 }
 
+// Asking reports the highscore name being typed.
+func (g *Game) Asking() bool { return g.asking }
+
 // StartAt starts a new game in room name: score 0 and 3 lives, as komencu sets
 // them (the title's Play and Continue).
 func (g *Game) StartAt(name string) error {

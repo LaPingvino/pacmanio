@@ -70,6 +70,21 @@ func (k keys) AnyPressed() bool {
 }
 
 func (a *app) Update() error {
+	// The two corner buttons by mouse (no touch layout), and M for the sound.
+	if inpututil.IsMouseButtonJustPressed(ebiten.MouseButtonLeft) && !a.touch.seen {
+		pt := image.Pt(ebiten.CursorPosition())
+		switch {
+		case pt.In(a.touch.lay.full):
+			ebiten.SetFullscreen(!ebiten.IsFullscreen())
+			return nil
+		case pt.In(a.touch.lay.snd):
+			toggleSound()
+			return nil
+		}
+	}
+	if inpututil.IsKeyJustPressed(ebiten.KeyM) && !a.typing() {
+		toggleSound()
+	}
 	// Full screen: F11, or Alt+Enter (the touch controls have a button).
 	if inpututil.IsKeyJustPressed(ebiten.KeyF11) || (inpututil.IsKeyJustPressed(ebiten.KeyEnter) && ebiten.IsKeyPressed(ebiten.KeyAlt)) {
 		ebiten.SetFullscreen(!ebiten.IsFullscreen())
@@ -131,6 +146,8 @@ func main() {
 		log.Fatal(err)
 	}
 	player := sound.NewPlayer(pacmanio.Files)
+	theSound = player
+	player.SetMuted(store.Muted())
 	g.G.Sound, g.G.SoundPlaying = player.Play, player.Playing
 	g.Highscores = store.LoadHighscores() // kept between games (localStorage / config file)
 	g.SaveHighscores = store.SaveHighscores
@@ -160,10 +177,30 @@ func main() {
 // layout the touches are read against.
 func (a *app) frameArea(screen *ebiten.Image) image.Rectangle {
 	b := screen.Bounds()
-	if !a.touch.seen {
-		a.touch.lay = touchLayout{area: b}
+	if !a.touch.seen { // no touch: the whole screen; the two buttons small in the top-left corner
+		d := ebiten.Monitor().DeviceScaleFactor()
+		k := int(28 * max(d, 1))
+		m := k / 4
+		a.touch.lay = touchLayout{area: b, full: image.Rect(m, m, m+k, m+k*2/3), snd: image.Rect(2*m+k, m, 2*m+2*k, m+k*2/3)}
 		return b
 	}
 	a.touch.lay = layoutTouch(b.Dx(), b.Dy())
 	return a.touch.lay.area
 }
+
+// theSound is the program's sound player.
+var theSound *sound.Player
+
+// toggleSound is the sound button and M: all sound off or on, remembered.
+func toggleSound() {
+	if theSound == nil {
+		return
+	}
+	theSound.SetMuted(!theSound.Muted())
+	store.SetMuted(theSound.Muted())
+}
+
+func soundMuted() bool { return theSound != nil && theSound.Muted() }
+
+// typing reports the highscore name being typed (M is a letter then).
+func (a *app) typing() bool { return a.game != nil && a.game.Asking() }
