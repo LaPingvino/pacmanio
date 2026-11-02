@@ -17,6 +17,7 @@ import (
 )
 
 type app struct {
+	pause   pauseMenu
 	game    *game.Game
 	frame   *image.RGBA
 	canvas  *ebiten.Image // the frame as an image, scaled onto the screen
@@ -80,6 +81,13 @@ func (a *app) Update() error {
 		case pt.In(a.touch.lay.snd):
 			toggleSound()
 			return nil
+		case a.touch.showPause && pt.In(a.touch.lay.paus):
+			if a.pause.on {
+				a.pause.on = false
+			} else {
+				a.openPause()
+			}
+			return nil
 		}
 	}
 	if inpututil.IsKeyJustPressed(ebiten.KeyM) && !a.typing() {
@@ -96,6 +104,15 @@ func (a *app) Update() error {
 		return nil
 	}
 	a.touch.update()
+	a.touch.showPause = a.game.InLevel()
+	if a.pause.on {
+		a.updatePause()
+		return nil
+	}
+	if a.pauseWanted() {
+		a.openPause()
+		return nil
+	}
 	if err := a.game.Step(keys{&a.touch, pollPhoneKeys()}); err != nil {
 		log.Print(err)
 	}
@@ -122,6 +139,9 @@ func (a *app) Draw(screen *ebiten.Image) {
 		a.game.World.Overlay = &a.overlay // the HUD's text, drawn sharp after the frame (text.go)
 	}
 	a.game.Draw(a.frame)
+	if a.pause.on {
+		a.drawPause()
+	}
 	a.canvas.WritePixels(a.frame.Pix)
 	present(screen, a.canvas, a.frameArea(screen))
 	drawOverlay(screen, &a.overlay)
@@ -177,11 +197,13 @@ func main() {
 // layout the touches are read against.
 func (a *app) frameArea(screen *ebiten.Image) image.Rectangle {
 	b := screen.Bounds()
-	if !a.touch.seen { // no touch: the whole screen; the two buttons small in the top-left corner
+	if !a.touch.seen { // no touch: the whole screen; the small buttons in the top-left corner
 		d := ebiten.Monitor().DeviceScaleFactor()
 		k := int(28 * max(d, 1))
 		m := k / 4
-		a.touch.lay = touchLayout{area: b, full: image.Rect(m, m, m+k, m+k*2/3), snd: image.Rect(2*m+k, m, 2*m+2*k, m+k*2/3)}
+		h := k * 2 / 3 // in a column, so they stay in the side margin
+		a.touch.lay = touchLayout{area: b, full: image.Rect(m, m, m+k, m+h), snd: image.Rect(m, 2*m+h, m+k, 2*m+2*h),
+			paus: image.Rect(m, 3*m+2*h, m+k, 3*m+3*h)}
 		return b
 	}
 	a.touch.lay = layoutTouch(b.Dx(), b.Dy())

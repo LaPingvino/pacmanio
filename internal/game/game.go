@@ -1,6 +1,7 @@
 package game
 
 import (
+	"fmt"
 	"image"
 	"io/fs"
 	"strings"
@@ -34,6 +35,29 @@ type Game struct {
 	// OnTitle, when set, replaces going back to komenco after the highscores:
 	// the program's own title screen (docs/UI.md).
 	OnTitle func()
+
+	levelStart levelStart
+}
+
+// levelStart is the score and lives a level began with (the pause menu's
+// "Rekomenci la nivelon" puts them back, so a restart can't farm points).
+type levelStart struct {
+	room, score, lives int
+	ok                 bool
+}
+
+// InLevel reports a level being played (not a title, region or end room).
+func (g *Game) InLevel() bool { return g.levelStart.ok && !g.asking }
+
+// RestartLevel starts the current level again with the score and lives it
+// began with (the pause menu; a remake addition, docs/UI.md).
+func (g *Game) RestartLevel() error {
+	ls := g.levelStart
+	if !ls.ok {
+		return fmt.Errorf("no level")
+	}
+	g.G.Score, g.G.Lives = ls.score, ls.lives
+	return g.enter(ls.room)
 }
 
 // AnyKey is keyboard_key != 0 or a mouse button this step.
@@ -107,6 +131,11 @@ func (g *Game) enter(i int) error {
 	}
 	w.Fonts = g.Fonts
 	g.World, g.Room = w, i
+	if strings.Contains(name, "nivelo") { // a level: what it began with, for the pause menu's restart
+		g.levelStart = levelStart{room: i, score: g.G.Score, lives: g.G.Lives, ok: true}
+	} else {
+		g.levelStart = levelStart{}
+	}
 	if name == "fino" { // finigxu's create: a new highscore asks the name
 		g.asking = g.Highscores[9].Score < g.G.Score
 		g.G.KeyboardString = "Pacman"
