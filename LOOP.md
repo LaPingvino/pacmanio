@@ -1,4 +1,4 @@
-# Pacmanio — loop (PRIVATE: contains stock assets; no remote, never publish without Joop's say-so)
+# Pacmanio — loop (PUBLIC since 2026-11-02, Joop: "the assets were meant for creating your own games anyway" — with the disclaimer in README.md)
 
 One bounded chunk (~10 min) per tick, top unchecked item first. The recovered 2006 project is in `pacmanio/`
 (20 rooms, 17 objects as GML, sprites, sounds) and the older preview in `pmv/`. Joop: Pacmanio "has been more
@@ -8,7 +8,7 @@ beautiful from the start and includes some of my own pixel art of the time. It s
 
 - The recovered code and rooms are the truth; nothing is guessed. Where the code is unclear, note it as a
   question for Joop (no Crostini needed).
-- Design approved 2026-11-01 (docs/DESIGN.md). Commit locally each tick; no remote; the web build only at the private kiefte.eu/pacmanio/.
+- Design approved 2026-11-01 (docs/DESIGN.md). Public repo github.com/LaPingvino/pacmanio (push to origin main), web build on GitHub Pages (2026-11-02; was private until then). The 2006 assets stay outside the MIT licence (README.md); keep that disclaimer.
 - Keep the recovered files as extracted (they are Joop's lost source); write new files beside them.
 
 ## Queue
@@ -87,3 +87,4 @@ beautiful from the start and includes some of my own pixel art of the time. It s
 - 2026-11-02 — Joop: Pacmanio may become the sample project of the new GameMaker-clone-in-Go project (~/Projects/gameviber (GameViber), low priority, design first) — its 2006 GML run unchanged there; the hand port stays meanwhile.
 - 2026-11-02 (Joop: 'Pacmanio isn't wasm available on the kiefte.eu link yet') — item 10: the Caddy route had been in place since Joop ran caddy-pacmanio.sh (2026-11-01); only the placeholder was deployed. Built (GOOS=js GOARCH=wasm, tests green) and swapped into ~/Projects/pacmanio-web (pacmanio.wasm 15 MB, wasm_exec.js, index.html; o+rX). Headless check of the deployed folder: the title room with the 2006 art runs. Redeploy = the same build + atomic swap.
 - 2026-11-02 (Joop: sound effects stall the game — fix now, 'keep the beat, no freeze') — as Stelo: effects decoded in the background at start (the first play of each no longer decodes in the step), and the action_sleep pauses (dying 1.5 s, level done 2 s) keep their length and logic but show the moment they began alive (animations, the scrolling background; the HUD holds score and lives); ghosts and Pacman go back to their starts when the pause ends. PACMANIO-RULES §8b. Tests green; private web build redeployed.
+- 2026-11-02 (Joop: 'I don't think there are strong reasons not to put the Pacmanio on Github either, the assets were meant for creating your own games anyway. We can of course put a clear disclaimer in the repo') — README rewritten for the public (the disclaimer: code MIT, the 2006 assets outside it — the GM Pac-Man example by Mark Overmars with images by Billy McQuown, Joop's own pixel art, two MIDI tunes of unrecorded origin; issues for takedown / credit), LICENSE (MIT, code only), docs/RECOVERY.md (the old README's extraction notes), .github/workflows/pages.yml (as Stelo's). Checked first: no .exe / .gmd in the tree or history; fonts are Liberation (OFL, licence included).
