@@ -56,9 +56,9 @@ header: Pacmanio grew out of Game Maker's Pac-Man example.
 - **`scared`** (child of `monster`, sprite `afraid`): after alarm 0 (160 steps) becomes `intermonster` with
   alarm 40.
 - **`intermonster`** (child of `scared`, sprite `inter`, the flashing one): after 40 steps becomes `monster`.
-- **[engine] open point**: `scared` is a child of `monster`, and Pacman has a collision event with each. Whether
-  Game Maker 5.3 runs both events when Pacman touches a scared ghost (and in which order) decides whether eating
-  a ghost can also kill Pacman. To be checked by playing the original.
+- **Settled (Joop, 2026-11-02)**: Pacman eats scared ghosts — touching a `scared` ghost does not cost a life,
+  although `scared` is a child of `monster` and Pacman has a collision event with each (so in the remake only the
+  `scared` event runs for a scared ghost).
 
 ## 4. Fruit (`bonus`) and extra lives
 
@@ -132,6 +132,6 @@ Order: `komenco` → (`pu_bildo`, pu_1a … pu_4a, `pu_fina_nivelo`) → (`ar_bi
 
 ## 9. Open points
 
-- Scared-ghost collision and parent events (§3).
+- (settled) Scared-ghost collision and parent events (§3): Pacman eats them.
 - What the larger rooms show without views (§1).
 - `pmv/` (the preview) is compared in queue item 3.

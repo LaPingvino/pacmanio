@@ -49,10 +49,10 @@ beautiful from the start and includes some of my own pixel art of the time. It s
 
 ## Questions for Joop
 
-- Do you remember: could Pacman eat the blue (scared) ghosts in Pacmanio, or did touching one still cost a life? (Settles the open engine point in PACMANIO-RULES §3: a scared ghost is also a 'monster', so both of Pacman's collision events see it.)
+- (ANSWERED 2026-11-02, Joop: 'Pacman can eat the blues') Do you remember: could Pacman eat the blue (scared) ghosts in Pacmanio, or did touching one still cost a life? (Settles the open engine point in PACMANIO-RULES §3: a scared ghost is also a 'monster', so both of Pacman's collision events see it.)
 
 
-- docs/ASSETS.md §Questions: which 'unsure' assets are his (pac_stand, star pellet, diamond, muro_1, the two MIDIs).
+- (ANSWERED 2026-11-02, Joop: he won't remember all authorship after so many years — leave them marked unsure, don't block on it) docs/ASSETS.md §Questions: which 'unsure' assets are his (pac_stand, star pellet, diamond, muro_1, the two MIDIs).
 - (engine open points: docs/PACMANIO-RULES.md §9)
 
 ## Blocked
@@ -77,3 +77,4 @@ beautiful from the start and includes some of my own pixel art of the time. It s
 - 2026-11-01 tick 14 (item 8) — the game is playable: cmd/pacmanio (Ebitengine, desktop + wasm; the room's own speed as TPS: 20/15/30; keyboard, Backspace, any key/click), internal/sound from Stelo (the six WAVs embedded, decoded at 44.1 kHz; test), web/index.html (minimal, as Stelo's without the phone keyboard yet). Headless wasm: the title room with the 2006 title art. PARTIAL: muziko/finsono MIDI (soundfont), highscore storage. NEXT: item 9 mobile or item 10 deploy (Joop's caddy script first).
 - 2026-11-01 tick 15 (item 9) — mobile, from Stelo: arrow pads on touch screens (or ?pads), a tap = any key, the phone keyboard ('Klavaro', pacmanioTyped) for the highscore name with Backspace/Enter, no page zoom/scroll (web/index.html now Stelo's full page). Headless 844×390 ?pads: the title fills the height, pads in the corners, Klavaro top-right. LEFT: a real phone; the pads cover the bottom corners of the room (as in Stelo).
 - 2026-11-01 tick 16 — the highscore table is kept between games: internal/store from Stelo (localStorage 'pacmanio-highscores' on the web, ~/.config/pacmanio/ on the desktop; round-trip test), loaded at start and saved when a name goes in. Everything left now waits on Joop: ghosts touching Pacman (question), the MIDI music (soundfont-fluid), the private deploy (caddy-pacmanio.sh), a real-phone try.
+- 2026-11-02 (Joop's answers, recorded from the goloco session) — eating a scared ghost does not cost a life: PACMANIO-RULES §3's engine open point is settled by the original's behaviour as Joop remembers it; asset authorship stays 'unsure' where unknown.
