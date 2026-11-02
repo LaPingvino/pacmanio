@@ -27,7 +27,7 @@ beautiful from the start and includes some of my own pixel art of the time. It s
 5. [x] Level converter for the 20 rooms (round-trip test), reusing the Stelo format.
 6. [x] Rooms drawn with the original sprites, wall autotiling (test against the room renders).
 7. [x] Pacman and the dots (done); ghosts; pellets; fruit; lives and HUD; regions, title and end rooms. (ghosts meeting Pacman done 2026-11-02)
-8. [~] Music and sounds (effects done; the two MIDI tunes wait for soundfont-fluid, as Stelo's).
+8. [~] Music and sounds (effects done; the two MIDI tunes: soundfont-fluid installed 2026-11-02 — render them).
 9. [~] Mobile (as Stelo item 12): done but for a real-phone try.
 10. [ ] The wasm build goes to ~/Projects/pacmanio-web, served PRIVATELY at
    https://kiefte.eu/pacmanio/ behind the goloco login (Joop 2026-11-01: 'add wasm pacmanio alongside goloco').
