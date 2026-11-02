@@ -165,7 +165,7 @@ func TestPacmanMeetsGhosts(t *testing.T) {
 		if kind != "monster" {
 			w.Room.Change(g, a.Object(kind), false)
 		}
-		pac.X, pac.Y, pac.HSpeed, pac.VSpeed = pac.X+32, pac.Y, 0, 0 // away from his start
+		pac.X, pac.HSpeed, pac.VSpeed = pac.X+32, 0, 0 // away from his start
 		other := ghosts[len(ghosts)-1]
 		other.X += 64
 		g.X, g.Y, g.HSpeed, g.VSpeed = pac.X, pac.Y, 0, 0

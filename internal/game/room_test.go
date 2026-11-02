@@ -82,6 +82,11 @@ func TestGhostsAndPellets(t *testing.T) {
 	}
 	g := ghosts[0]
 	x0, y0 := g.X, g.Y
+	// Pacman out of the room while the ghosts roam (meeting one costs a life
+	// and sends them all back), then back for the pellet.
+	p0 := w.Room.All("pacman")[0]
+	px, py := p0.X, p0.Y
+	p0.Destroyed = true
 	for range 200 {
 		w.Step(held{})
 		if !w.Room.PlaceFree(g, g.X, g.Y) {
@@ -91,12 +96,16 @@ func TestGhostsAndPellets(t *testing.T) {
 	if g.X == x0 && g.Y == y0 {
 		t.Error("ghost didn't move")
 	}
-	p := w.Room.All("pacman")[0]
+	for _, gh := range w.Room.All("monster") { // ghosts back in their box: no meeting in the pellet step
+		gh.X, gh.Y = gh.XStart, gh.YStart
+	}
+	p := w.Room.Create(a.Object("pacman"), px, py)
 	pil := w.Room.Create(a.Object("pil"), p.X, p.Y)
 	w.Step(held{})
 	if !pil.Destroyed || g.Obj.Name != "scared" || g.Alarm[0] <= 0 {
 		t.Fatalf("pellet: destroyed %v, ghost %s alarm %d", pil.Destroyed, g.Obj.Name, g.Alarm[0])
 	}
+	p.Destroyed = true // the timers below, without Pacman eating (or meeting) ghosts
 	for range 160 {
 		w.Step(held{})
 	}
