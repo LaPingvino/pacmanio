@@ -70,7 +70,13 @@ func (k keys) AnyPressed() bool {
 }
 
 func (a *app) Update() error {
+	// Full screen: F11, or Alt+Enter (the touch controls have a button).
+	if inpututil.IsKeyJustPressed(ebiten.KeyF11) || (inpututil.IsKeyJustPressed(ebiten.KeyEnter) && ebiten.IsKeyPressed(ebiten.KeyAlt)) {
+		ebiten.SetFullscreen(!ebiten.IsFullscreen())
+		return nil
+	}
 	if a.title.on {
+		a.touch.update() // the controls appear (and full screen works) on the title too
 		a.updateTitle()
 		return nil
 	}
@@ -91,8 +97,9 @@ func (a *app) Draw(screen *ebiten.Image) {
 		a.overlay.Reset()
 		a.drawTitle()
 		a.canvas.WritePixels(a.frame.Pix)
-		present(screen, a.canvas)
+		present(screen, a.canvas, a.frameArea(screen))
 		drawOverlay(screen, &a.overlay)
+		a.touch.draw(screen)
 		return
 	}
 	a.overlay.Reset()
@@ -101,9 +108,9 @@ func (a *app) Draw(screen *ebiten.Image) {
 	}
 	a.game.Draw(a.frame)
 	a.canvas.WritePixels(a.frame.Pix)
-	a.touch.draw(a.canvas)
-	present(screen, a.canvas)
+	present(screen, a.canvas, a.frameArea(screen))
 	drawOverlay(screen, &a.overlay)
+	a.touch.draw(screen)
 }
 
 // Layout is the screen's real resolution; the frame is scaled onto it (scale.go).
@@ -146,4 +153,17 @@ func main() {
 	if err := ebiten.RunGame(a); err != nil {
 		log.Fatal(err)
 	}
+}
+
+// frameArea is where the frame goes on the screen: all of it, or — once touch
+// has been used — what the touch controls leave (touch.go); it also stores the
+// layout the touches are read against.
+func (a *app) frameArea(screen *ebiten.Image) image.Rectangle {
+	b := screen.Bounds()
+	if !a.touch.seen {
+		a.touch.lay = touchLayout{area: b}
+		return b
+	}
+	a.touch.lay = layoutTouch(b.Dx(), b.Dy())
+	return a.touch.lay.area
 }
