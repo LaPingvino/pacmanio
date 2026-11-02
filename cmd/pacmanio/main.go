@@ -17,9 +17,10 @@ import (
 )
 
 type app struct {
-	game  *game.Game
-	frame *image.RGBA
-	touch touchState
+	game   *game.Game
+	frame  *image.RGBA
+	canvas *ebiten.Image // the frame as an image, scaled onto the screen
+	touch  touchState
 }
 
 // keys is the keyboard, the mouse and the touch screen as the game's input.
@@ -81,11 +82,13 @@ func (a *app) Update() error {
 
 func (a *app) Draw(screen *ebiten.Image) {
 	a.game.Draw(a.frame)
-	screen.WritePixels(a.frame.Pix)
-	a.touch.draw(screen)
+	a.canvas.WritePixels(a.frame.Pix)
+	a.touch.draw(a.canvas)
+	present(screen, a.canvas)
 }
 
-func (a *app) Layout(int, int) (int, int) { return game.ScreenW, game.ScreenH }
+// Layout is the screen's real resolution; the frame is scaled onto it (scale.go).
+func (a *app) Layout(outW, outH int) (int, int) { return screenSize(outW, outH) }
 
 func main() {
 	assets, err := game.LoadAssets(pacmanio.Files)
@@ -104,7 +107,7 @@ func main() {
 	g.G.Sound, g.G.SoundPlaying = player.Play, player.Playing
 	g.Highscores = store.LoadHighscores() // kept between games (localStorage / config file)
 	g.SaveHighscores = store.SaveHighscores
-	a := &app{game: g, frame: image.NewRGBA(image.Rect(0, 0, game.ScreenW, game.ScreenH))}
+	a := &app{game: g, frame: image.NewRGBA(image.Rect(0, 0, game.ScreenW, game.ScreenH)), canvas: ebiten.NewImage(game.ScreenW, game.ScreenH)}
 	a.touch.seen = showPadsFromURL()
 	ebiten.SetWindowTitle("Pacmanio")
 	ebiten.SetTPS(g.World.Speed)
