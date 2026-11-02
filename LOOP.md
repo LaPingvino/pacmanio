@@ -49,7 +49,7 @@ U0b. [x] (DONE 2026-11-02) **Sound on / off button** beside the full-screen one 
 U. [ ] **Modern UI** (Joop 2026-11-02, docs/UI.md — APPROVED): sharp scaling + text at real resolution, Noto Sans,
    Pits-like menus (title, pause, settings, level pick of reached levels, resume), new "Kiel ludi" and "Pri"
    texts (drafts to Joop first), slim HUD, proper highscores. Steps: U1 shared UI package (scaler, text, menu
-   widget); U2 title + menus (U2a title DONE; U2b pause menu DONE 2026-11-02; U3 next); U3 Kiel ludi / Pri (drafts → Joop); U4 HUD + level start / end; U5 highscores;
+   widget); U2 title + menus (U2a title DONE; U2b pause menu DONE 2026-11-02; U3 drafts in docs/TEXTS.md, WAITING for Joop); U3 Kiel ludi / Pri (drafts → Joop); U4 HUD + level start / end; U5 highscores;
    U6 settings (language, sound, music). After Stelo (reuses its UI package).
 
 ## Decisions (Joop)
@@ -111,3 +111,4 @@ U. [ ] **Modern UI** (Joop 2026-11-02, docs/UI.md — APPROVED): sharp scaling +
 - 2026-11-02 (item U0) — as Stelo: the touch controls beside the game on a phone on its side (← → left, ↑ ↓ right, full screen top left), a row under it upright; the frame fitted into what is left; full screen by the button, F11 or Alt+Enter; the controls on the title too (touch.go / scale.go from Stelo). Headless phone checks in pu_1a_nivelo. Next: U0b the sound button.
 - 2026-11-02 (item U0b) — the sound button, as Stelo: the player's mute (effects skipped, the tune silenced and kept), remembered (store 'pacmanio-muted'), M (not while a highscore name is typed: Game.Asking), the loudspeaker beside the full-screen button — in the touch layout, and small in the top-left corner for the mouse. TestMute. Headless: the corner buttons on the title.
 - 2026-11-02 (item U, step U2b, as Stelo) — the pause menu: Esc / P in a level (the 2006 game's Esc quit), or the pause button (shown only in levels: Game.InLevel — rooms named *nivelo*, not while a highscore name is typed); Paŭzo · Daŭrigi · Rekomenci la nivelon (Game.RestartLevel: the room again with the score and lives it began with) · Sono ‹on/off› · Ĉefmenuo; the game doesn't step while open; navy panel. touch.go from Stelo (portrait: the small buttons in their own row under the pads). Desktop: the three small buttons in a column in the left margin (in a row the third reached into the frame). TestRestartLevel; headless: ?room=pu_1a_nivelo + Esc shows the menu.
+- 2026-11-02 (item U, step U3) — docs/TEXTS.md: drafts of Kiel ludi (goal, the three regions, keys, phone, a legend from PACMANIO-RULES, the one-way walls and wrap-around) and Pri (credits incl. Mark Overmars' example and Billy McQuown per the 2006 help text), Esperanto + English, 4 questions. WAITING for Joop's read; U4 (slim HUD + level start/end) next.
