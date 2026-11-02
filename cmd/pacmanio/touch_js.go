@@ -32,3 +32,17 @@ func pollPhoneKeys() phoneKeys {
 	q.Call("splice", 0, q.Length())
 	return p
 }
+
+// roomFromURL: "?room=name" starts in that room (for checking a room without
+// playing up to it).
+func roomFromURL() string {
+	q := js.Global().Get("location").Get("search").String()
+	if i := strings.Index(q, "room="); i >= 0 {
+		r := q[i+5:]
+		if j := strings.IndexAny(r, "&#"); j >= 0 {
+			r = r[:j]
+		}
+		return r
+	}
+	return ""
+}

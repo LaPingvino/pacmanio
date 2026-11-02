@@ -68,6 +68,18 @@ func drawGMText(dst *image.RGBA, f font.Face, x, y int, s string, c color.Color)
 // the view's corners (no views: the room's top-left 640×480), with the room
 // caption, the score, the programmer and the lives.
 // ASSUMPTION: action_draw_rectangle's corners are inclusive (97×65 boxes).
+// hudText is drawGMText for the HUD: into the overlay (sharp, Noto Sans Bold
+// at the size of MS Sans Serif 9) when there is one, else into the frame.
+func (w *World) hudText(dst *image.RGBA, f font.Face, size float64, x, y int, s string, c color.Color) {
+	if w.Overlay == nil {
+		drawGMText(dst, f, x, y, s, c)
+		return
+	}
+	for i, line := range strings.Split(s, "#") {
+		w.Overlay.Add(Text{S: line, X: float64(x), Y: float64(y) + float64(i)*size*1.3, Size: size, Weight: Bold, Color: c})
+	}
+}
+
 func (w *World) drawHUD(dst *image.RGBA) {
 	f := w.Fonts
 	if f == nil {
@@ -79,13 +91,13 @@ func (w *World) drawHUD(dst *image.RGBA) {
 	}
 	g := w.Room.ShownG() // during a pause, the score and lives of the moment it began
 	box(0, 0, 96, 64)
-	drawGMText(dst, f.Small, 3, 3, "P A C M A N I O#"+w.Level.Caption, fg)
+	w.hudText(dst, f.Small, 11, 3, 3, "P A C M A N I O#"+w.Level.Caption, fg)
 	box(640-96, 0, 640, 64)
-	drawGMText(dst, f.Small, 640-93, 3, "Poentoj:#"+strconv.Itoa(g.Score), fg)
+	w.hudText(dst, f.Small, 11, 640-93, 3, "Poentoj:#"+strconv.Itoa(g.Score), fg)
 	box(0, 480-64, 96, 480)
-	drawGMText(dst, f.Small, 3, 480-61, "Programisto:##Joop KIEFTE", fg)
+	w.hudText(dst, f.Small, 11, 3, 480-61, "Programisto:##Joop KIEFTE", fg)
 	box(640-96, 480-64, 640, 480)
-	drawGMText(dst, f.Small, 640-93, 480-61, "Restaj vivoj:", fg)
+	w.hudText(dst, f.Small, 11, 640-93, 480-61, "Restaj vivoj:", fg)
 	icon := func(x int) {
 		if sp := w.Assets.Sprites["pac_stand"]; sp != nil && len(sp.Frames) > 0 {
 			img := sp.Frames[0]
@@ -98,6 +110,6 @@ func (w *World) drawHUD(dst *image.RGBA) {
 		}
 	} else { // one icon and the number (Courier New 18 bold, yellow)
 		icon(640 - 96)
-		drawGMText(dst, f.Lives, 640-64, 480-32, strconv.Itoa(g.Lives), color.RGBA{255, 255, 0, 255})
+		w.hudText(dst, f.Lives, 22, 640-64, 480-32, strconv.Itoa(g.Lives), color.RGBA{255, 255, 0, 255})
 	}
 }

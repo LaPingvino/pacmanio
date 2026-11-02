@@ -28,6 +28,9 @@ type World struct {
 	// BgX, BgY is the background's offset: it moves by background_hspeed/
 	// vspeed each step.
 	BgX, BgY float64
+	// Overlay, when set, receives the HUD's text to be drawn sharp at the
+	// screen's resolution (docs/UI.md); nil: drawn into the frame as before.
+	Overlay *Overlay
 }
 
 // RegionOf is the region a room is played in: the *_bildo room before it sets

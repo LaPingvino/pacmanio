@@ -45,6 +45,17 @@ func NewGame(fsys fs.FS, a *Assets, f *Fonts) (*Game, error) {
 
 // enter goes to room i: the *_bildo room's creation code sets the region
 // (pu 2, ar 1, ls 3), komenco sets 1, other rooms keep it.
+// EnterRoom starts in a room by name (a testing aid: ?room= / PACMANIO_ROOM);
+// unknown names are ignored.
+func (g *Game) EnterRoom(name string) error {
+	for i, n := range RoomOrder {
+		if n == name {
+			return g.enter(i)
+		}
+	}
+	return nil
+}
+
 func (g *Game) enter(i int) error {
 	name := RoomOrder[i]
 	switch {
