@@ -28,6 +28,7 @@ type titleScreen struct {
 	px, py   int
 	progress int    // the furthest room reached (game.RoomOrder index)
 	info     string // an open info page: "help" (Kiel ludi), "about" (Pri), "" none
+	pick     int    // the room Continue starts (a RoomOrder index, 1 … progress)
 }
 
 func (a *app) openTitle() {
@@ -57,8 +58,12 @@ func (a *app) buildTitleMenu(sel int) {
 		ids = append(ids, id)
 	}
 	add("play", "Ludi")
-	if p := a.title.progress; p > 1 && p < len(game.RoomOrder)-1 {
-		add("continue", "Daŭrigi — "+game.RoomTitle(p))
+	if p := a.title.progress; p > 1 && p < len(game.RoomOrder)-1 { // Continue at a reached room: ← → for an earlier one
+		if a.title.pick < 1 || a.title.pick > p {
+			a.title.pick = p
+		}
+		items = append(items, game.MenuItem{Label: "Daŭrigi", Value: game.RoomTitle(a.title.pick), Action: true})
+		ids = append(ids, "continue")
 	}
 	add("scores", "Plej bonaj")
 	add("help", "Kiel ludi")
@@ -108,6 +113,12 @@ func (a *app) updateTitle() {
 		a.buildTitleMenu(sel)
 		return true
 	}
+	if res.Step != 0 && a.title.ids[sel] == "continue" { // the room pick: 1 … the furthest reached, round
+		p := a.title.progress
+		a.title.pick = (a.title.pick-1+res.Step+p)%p + 1
+		a.buildTitleMenu(sel)
+		return
+	}
 	if res.Step != 0 && toggle(a.title.ids[sel]) {
 		return
 	}
@@ -118,7 +129,7 @@ func (a *app) updateTitle() {
 	case "play":
 		a.startAt("pu_bildo")
 	case "continue":
-		a.startAt(game.RoomOrder[a.title.progress])
+		a.startAt(game.RoomOrder[a.title.pick])
 	case "scores":
 		a.startAt("fino")
 	case "help", "about":
