@@ -27,10 +27,11 @@ type titleScreen struct {
 	ids      []string
 	tick     int
 	px, py   int
-	progress int    // the furthest room reached (game.RoomOrder index)
-	info     string // an open info page: "help" (Kiel ludi), "about" (Pri), "" none
-	page     string // the open page: "" the blocks, "settings", "levels" (Daŭrigi's level pick)
-	rooms    []int  // the levels page's rooms (RoomOrder indices)
+	progress int           // the furthest room reached (game.RoomOrder index)
+	info     string        // an open info page: "help" (Kiel ludi), "about" (Pri), "" none
+	page     string        // the open page: "" the blocks, "settings", "levels" (Daŭrigi's level pick)
+	rooms    []int         // the levels page's rooms (RoomOrder indices)
+	thumbs   []*image.RGBA // and their pictures
 }
 
 func (a *app) openTitle() {
@@ -87,7 +88,11 @@ func (a *app) buildTitleMenu(sel int) {
 			sel = len(items) - 1 // the furthest
 		}
 		a.title.ids = ids
-		a.title.menu = game.Menu{Items: items, Sel: sel, X: game.ScreenW / 2, Y: 214, Size: 20, Cols: 5, CellW: 96, CellH: 52, Gap: 10}
+		a.title.menu = game.Menu{Items: items, Sel: sel, X: game.ScreenW / 2, Y: 200, Size: 14, Cols: 5, CellW: 104, CellH: 96, Gap: 8, LabelBottom: true}
+		a.title.thumbs = a.title.thumbs[:0]
+		for _, i := range a.title.rooms { // each level's picture (made once a page)
+			a.title.thumbs = append(a.title.thumbs, levelThumb(game.RoomOrder[i], 92, 58))
+		}
 		return
 	}
 	add("play", "Ludi", "")
@@ -231,6 +236,12 @@ func (a *app) drawTitle() {
 	o.Add(game.Text{S: "Pacmanio", X: game.ScreenW/2 + 4, Y: 54, Size: 88, Weight: game.Black, Color: shadow, Align: game.Centre})
 	o.Add(game.Text{S: "Pacmanio", X: game.ScreenW / 2, Y: 50, Size: 88, Weight: game.Black, Color: color.RGBA{0xff, 0xe0, 0x2a, 255}, Align: game.Centre})
 	o.Add(game.Text{S: "Labirinta ludo · 2006, refarita 2026", X: game.ScreenW / 2, Y: 176, Size: 15, Weight: game.Bold, Color: color.RGBA{0xd8, 0xe4, 0xff, 255}, Align: game.Centre})
+	if a.title.page == "levels" { // the levels' pictures, in their blocks
+		for i, img := range a.title.thumbs {
+			x, y := a.title.menu.Cell(i)
+			o.Pics = append(o.Pics, game.Pic{Img: img, X: x + 6, Y: y + 5, W: 92, H: 58})
+		}
+	}
 	a.title.menu.Draw(o, game.MenuColors{Text: color.RGBA{0xf0, 0xf4, 0xff, 255}, Disabled: color.RGBA{0x80, 0x88, 0xa8, 255},
 		Selected: color.RGBA{0x0b, 0x12, 0x3a, 255}, Highlight: color.RGBA{0xff, 0xe0, 0x2a, 235}})
 }
