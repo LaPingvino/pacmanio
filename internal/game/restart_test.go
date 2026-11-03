@@ -86,3 +86,28 @@ type noInput struct{}
 
 func (noInput) Held(gm.Key) bool    { return false }
 func (noInput) Pressed(gm.Key) bool { return false }
+
+// The new highscore screen: the table, or the question with the name typed.
+func TestDrawEndUI(t *testing.T) {
+	a, err := LoadAssets(pacmanio.Files)
+	if err != nil {
+		t.Fatal(err)
+	}
+	g, err := NewGame(pacmanio.Files, a, nil)
+	if err != nil {
+		t.Fatal(err)
+	}
+	w := g.World
+	w.Overlay = &Overlay{}
+	h := ClearedHighscores()
+	h.Add("Joop", 1234)
+	w.drawEndUI(h, false, "")
+	if got := w.Overlay.Texts[1].S + " " + w.Overlay.Texts[2].S + " " + w.Overlay.Texts[3].S; got != "1. Joop 1234" {
+		t.Errorf("first row %q", got)
+	}
+	w.Overlay = &Overlay{}
+	w.drawEndUI(h, true, "Pac")
+	if w.Overlay.Texts[0].S != hsAsk || w.Overlay.Texts[1].S[:3] != "Pac" {
+		t.Errorf("asking: %q, %q", w.Overlay.Texts[0].S, w.Overlay.Texts[1].S)
+	}
+}

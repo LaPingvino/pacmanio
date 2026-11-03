@@ -56,6 +56,10 @@ var hsYellow = image.NewUniform(color.RGBA{255, 255, 0, 255})
 // ASSUMPTION [engine]: draw_highscore puts names at the left edge and scores
 // right-aligned at the right edge, the ten rows spread over the height.
 func (w *World) drawEnd(dst *image.RGBA, x, y int, h Highscores, asking bool, name string) {
+	if w.Overlay != nil {
+		w.drawEndUI(h, asking, name)
+		return
+	}
 	f := w.Fonts
 	if f == nil || f.Table == nil {
 		return
@@ -83,4 +87,38 @@ func (w *World) drawEnd(dst *image.RGBA, x, y int, h Highscores, asking bool, na
 		d.DrawString(s)
 	}
 	drawGMText(dst, f.Table, x, y+288, "Premu klavon por ekludi...", hsYellow.C)
+}
+
+// drawEndUI is the new UI's highscore screen (docs/UI.md §5, step U5): a
+// table in Noto Sans on a panel — rank, name, score — and, while a name is
+// asked, the 2006 question over a text field with a caret. The texts are the
+// 2006 ones.
+func (w *World) drawEndUI(h Highscores, asking bool, name string) {
+	o := w.Overlay
+	navy, text, gold := color.RGBA{0x0b, 0x12, 0x3a, 235}, color.RGBA{0xf0, 0xf4, 0xff, 255}, color.RGBA{0xff, 0xe0, 0x2a, 255}
+	cx := float64(ScreenW) / 2
+	if asking {
+		o.AddRect(Rect{X: cx - 260, Y: 150, W: 520, H: 150, Color: navy})
+		o.Add(Text{S: hsAsk, X: cx, Y: 168, Size: 16, Weight: Bold, Color: gold, Align: Centre})
+		o.AddRect(Rect{X: cx - 200, Y: 210, W: 400, H: 44, Color: color.RGBA{0xf0, 0xf4, 0xff, 255}})
+		caret := ""
+		if w.Steps/15%2 == 0 { // blinking, half a second each way at 30 steps a second
+			caret = "|"
+		}
+		o.Add(Text{S: name + caret, X: cx - 190, Y: 219, Size: 20, Weight: Bold, Color: color.RGBA{0x0b, 0x12, 0x3a, 255}})
+		return
+	}
+	o.AddRect(Rect{X: cx - 200, Y: 40, W: 400, H: 400, Color: navy})
+	o.Add(Text{S: "Plej bonaj", X: cx, Y: 54, Size: 30, Weight: Black, Color: gold, Align: Centre})
+	for i, e := range h {
+		y := 112 + float64(i)*28
+		col := text
+		if i == 0 {
+			col = gold
+		}
+		o.Add(Text{S: strconv.Itoa(i+1) + ".", X: cx - 160, Y: y, Size: 17, Weight: Bold, Color: col, Align: Right})
+		o.Add(Text{S: e.Name, X: cx - 145, Y: y, Size: 17, Weight: Bold, Color: col})
+		o.Add(Text{S: strconv.Itoa(e.Score), X: cx + 170, Y: y, Size: 17, Weight: Bold, Color: col, Align: Right})
+	}
+	o.Add(Text{S: "Premu klavon por ekludi...", X: cx, Y: 405, Size: 15, Weight: Bold, Color: text, Align: Centre})
 }
