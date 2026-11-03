@@ -7,6 +7,7 @@ import (
 	"log"
 	"os"
 	"runtime"
+	"strings"
 
 	"github.com/hajimehoshi/ebiten/v2"
 	"github.com/hajimehoshi/ebiten/v2/inpututil"
@@ -28,7 +29,8 @@ type titleScreen struct {
 	px, py   int
 	progress int    // the furthest room reached (game.RoomOrder index)
 	info     string // an open info page: "help" (Kiel ludi), "about" (Pri), "" none
-	pick     int    // the room Continue starts (a RoomOrder index, 1 … progress)
+	page     string // the open page: "" the blocks, "settings", "levels" (Daŭrigi's level pick)
+	rooms    []int  // the levels page's rooms (RoomOrder indices)
 }
 
 func (a *app) openTitle() {
@@ -39,42 +41,78 @@ func (a *app) openTitle() {
 	ebiten.SetWindowTitle("Pacmanio")
 }
 
+// buildTitleMenu builds the open page of the title (U7, as Stelo; Joop
+// 2026-11-04: "block buttons"): the main page as blocks — Ludi, Daŭrigi,
+// Plej bonaj, Kiel ludi, Pri, Agordoj (Fini on the desktop); Agordoj the
+// settings as a list; Daŭrigi the reached levels as blocks, a region a row.
 func (a *app) buildTitleMenu(sel int) {
 	a.title.progress = store.Progress()
 	var items []game.MenuItem
 	var ids []string
-	add := func(id, label string) {
-		items = append(items, game.MenuItem{Label: label})
+	add := func(id, label, value string) {
+		items = append(items, game.MenuItem{Label: label, Value: value})
 		ids = append(ids, id)
 	}
-	onOff := func(off bool) string {
-		if off {
-			return "malŝaltita"
+	switch a.title.page {
+	case "settings":
+		onOff := func(off bool) string {
+			if off {
+				return "malŝaltita"
+			}
+			return "ŝaltita"
 		}
-		return "ŝaltita"
-	}
-	setting := func(id, label string, off bool) { // a setting: ← → or a click change it
-		items = append(items, game.MenuItem{Label: label, Value: onOff(off)})
-		ids = append(ids, id)
-	}
-	add("play", "Ludi")
-	if p := a.title.progress; p > 1 && p < len(game.RoomOrder)-1 { // Continue at a reached room: ← → for an earlier one
-		if a.title.pick < 1 || a.title.pick > p {
-			a.title.pick = p
+		add("sound", "Sono", onOff(soundMuted()))
+		add("music", "Muziko", onOff(theSound != nil && theSound.MusicOff()))
+		add("back", "Reen", "")
+		a.title.ids = ids
+		a.title.menu = game.Menu{Items: items, Sel: min(sel, len(items)-1), X: game.ScreenW / 2, Y: 230, LineH: 32, W: 330, Size: 18}
+		return
+	case "levels":
+		a.title.rooms = a.title.rooms[:0]
+		region := map[string]string{"pu": "Urba", "ar": "Akva", "ls": "Libera"}
+		for i := 1; i <= a.title.progress && i < len(game.RoomOrder); i++ {
+			name := game.RoomOrder[i]
+			r, ok := region[name[:min(2, len(name))]]
+			if !ok || strings.HasSuffix(name, "_bildo") {
+				continue // the title and end rooms, the region title rooms
+			}
+			label := "Fina"
+			if len(name) > 4 && name[4] == 'a' {
+				label = name[3:4]
+			}
+			add("level", label, r)
+			a.title.rooms = append(a.title.rooms, i)
 		}
-		items = append(items, game.MenuItem{Label: "Daŭrigi", Value: game.RoomTitle(a.title.pick), Action: true})
-		ids = append(ids, "continue")
+		if sel < 0 || sel >= len(items) {
+			sel = len(items) - 1 // the furthest
+		}
+		a.title.ids = ids
+		a.title.menu = game.Menu{Items: items, Sel: sel, X: game.ScreenW / 2, Y: 214, Size: 20, Cols: 5, CellW: 96, CellH: 52, Gap: 10}
+		return
 	}
-	add("scores", "Plej bonaj")
-	add("help", "Kiel ludi")
-	add("about", "Pri")
-	setting("sound", "Sono", soundMuted())
-	setting("music", "Muziko", theSound != nil && theSound.MusicOff())
+	add("play", "Ludi", "")
+	if p := a.title.progress; p > 1 && p < len(game.RoomOrder)-1 {
+		add("continue", "Daŭrigi", game.RoomTitle(p))
+	}
+	add("scores", "Plej bonaj", "")
+	add("help", "Kiel ludi", "")
+	add("about", "Pri", "")
+	add("settings", "Agordoj", "")
 	if runtime.GOOS != "js" {
-		add("quit", "Fini")
+		add("quit", "Fini", "")
+	}
+	cols, w := 3, 172.0
+	if len(items) > 6 {
+		cols, w = 4, 142
 	}
 	a.title.ids = ids
-	a.title.menu = game.Menu{Items: items, Sel: min(sel, len(items)-1), X: game.ScreenW / 2, Y: 230, LineH: 32, W: 330, Size: 18}
+	a.title.menu = game.Menu{Items: items, Sel: min(sel, len(items)-1), X: game.ScreenW / 2, Y: 222, Size: 19, Cols: cols, CellW: w, CellH: 62, Gap: 12}
+}
+
+// openPage shows a page of the title ("" the main one).
+func (a *app) openPage(page string, sel int) {
+	a.title.page = page
+	a.buildTitleMenu(sel)
 }
 
 func (a *app) updateTitle() {
@@ -99,6 +137,10 @@ func (a *app) updateTitle() {
 		}
 		return
 	}
+	if a.title.page != "" && inpututil.IsKeyJustPressed(ebiten.KeyEscape) { // a page: Esc goes back
+		a.openPage("", 0)
+		return
+	}
 	res := a.title.menu.Update(in)
 	sel := a.title.menu.Sel
 	toggle := func(id string) bool {
@@ -113,12 +155,6 @@ func (a *app) updateTitle() {
 		a.buildTitleMenu(sel)
 		return true
 	}
-	if res.Step != 0 && a.title.ids[sel] == "continue" { // the room pick: 1 … the furthest reached, round
-		p := a.title.progress
-		a.title.pick = (a.title.pick-1+res.Step+p)%p + 1
-		a.buildTitleMenu(sel)
-		return
-	}
 	if res.Step != 0 && toggle(a.title.ids[sel]) {
 		return
 	}
@@ -129,7 +165,18 @@ func (a *app) updateTitle() {
 	case "play":
 		a.startAt("pu_bildo")
 	case "continue":
-		a.startAt(game.RoomOrder[a.title.pick])
+		a.openPage("levels", -1)
+	case "level":
+		a.startAt(game.RoomOrder[a.title.rooms[res.Chosen]])
+	case "settings":
+		a.openPage("settings", 0)
+	case "back": // to the main page, Agordoj chosen
+		a.openPage("", 0)
+		for i, id := range a.title.ids {
+			if id == "settings" {
+				a.title.menu.Sel = i
+			}
+		}
 	case "scores":
 		a.startAt("fino")
 	case "help", "about":
