@@ -1,6 +1,7 @@
 package game
 
 import (
+	xdraw "golang.org/x/image/draw"
 	"image"
 	"image/color"
 	"image/draw"
@@ -89,7 +90,11 @@ func (w *World) drawHUD(dst *image.RGBA) {
 	box := func(x1, y1, x2, y2 int) {
 		draw.Draw(dst, image.Rect(x1, y1, x2+1, y2+1), image.NewUniform(bg), image.Point{}, draw.Src)
 	}
-	g := w.Room.ShownG() // during a pause, the score and lives of the moment it began
+	g := w.Room.ShownG()  // during a pause, the score and lives of the moment it began
+	if w.Overlay != nil { // the new UI's slim bar (docs/UI.md §5)
+		w.drawBar(dst, g.Score, g.Lives)
+		return
+	}
 	box(0, 0, 96, 64)
 	w.hudText(dst, f.Small, 11, 3, 3, "P A C M A N I O#"+w.Level.Caption, fg)
 	box(640-96, 0, 640, 64)
@@ -111,5 +116,52 @@ func (w *World) drawHUD(dst *image.RGBA) {
 	} else { // one icon and the number (Courier New 18 bold, yellow)
 		icon(640 - 96)
 		w.hudText(dst, f.Lives, 22, 640-64, 480-32, strconv.Itoa(g.Lives), color.RGBA{255, 255, 0, 255})
+	}
+}
+
+// drawBar is the new UI's HUD (docs/UI.md §5, a remake change): one slim bar
+// along the top — the score, the level's title and caption, the lives as
+// icons — instead of the four 2006 corner boxes; and the level's title large
+// with its caption for its first 40 steps (two seconds at 20 steps a second).
+func (w *World) drawBar(dst *image.RGBA, score, lives int) {
+	const h = 22
+	draw.Draw(dst, image.Rect(0, 0, ScreenW, h), image.NewUniform(color.RGBA{0x0b, 0x12, 0x3a, 190}), image.Point{}, draw.Over)
+	text, gold := color.RGBA{0xf0, 0xf4, 0xff, 255}, color.RGBA{0xff, 0xe0, 0x2a, 255}
+	w.Overlay.Add(Text{S: "Poentoj  " + strconv.Itoa(score), X: 10, Y: 3, Size: 13, Weight: Bold, Color: text})
+	mid := w.Label
+	if mid == "" {
+		mid = w.Level.Caption
+	} else if w.Level.Caption != "" {
+		mid += " — " + w.Level.Caption
+	}
+	w.Overlay.Add(Text{S: mid, X: ScreenW / 2, Y: 3, Size: 13, Weight: Bold, Color: text, Align: Centre})
+	if sp := w.Assets.Sprites["pac_stand"]; sp != nil && len(sp.Frames) > 0 {
+		img := sp.Frames[0]
+		const iw = 18 // the 32 px Pacman, scaled into the bar
+		n := max(lives, 0)
+		shown := min(n, 5)
+		if n > shown {
+			shown = 1
+		}
+		x := ScreenW - 10 - shown*(iw+3)
+		if n > 5 {
+			w.Overlay.Add(Text{S: "×" + strconv.Itoa(n), X: float64(x - 4), Y: 3, Size: 13, Weight: Bold, Color: gold, Align: Right})
+		}
+		for i := range shown {
+			r := image.Rect(x+i*(iw+3), (h-iw)/2, x+i*(iw+3)+iw, (h-iw)/2+iw)
+			xdraw.NearestNeighbor.Scale(dst, r, img, img.Bounds(), xdraw.Over, nil)
+		}
+	}
+	if st := w.Steps; w.Label != "" && st < 40 {
+		a := uint8(255)
+		if st > 30 { // fading out over the last half second
+			a = uint8(255 * (40 - st) / 10)
+		}
+		w.Overlay.Add(Text{S: w.Label, X: ScreenW/2 + 3, Y: ScreenH/2 - 47, Size: 44, Weight: Black, Color: color.NRGBA{0, 0, 0, a}, Align: Centre})
+		w.Overlay.Add(Text{S: w.Label, X: ScreenW / 2, Y: ScreenH/2 - 50, Size: 44, Weight: Black, Color: color.NRGBA{0xff, 0xe0, 0x2a, a}, Align: Centre})
+		if w.Level.Caption != "" {
+			w.Overlay.Add(Text{S: w.Level.Caption, X: ScreenW/2 + 2, Y: ScreenH/2 + 12, Size: 22, Weight: Bold, Color: color.NRGBA{0, 0, 0, a}, Align: Centre})
+			w.Overlay.Add(Text{S: w.Level.Caption, X: ScreenW / 2, Y: ScreenH/2 + 10, Size: 22, Weight: Bold, Color: color.NRGBA{0xf0, 0xf4, 0xff, a}, Align: Centre})
+		}
 	}
 }

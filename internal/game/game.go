@@ -131,6 +131,9 @@ func (g *Game) enter(i int) error {
 	}
 	w.Fonts = g.Fonts
 	g.World, g.Room = w, i
+	if strings.Contains(name, "nivelo") {
+		w.Label = RoomTitle(i)
+	}
 	if strings.Contains(name, "nivelo") { // a level: what it began with, for the pause menu's restart
 		g.levelStart = levelStart{room: i, score: g.G.Score, lives: g.G.Lives, ok: true}
 	} else {
@@ -147,6 +150,9 @@ func (g *Game) enter(i int) error {
 // Step runs a step and then any room change it asked for (room_goto_next,
 // a named room, or "no more lives" → fino).
 func (g *Game) Step(in gm.Input) error {
+	if g.World != nil {
+		g.World.Steps++
+	}
 	if RoomOrder[g.Room] == "fino" {
 		return g.stepEnd(in)
 	}
