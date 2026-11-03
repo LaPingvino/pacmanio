@@ -152,6 +152,11 @@ func (w *World) drawBar(dst *image.RGBA, score, lives int) {
 			xdraw.NearestNeighbor.Scale(dst, r, img, img.Bounds(), xdraw.Over, nil)
 		}
 	}
+	if w.LevelDone() && !w.HideBanner { // within the 2006 pause (2 s), so the timing doesn't change
+		w.Overlay.Add(Text{S: "Nivelo finita!", X: ScreenW/2 + 3, Y: ScreenH/2 - 27, Size: 44, Weight: Black, Color: color.NRGBA{0, 0, 0, 255}, Align: Centre})
+		w.Overlay.Add(Text{S: "Nivelo finita!", X: ScreenW / 2, Y: ScreenH/2 - 30, Size: 44, Weight: Black, Color: gold, Align: Centre})
+		return
+	}
 	if st := w.Steps; w.Label != "" && st < 40 && !w.HideBanner {
 		a := uint8(255)
 		if st > 30 { // fading out over the last half second
@@ -164,4 +169,19 @@ func (w *World) drawBar(dst *image.RGBA, score, lives int) {
 			w.Overlay.Add(Text{S: w.Level.Caption, X: ScreenW / 2, Y: ScreenH/2 + 10, Size: 22, Weight: Bold, Color: color.NRGBA{0xf0, 0xf4, 0xff, a}, Align: Centre})
 		}
 	}
+}
+
+// LevelDone reports the pause after a level's last dot (pacman's step: no
+// dots left → sound won, 2 s, next room): a pause that began with no dot in
+// the room — a death's pause begins with dots left.
+func (w *World) LevelDone() bool {
+	if w.Label == "" || w.Room.Paused == nil {
+		return false
+	}
+	for _, in := range w.Room.Paused {
+		if !in.Destroyed && in.Obj.IsA("point") {
+			return false
+		}
+	}
+	return true
 }
