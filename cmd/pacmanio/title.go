@@ -166,7 +166,7 @@ func (a *app) drawTitle() {
 	put("bonus_sprite", (t/90)%4, 40, 360)
 	o := &a.overlay
 	if a.title.info != "" { // the page instead of the title's texts (the overlay draws texts over every rect)
-		a.drawInfo(o, a.title.info)
+		a.drawInfo(o, a.title.info, put)
 		return
 	}
 	shadow := color.RGBA{0x7a, 0x10, 0x10, 255}

@@ -1,7 +1,9 @@
 package main
 
 import (
+	"image"
 	"image/color"
+	"image/draw"
 
 	"pacmanio/internal/game"
 )
@@ -20,10 +22,6 @@ var infoPages = map[string][]string{
 		"* Telefono: la butonoj ĉe la randoj.",
 		"Pacman turniĝas tuj kiam la vojo estas libera: tenu la klavon antaŭe.",
 		"",
-		"Punkto +10 · Potenca monero: la fantomoj timiĝas por iom da tempo",
-		"Fantomo: ĝi kaptas vin, vi perdas vivon",
-		"Timigita fantomo: manĝu ĝin, +100 (ekbrilante ĝi baldaŭ revenas)",
-		"Frukto: +200, ĝi aperas de tempo al tempo · Vivo: +1 vivo",
 		"Iuj muroj haltigas nur vin; nevideblaj muroj nur la fantomojn.",
 		"Elirante ĉe unu rando, vi revenas ĉe la alia.",
 	},
@@ -42,10 +40,22 @@ var infoPages = map[string][]string{
 	},
 }
 
+// legend is the help page's legend (UI.md §4; the texts of docs/TEXTS.md).
+var legend = []struct{ sprite, text string }{
+	{"point_sprite", "Punkto: +10"},
+	{"coin_sprite", "Potenca monero: timigas fantomojn"},
+	{"normal", "Fantomo: ĝi kaptas vin, −1 vivo"},
+	{"afraid", "Timigita fantomo: manĝu ĝin, +100"},
+	{"bonus_sprite", "Frukto: +200, de tempo al tempo"},
+	{"vivo_sprite", "Vivo: +1 vivo"},
+}
+
 // drawInfo draws an info page on a panel over the title: "# " a heading,
 // "* " a bold line; Enter, Esc or a click goes back.
-func (a *app) drawInfo(o *game.Overlay, page string) {
-	o.AddRect(game.Rect{X: 26, Y: 36, W: game.ScreenW - 52, H: game.ScreenH - 72, Color: color.RGBA{0x0b, 0x12, 0x3a, 238}})
+func (a *app) drawInfo(o *game.Overlay, page string, put func(name string, frame, x, y int)) {
+	// The panel goes into the frame (the overlay's rects would cover the
+	// legend's sprites).
+	draw.Draw(a.frame, image.Rect(26, 36, game.ScreenW-26, game.ScreenH-36), image.NewUniform(color.RGBA{0x0b, 0x12, 0x3a, 238}), image.Point{}, draw.Over)
 	text, gold := color.RGBA{0xf0, 0xf4, 0xff, 255}, color.RGBA{0xff, 0xe0, 0x2a, 255}
 	y := 54.0
 	for _, l := range infoPages[page] {
@@ -61,6 +71,13 @@ func (a *app) drawInfo(o *game.Overlay, page string) {
 		default:
 			o.Add(game.Text{S: l, X: 42, Y: y, Size: 14, Color: text})
 			y += 22
+		}
+	}
+	if page == "help" { // the legend: each thing with its sprite, two columns
+		for i, l := range legend {
+			x, row := 42+(i/3)*308, int(y)+(i%3)*36
+			put(l.sprite, 0, x, row)
+			o.Add(game.Text{S: l.text, X: float64(x + 40), Y: float64(row + 8), Size: 14, Color: text})
 		}
 	}
 	o.Add(game.Text{S: "Enter / Esc: reen", X: game.ScreenW / 2, Y: game.ScreenH - 62, Size: 13, Weight: game.Bold, Color: gold, Align: game.Centre})
