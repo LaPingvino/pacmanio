@@ -88,3 +88,17 @@ func TestMute(t *testing.T) {
 		t.Fatal("still muted")
 	}
 }
+
+// The music setting: only the tune's volume, the effects stay.
+func TestMusicOff(t *testing.T) {
+	p := &Player{fsys: pacmanio.Files}
+	p.SetMusicOff(true)
+	if !p.MusicOff() || p.musicVolume() != 0 || p.volume() != 1 {
+		t.Fatal("music off: wrong volumes")
+	}
+	p.SetMusicOff(false)
+	p.SetMuted(true)
+	if p.musicVolume() != 0 {
+		t.Fatal("muted: music still on")
+	}
+}

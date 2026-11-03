@@ -45,22 +45,35 @@ func (a *app) buildTitleMenu(sel int) {
 		items = append(items, game.MenuItem{Label: label})
 		ids = append(ids, id)
 	}
+	onOff := func(off bool) string {
+		if off {
+			return "malŝaltita"
+		}
+		return "ŝaltita"
+	}
+	setting := func(id, label string, off bool) { // a setting: ← → or a click change it
+		items = append(items, game.MenuItem{Label: label, Value: onOff(off)})
+		ids = append(ids, id)
+	}
 	add("play", "Ludi")
 	if p := a.title.progress; p > 1 && p < len(game.RoomOrder)-1 {
 		add("continue", "Daŭrigi — "+game.RoomTitle(p))
 	}
 	add("scores", "Plej bonaj")
+	setting("sound", "Sono", soundMuted())
+	setting("music", "Muziko", theSound != nil && theSound.MusicOff())
 	if runtime.GOOS != "js" {
 		add("quit", "Fini")
 	}
 	a.title.ids = ids
-	a.title.menu = game.Menu{Items: items, Sel: min(sel, len(items)-1), X: game.ScreenW / 2, Y: 250, LineH: 32, W: 330, Size: 18}
+	a.title.menu = game.Menu{Items: items, Sel: min(sel, len(items)-1), X: game.ScreenW / 2, Y: 230, LineH: 32, W: 330, Size: 18}
 }
 
 func (a *app) updateTitle() {
 	a.title.tick++
 	in := game.MenuInput{
 		Up: inpututil.IsKeyJustPressed(ebiten.KeyArrowUp), Down: inpututil.IsKeyJustPressed(ebiten.KeyArrowDown),
+		Left: inpututil.IsKeyJustPressed(ebiten.KeyArrowLeft), Right: inpututil.IsKeyJustPressed(ebiten.KeyArrowRight),
 		Enter: inpututil.IsKeyJustPressed(ebiten.KeyEnter) || inpututil.IsKeyJustPressed(ebiten.KeyNumpadEnter) || inpututil.IsKeyJustPressed(ebiten.KeySpace),
 	}
 	x, y := toFrame(ebiten.CursorPosition())
@@ -73,7 +86,23 @@ func (a *app) updateTitle() {
 		in.Clicked = true
 	}
 	res := a.title.menu.Update(in)
-	if res.Chosen < 0 {
+	sel := a.title.menu.Sel
+	toggle := func(id string) bool {
+		switch id {
+		case "sound":
+			toggleSound()
+		case "music":
+			toggleMusic()
+		default:
+			return false
+		}
+		a.buildTitleMenu(sel)
+		return true
+	}
+	if res.Step != 0 && toggle(a.title.ids[sel]) {
+		return
+	}
+	if res.Chosen < 0 || toggle(a.title.ids[res.Chosen]) {
 		return
 	}
 	switch a.title.ids[res.Chosen] {

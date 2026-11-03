@@ -169,6 +169,7 @@ func main() {
 	player := sound.NewPlayer(pacmanio.Files)
 	theSound = player
 	player.SetMuted(store.Muted())
+	player.SetMusicOff(store.MusicOff())
 	g.G.Sound, g.G.SoundPlaying = player.Play, player.Playing
 	g.Highscores = store.LoadHighscores() // kept between games (localStorage / config file)
 	g.SaveHighscores = store.SaveHighscores
@@ -227,3 +228,12 @@ func soundMuted() bool { return theSound != nil && theSound.Muted() }
 
 // typing reports the highscore name being typed (M is a letter then).
 func (a *app) typing() bool { return a.game != nil && a.game.Asking() }
+
+// toggleMusic is the music setting: the tune alone off or on, remembered.
+func toggleMusic() {
+	if theSound == nil {
+		return
+	}
+	theSound.SetMusicOff(!theSound.MusicOff())
+	store.SetMusicOff(theSound.MusicOff())
+}
