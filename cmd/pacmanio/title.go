@@ -26,7 +26,8 @@ type titleScreen struct {
 	ids      []string
 	tick     int
 	px, py   int
-	progress int // the furthest room reached (game.RoomOrder index)
+	progress int    // the furthest room reached (game.RoomOrder index)
+	info     string // an open info page: "help" (Kiel ludi), "about" (Pri), "" none
 }
 
 func (a *app) openTitle() {
@@ -60,6 +61,8 @@ func (a *app) buildTitleMenu(sel int) {
 		add("continue", "Daŭrigi — "+game.RoomTitle(p))
 	}
 	add("scores", "Plej bonaj")
+	add("help", "Kiel ludi")
+	add("about", "Pri")
 	setting("sound", "Sono", soundMuted())
 	setting("music", "Muziko", theSound != nil && theSound.MusicOff())
 	if runtime.GOOS != "js" {
@@ -84,6 +87,12 @@ func (a *app) updateTitle() {
 	if ids := inpututil.AppendJustPressedTouchIDs(nil); len(ids) > 0 {
 		in.PX, in.PY = toFrame(ebiten.TouchPosition(ids[0]))
 		in.Clicked = true
+	}
+	if a.title.info != "" { // an info page: Enter, Esc or a click goes back
+		if in.Enter || in.Clicked || inpututil.IsKeyJustPressed(ebiten.KeyEscape) {
+			a.title.info = ""
+		}
+		return
 	}
 	res := a.title.menu.Update(in)
 	sel := a.title.menu.Sel
@@ -112,6 +121,8 @@ func (a *app) updateTitle() {
 		a.startAt(game.RoomOrder[a.title.progress])
 	case "scores":
 		a.startAt("fino")
+	case "help", "about":
+		a.title.info = a.title.ids[res.Chosen]
 	case "quit":
 		os.Exit(0)
 	}
@@ -154,6 +165,10 @@ func (a *app) drawTitle() {
 	put("coin_sprite", 0, 568, 360)
 	put("bonus_sprite", (t/90)%4, 40, 360)
 	o := &a.overlay
+	if a.title.info != "" { // the page instead of the title's texts (the overlay draws texts over every rect)
+		a.drawInfo(o, a.title.info)
+		return
+	}
 	shadow := color.RGBA{0x7a, 0x10, 0x10, 255}
 	o.Add(game.Text{S: "Pacmanio", X: game.ScreenW/2 + 4, Y: 54, Size: 88, Weight: game.Black, Color: shadow, Align: game.Centre})
 	o.Add(game.Text{S: "Pacmanio", X: game.ScreenW / 2, Y: 50, Size: 88, Weight: game.Black, Color: color.RGBA{0xff, 0xe0, 0x2a, 255}, Align: game.Centre})

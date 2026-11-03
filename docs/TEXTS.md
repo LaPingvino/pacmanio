@@ -1,4 +1,4 @@
-# Pacmanio — new texts (DRAFT, waiting for Joop's read; UI step U3)
+# Pacmanio — new texts (IN THE GAME since 2026-11-04 as drafts — Joop: "we can correct things later"; UI step U3)
 
 Replace the title subtitle and the "Programisto: Joop KIEFTE" corner box — docs/UI.md §4. Esperanto first,
 English alongside. Every line is from docs/PACMANIO-RULES.md (what the game really does); nothing invented.
@@ -59,7 +59,11 @@ English alongside. Every line is from docs/PACMANIO-RULES.md (what the game real
 > The images are the 2006 originals (see the README about their status); the code is MIT.
 > Source: github.com/LaPingvino/pacmanio
 
-## Questions for Joop
+## Questions for Joop (taken as below for now; say otherwise and it changes)
+Choices in the game (2026-11-04): Esperanto only (Pacmanio's one language), so the region names stay
+Esperanto; the music and sounds "from the 2006 game" until their source is known; Claude in the repository,
+not in Pri.
+
 1. The region names in English — "City Region", "Water Region", "Free Space" — or keep them in Esperanto?
 2. The 2006 music and sounds: their source, to credit them properly (also asked for Stelo).
 3. Mention Claude in Pri, or leave it to the repo? (also asked for Stelo)
