@@ -36,6 +36,9 @@ type World struct {
 	// counts the room's steps.
 	Label string
 	Steps int
+	// HideBanner hides the level's title (the pause menu is open: the steps
+	// stand still, so it would stay).
+	HideBanner bool
 }
 
 // RegionOf is the region a room is played in: the *_bildo room before it sets

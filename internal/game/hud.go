@@ -152,7 +152,7 @@ func (w *World) drawBar(dst *image.RGBA, score, lives int) {
 			xdraw.NearestNeighbor.Scale(dst, r, img, img.Bounds(), xdraw.Over, nil)
 		}
 	}
-	if st := w.Steps; w.Label != "" && st < 40 {
+	if st := w.Steps; w.Label != "" && st < 40 && !w.HideBanner {
 		a := uint8(255)
 		if st > 30 { // fading out over the last half second
 			a = uint8(255 * (40 - st) / 10)
