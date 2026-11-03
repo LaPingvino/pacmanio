@@ -27,13 +27,13 @@ beautiful from the start and includes some of my own pixel art of the time. It s
 5. [x] Level converter for the 20 rooms (round-trip test), reusing the Stelo format.
 6. [x] Rooms drawn with the original sprites, wall autotiling (test against the room renders).
 7. [x] Pacman and the dots (done); ghosts; pellets; fruit; lives and HUD; regions, title and end rooms. (ghosts meeting Pacman done 2026-11-02)
-8. [~] Music and sounds (effects done; the two MIDI tunes: soundfont-fluid installed 2026-11-02 — render them).
+8. [x] Music and sounds (effects done; the two MIDI tunes rendered with FluidR3 to audio/music/*.opus, played through gopus — done 2026-11-02).
 9. [~] Mobile (as Stelo item 12): done but for a real-phone try.
 10. [x] (deployed 2026-11-02; the Caddy route was in place since 2026-11-01) The wasm build goes to ~/Projects/pacmanio-web, served PRIVATELY at
    https://kiefte.eu/pacmanio/ behind the goloco login (Joop 2026-11-01: 'add wasm pacmanio alongside goloco').
    Joop runs `sudo bash ~/Projects/pacmanio-recovered/scripts/caddy-pacmanio.sh` once (a placeholder page is
    there now); later deploys just replace the folder (atomic swap, chmod -R o+rX).
-11. [ ] Quality of life (Joop 2026-11-02: "both could have some quality of life improvements in the next runs").
+11. [x] (DONE 2026-11-03 through item U: resume = Daŭrigi, pause = the pause menu, mute = the sound button / settings, the ready beat = the level banner) Quality of life (Joop 2026-11-02: "both could have some quality of life improvements in the next runs").
    First a short list for Joop to pick from, each small and switch-free unless he asks: resume from the last
    room reached, a pause key, a mute toggle, a short "ready" beat when a level starts. The pause fix (no
    freeze) is done.
@@ -117,3 +117,4 @@ U. [ ] **Modern UI** (Joop 2026-11-02, docs/UI.md — APPROVED): sharp scaling +
 - 2026-11-03 (item U, step U4b) — 'Nivelo finita!' large during the 2006 pause after a level's last dot (inside the existing 2 s, so the timing is unchanged): World.LevelDone — a pause that began with no dot left (a death's pause begins with dots left); not in the region/title rooms (no Label). TestLevelDone: all dots gone → the pause, LevelDone, the overlay holds the message and not the start banner. Visual check by the overlay's content (reaching the moment headlessly would need a test switch). NEXT U5: highscores.
 - 2026-11-03 (item U, step U5) — the highscore screen with the overlay (drawEndUI; the 2006 drawing kept for the plain path): a navy panel, 'Plej bonaj', ranks / names / scores in Noto Sans (the best in gold), the 2006 'Premu klavon por ekludi...'; the name asked with the 2006 question over a white text field with a blinking caret. TestDrawEndUI; headless ?room=fino: the table.
 - 2026-11-03 (item U, step U6) — settings on the title menu (Pacmanio has one language, so no separate screen): Sono ‹ŝaltita / malŝaltita› (the master mute, as the button) and Muziko ‹…› (sound.Player.SetMusicOff: the tune alone silenced and kept; store 'pacmanio-music-off'); ← → or a click change them. TestMusicOff; headless: the title with both lines.
+- 2026-11-03 — bookkeeping: items 8 and 11 checked off (done by earlier ticks / item U). Left: U3 texts and a real-phone try — both waiting for Joop.
